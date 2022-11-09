@@ -146,23 +146,35 @@ public class MainMenu extends javax.swing.JFrame {
     }// GEN-LAST:event_HostButtonActionPerformed
 
     private void JoinButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_JoinButtonActionPerformed
-        MainMenuPanel.setVisible(false);
         // TODO Open Join Page
+        BoardPanelClient b = new BoardPanelClient();
+        MainMenuPanel.setLayout(new java.awt.BorderLayout());
+        MainMenuPanel.removeAll();
+        MainMenuPanel.add(b);
+        MainMenuPanel.revalidate();
 
         Thread clientThread = new Thread(new Runnable() {
-
             public void run() {
-                new Client("127.0.0.1", 3000);
-                BoardPanel b = new BoardPanel();
-                MainMenuPanel.setLayout(new java.awt.BorderLayout());
-                MainMenuPanel.removeAll();
-                MainMenuPanel.add(b);
-                MainMenuPanel.revalidate();
-
+                b.run("127.0.0.1", 3000);
             }
         });
 
         clientThread.start();
+
+        // new Client("127.0.0.1", 3000);
+
+        // Thread clientThread = new Thread(new Runnable() {
+
+        // public void run() {
+        // new Client("127.0.0.1", 3000, b);
+        // // MainMenuPanel.setLayout(new java.awt.BorderLayout());
+        // // MainMenuPanel.removeAll();
+        // // MainMenuPanel.add(b);
+        // // MainMenuPanel.revalidate();
+        // }
+        // });
+
+        // clientThread.start();
     }// GEN-LAST:event_JoinButtonActionPerformed
 
     private void QuitButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_QuitButtonActionPerformed

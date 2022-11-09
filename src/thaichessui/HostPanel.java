@@ -125,21 +125,31 @@ public class HostPanel extends javax.swing.JPanel {
         // this.revalidate();
 
         HostPanel hostPanel = this;
-        BoardPanel b = new BoardPanel();
+        BoardPanelServer b = new BoardPanelServer();
         hostPanel.setLayout(new java.awt.BorderLayout());
         hostPanel.removeAll();
         hostPanel.add(b);
         hostPanel.revalidate();
 
         Thread serverThread = new Thread(new Runnable() {
-
             public void run() {
-
-                Server server = new Server(3000);
+                b.run(3000);
             }
         });
 
         serverThread.start();
+
+        // new Server(3000);
+
+        // Thread serverThread = new Thread(new Runnable() {
+
+        // public void run() {
+
+        // new Server(3000, b);
+        // }
+        // });
+
+        // serverThread.start();
 
     }// GEN-LAST:event_StartButtonActionPerformed
 
