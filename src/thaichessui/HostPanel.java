@@ -26,6 +26,7 @@ public class HostPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         TimeComboBox = new javax.swing.JComboBox<>();
         TimeLabel = new javax.swing.JLabel();
         PlayAsLabel = new javax.swing.JLabel();
@@ -46,9 +47,21 @@ public class HostPanel extends javax.swing.JPanel {
 
         PlayAsLabel.setText("Play as");
 
+        buttonGroup1.add(WhiteRadioButton);
         WhiteRadioButton.setText("White");
+        WhiteRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                WhiteRadioButtonActionPerformed(evt);
+            }
+        });
 
+        buttonGroup1.add(BlackRadioButton);
         BlackRadioButton.setText("Black");
+        BlackRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BlackRadioButtonActionPerformed(evt);
+            }
+        });
 
         StartButton.setText("Start");
 
@@ -98,6 +111,14 @@ public class HostPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_TimeComboBoxActionPerformed
 
+    private void BlackRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BlackRadioButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BlackRadioButtonActionPerformed
+
+    private void WhiteRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_WhiteRadioButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_WhiteRadioButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton BlackRadioButton;
@@ -106,5 +127,6 @@ public class HostPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> TimeComboBox;
     private javax.swing.JLabel TimeLabel;
     private javax.swing.JRadioButton WhiteRadioButton;
+    private javax.swing.ButtonGroup buttonGroup1;
     // End of variables declaration//GEN-END:variables
 }
