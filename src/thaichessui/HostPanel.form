@@ -44,11 +44,11 @@
                               <Component id="StartButton" min="-2" pref="212" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
-                              <Component id="PlayAsLabel" pref="83" max="32767" attributes="0"/>
+                              <Component id="PlayAsLabel" max="32767" attributes="0"/>
                               <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
-                              <Component id="WhiteRadioButton" pref="86" max="32767" attributes="0"/>
+                              <Component id="WhiteRadioButton" max="32767" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="BlackRadioButton" pref="85" max="32767" attributes="0"/>
+                              <Component id="BlackRadioButton" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="238" max="-2" attributes="0"/>
