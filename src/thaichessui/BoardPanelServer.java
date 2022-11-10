@@ -62,13 +62,12 @@ public class BoardPanelServer extends javax.swing.JPanel {
             try {
                 message = (String) in.readObject();
                 jTextArea1.append(message + "\n");
-                // chatArea.append("\n" + message);
             } catch (ClassNotFoundException classNotFoundException) {
             }
         } while (!message.equals("Client - END"));
     }
 
-    public void printCustom(String str) throws IOException {
+    public void writeToChat(String str) throws IOException {
         jTextArea1.append("Server: " + str + "\n");
         out.writeObject("Server: " + str);
     }
@@ -95,6 +94,7 @@ public class BoardPanelServer extends javax.swing.JPanel {
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
+        jTextArea1.setEditable(false);
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,7 +138,7 @@ public class BoardPanelServer extends javax.swing.JPanel {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
         try {
-            printCustom(jTextField1.getText());
+            writeToChat(jTextField1.getText());
         } catch (IOException i) {
             System.out.println(i);
         }
