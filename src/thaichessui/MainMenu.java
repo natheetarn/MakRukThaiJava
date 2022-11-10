@@ -4,6 +4,8 @@
  */
 package thaichessui;
 
+import javax.swing.JPanel;
+
 /**
  *
  * @author ROG Zephyrus M
@@ -15,6 +17,10 @@ public class MainMenu extends javax.swing.JFrame {
      */
     public MainMenu() {
         initComponents();
+    }
+
+    public JPanel getMainMenuPanel() {
+        return MainMenuPanel;
     }
 
     /**

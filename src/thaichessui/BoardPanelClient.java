@@ -7,8 +7,12 @@ package thaichessui;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.ConnectException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -37,7 +41,15 @@ public class BoardPanelClient extends javax.swing.JPanel {
         } catch (UnknownHostException u) {
             System.out.println(u);
         } catch (IOException i) {
-            System.out.println(i);
+            JOptionPane.showMessageDialog(null, "There is no host right now!", "Sad", JOptionPane.WARNING_MESSAGE);
+
+            HostPanel hostPanel = new HostPanel();
+
+            this.setLayout(new java.awt.BorderLayout());
+            this.removeAll();
+            this.add(hostPanel);
+            this.revalidate();
+            return;
         }
 
         try {
@@ -50,6 +62,7 @@ public class BoardPanelClient extends javax.swing.JPanel {
             in.close();
             out.close();
             socket.close();
+            socket = null;
         } catch (IOException i) {
             System.out.println(i);
         }
@@ -137,7 +150,11 @@ public class BoardPanelClient extends javax.swing.JPanel {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
         try {
-            writeToChat(jTextField1.getText());
+            if (socket == null) {
+                jTextArea1.append("Host has disconnected!\n");
+            } else {
+                writeToChat(jTextField1.getText());
+            }
         } catch (IOException i) {
             System.out.println(i);
         }

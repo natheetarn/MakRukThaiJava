@@ -37,8 +37,8 @@ public class BoardPanelServer extends javax.swing.JPanel {
             while (true) {
                 System.out.println("Waiting for a client ...");
                 jTextArea1.append("Waiting for a client ...\n");
-                socket = server.accept();
 
+                socket = server.accept();
                 System.out.println("Client accepted");
                 jTextArea1.append("Client Connected\n");
 
@@ -138,7 +138,11 @@ public class BoardPanelServer extends javax.swing.JPanel {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
         try {
-            writeToChat(jTextField1.getText());
+            if (socket == null) {
+                jTextArea1.append("Client has not joined yet!\n");
+            } else {
+                writeToChat(jTextField1.getText());
+            }
         } catch (IOException i) {
             System.out.println(i);
         }
