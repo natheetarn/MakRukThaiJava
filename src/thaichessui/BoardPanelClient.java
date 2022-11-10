@@ -29,10 +29,16 @@ public class BoardPanelClient extends javax.swing.JPanel {
         initComponents();
     }
 
+    public void chatPrintln(String str) {
+        jTextArea1.append(str + "\n");
+    }
+
     public void run(String address, int port) {
         try {
             socket = new Socket(address, port);
             System.out.println("Connected");
+
+            chatPrintln("GLHF!!!");
 
             out = new ObjectOutputStream(socket.getOutputStream());
             in = new ObjectInputStream(socket.getInputStream());
@@ -71,15 +77,10 @@ public class BoardPanelClient extends javax.swing.JPanel {
         do {
             try {
                 message = (String) in.readObject();
-                jTextArea1.append(message + "\n");
+                chatPrintln(message);
             } catch (ClassNotFoundException classNotFoundException) {
             }
         } while (!message.equals("Client - END"));
-    }
-
-    public void writeToChat(String str) throws IOException {
-        jTextArea1.append("Client: " + str + "\n");
-        out.writeObject("Client: " + str);
     }
 
     /**
@@ -149,9 +150,10 @@ public class BoardPanelClient extends javax.swing.JPanel {
         // TODO add your handling code here:
         try {
             if (socket == null) {
-                jTextArea1.append("Host has disconnected!\n");
+                chatPrintln("Host has disconnected");
             } else {
-                writeToChat(jTextField1.getText());
+                chatPrintln("Client: " + jTextField1.getText());
+                out.writeObject("Client: " + jTextField1.getText());
             }
         } catch (IOException i) {
             System.out.println(i);

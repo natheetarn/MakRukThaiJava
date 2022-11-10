@@ -29,6 +29,10 @@ public class BoardPanelServer extends javax.swing.JPanel {
 
     }
 
+    public void chatPrintln(String str) {
+        jTextArea1.append(str + "\n");
+    }
+
     public void run(int port) {
         try {
             server = new ServerSocket(port);
@@ -36,11 +40,13 @@ public class BoardPanelServer extends javax.swing.JPanel {
 
             while (true) {
                 System.out.println("Waiting for a client ...");
-                jTextArea1.append("Waiting for a client ...\n");
+                chatPrintln("Waiting for a client...");
 
                 socket = server.accept();
                 System.out.println("Client accepted");
-                jTextArea1.append("Client Connected\n");
+                chatPrintln("Client connected!");
+
+                chatPrintln("GLHF!!!");
 
                 out = new ObjectOutputStream(socket.getOutputStream());
                 in = new ObjectInputStream(socket.getInputStream());
@@ -61,10 +67,10 @@ public class BoardPanelServer extends javax.swing.JPanel {
         do {
             try {
                 message = (String) in.readObject();
-                jTextArea1.append(message + "\n");
+                chatPrintln(message);
             } catch (ClassNotFoundException classNotFoundException) {
             }
-        } while (!message.equals("Client - END"));
+        } while (!message.equals("Client: END"));
     }
 
     public void writeToChat(String str) throws IOException {
@@ -139,9 +145,10 @@ public class BoardPanelServer extends javax.swing.JPanel {
         // TODO add your handling code here:
         try {
             if (socket == null) {
-                jTextArea1.append("Client has not joined yet!\n");
+                chatPrintln("Client ahs not joined yet!");
             } else {
-                writeToChat(jTextField1.getText());
+                chatPrintln("Server: " + jTextField1.getText());
+                out.writeObject("Server: " + jTextField1.getText());
             }
         } catch (IOException i) {
             System.out.println(i);
