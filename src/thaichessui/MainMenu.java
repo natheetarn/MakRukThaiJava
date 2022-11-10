@@ -4,8 +4,6 @@
  */
 package thaichessui;
 
-import javax.swing.JPanel;
-
 /**
  *
  * @author ROG Zephyrus M
@@ -19,10 +17,6 @@ public class MainMenu extends javax.swing.JFrame {
         initComponents();
     }
 
-    public JPanel getMainMenuPanel() {
-        return MainMenuPanel;
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,162 +24,44 @@ public class MainMenu extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        MainMenuPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        QuitButton = new javax.swing.JButton();
-        JoinButton = new javax.swing.JButton();
-        HostButton = new javax.swing.JButton();
-        NameField = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        MainMenuPanel.setBackground(new java.awt.Color(153, 255, 255));
-        MainMenuPanel.setPreferredSize(new java.awt.Dimension(720, 480));
-
-        jLabel1.setFont(new java.awt.Font("Monospaced", 0, 48)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("MakRukThai");
-
-        QuitButton.setText("Quit");
-        QuitButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                QuitButtonActionPerformed(evt);
-            }
-        });
-
-        JoinButton.setText("Join");
-        JoinButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                JoinButtonActionPerformed(evt);
-            }
-        });
-
-        HostButton.setText("Host");
-        HostButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                HostButtonActionPerformed(evt);
-            }
-        });
-
-        NameField.setText("Name");
-
-        javax.swing.GroupLayout MainMenuPanelLayout = new javax.swing.GroupLayout(MainMenuPanel);
-        MainMenuPanel.setLayout(MainMenuPanelLayout);
-        MainMenuPanelLayout.setHorizontalGroup(
-                MainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(MainMenuPanelLayout.createSequentialGroup()
-                                .addGroup(MainMenuPanelLayout
-                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(MainMenuPanelLayout.createSequentialGroup()
-                                                .addGap(242, 242, 242)
-                                                .addComponent(jLabel1))
-                                        .addGroup(MainMenuPanelLayout.createSequentialGroup()
-                                                .addGap(293, 293, 293)
-                                                .addComponent(NameField, javax.swing.GroupLayout.PREFERRED_SIZE, 168,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addContainerGap(190, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainMenuPanelLayout
-                                .createSequentialGroup()
-                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(MainMenuPanelLayout
-                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainMenuPanelLayout
-                                                .createSequentialGroup()
-                                                .addComponent(HostButton, javax.swing.GroupLayout.PREFERRED_SIZE, 104,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(73, 73, 73)
-                                                .addComponent(JoinButton, javax.swing.GroupLayout.PREFERRED_SIZE, 106,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(219, 219, 219))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainMenuPanelLayout
-                                                .createSequentialGroup()
-                                                .addComponent(QuitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(309, 309, 309)))));
-        MainMenuPanelLayout.setVerticalGroup(
-                MainMenuPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(MainMenuPanelLayout.createSequentialGroup()
-                                .addGap(87, 87, 87)
-                                .addComponent(jLabel1)
-                                .addGap(41, 41, 41)
-                                .addComponent(NameField, javax.swing.GroupLayout.PREFERRED_SIZE,
-                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(48, 48, 48)
-                                .addGroup(MainMenuPanelLayout
-                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(HostButton, javax.swing.GroupLayout.PREFERRED_SIZE, 59,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(JoinButton, javax.swing.GroupLayout.PREFERRED_SIZE, 59,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33,
-                                        Short.MAX_VALUE)
-                                .addComponent(QuitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(68, 68, 68)));
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 720, Short.MAX_VALUE));
+        jPanel1Layout.setVerticalGroup(
+                jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 474, Short.MAX_VALUE));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(MainMenuPanel, javax.swing.GroupLayout.Alignment.TRAILING,
-                                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.PREFERRED_SIZE));
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(MainMenuPanel, javax.swing.GroupLayout.Alignment.TRAILING,
-                                javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                javax.swing.GroupLayout.PREFERRED_SIZE));
+                        .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addContainerGap()));
 
         pack();
+
+        MenuPanel menuPanel = new MenuPanel();
+        jPanel1.setLayout(new java.awt.BorderLayout());
+        jPanel1.removeAll();
+        jPanel1.add(menuPanel);
+        jPanel1.revalidate();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void HostButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_HostButtonActionPerformed
-        HostPanel hostPanel = new HostPanel();
-        MainMenuPanel.setLayout(new java.awt.BorderLayout());
-        MainMenuPanel.removeAll();
-        MainMenuPanel.add(hostPanel);
-        MainMenuPanel.revalidate();
-        // TODO Open host page
-    }// GEN-LAST:event_HostButtonActionPerformed
-
-    private void JoinButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_JoinButtonActionPerformed
-        // TODO Open Join Page
-        BoardPanelClient b = new BoardPanelClient();
-        MainMenuPanel.setLayout(new java.awt.BorderLayout());
-        MainMenuPanel.removeAll();
-        MainMenuPanel.add(b);
-        MainMenuPanel.revalidate();
-
-        Thread clientThread = new Thread(new Runnable() {
-            public void run() {
-                b.run("127.0.0.1", 3000);
-            }
-        });
-
-        clientThread.start();
-
-        // new Client("127.0.0.1", 3000);
-
-        // Thread clientThread = new Thread(new Runnable() {
-
-        // public void run() {
-        // new Client("127.0.0.1", 3000, b);
-        // // MainMenuPanel.setLayout(new java.awt.BorderLayout());
-        // // MainMenuPanel.removeAll();
-        // // MainMenuPanel.add(b);
-        // // MainMenuPanel.revalidate();
-        // }
-        // });
-
-        // clientThread.start();
-    }// GEN-LAST:event_JoinButtonActionPerformed
-
-    private void QuitButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_QuitButtonActionPerformed
-        this.dispose();
-    }// GEN-LAST:event_QuitButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -226,15 +102,9 @@ public class MainMenu extends javax.swing.JFrame {
             }
         });
 
-        // Server server = new Server(3000);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton HostButton;
-    private javax.swing.JButton JoinButton;
-    private javax.swing.JPanel MainMenuPanel;
-    private javax.swing.JTextField NameField;
-    private javax.swing.JButton QuitButton;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

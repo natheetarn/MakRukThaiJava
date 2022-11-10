@@ -27,88 +27,127 @@ public class HostPanel extends javax.swing.JPanel {
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         TimeComboBox = new javax.swing.JComboBox<>();
         TimeLabel = new javax.swing.JLabel();
         PlayAsLabel = new javax.swing.JLabel();
         WhiteRadioButton = new javax.swing.JRadioButton();
         BlackRadioButton = new javax.swing.JRadioButton();
         StartButton = new javax.swing.JButton();
+        TimeLabel1 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(242, 252, 242));
         setPreferredSize(new java.awt.Dimension(800, 600));
 
         TimeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(
-                new String[] { "1 min", "3 min", "5 min", "10 min", "30 min", "1 hr", "2 hr", " " }));
+                new String[] { "1 min", "3 min", "5 min", "10 min", "30 min", "1 hr", "2 hr", "Unlimited" }));
         TimeComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TimeComboBoxActionPerformed(evt);
             }
         });
 
+        TimeLabel.setForeground(new java.awt.Color(255, 153, 0));
         TimeLabel.setText("Time");
 
+        PlayAsLabel.setForeground(new java.awt.Color(255, 153, 0));
         PlayAsLabel.setText("Play as");
 
+        buttonGroup1.add(WhiteRadioButton);
         WhiteRadioButton.setText("White");
+        WhiteRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                WhiteRadioButtonActionPerformed(evt);
+            }
+        });
 
+        buttonGroup1.add(BlackRadioButton);
         BlackRadioButton.setText("Black");
+        BlackRadioButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BlackRadioButtonActionPerformed(evt);
+            }
+        });
 
-        StartButton.setText("Start");
+        StartButton.setFont(new java.awt.Font("Silom", 0, 18)); // NOI18N
+        StartButton.setForeground(new java.awt.Color(0, 153, 153));
+        StartButton.setText("START ♖");
         StartButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 StartButtonActionPerformed(evt);
             }
         });
 
+        TimeLabel1.setFont(new java.awt.Font("Silom", 0, 36)); // NOI18N
+        TimeLabel1.setForeground(new java.awt.Color(255, 204, 51));
+        TimeLabel1.setText("Configuration");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(55, 55, 55)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(TimeLabel, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(PlayAsLabel, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(137, 137, 137)
+                                .addGap(112, 112, 112)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
-                                                .addComponent(TimeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 200,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addComponent(WhiteRadioButton, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        277, Short.MAX_VALUE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(BlackRadioButton, javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                .addComponent(TimeLabel, javax.swing.GroupLayout.DEFAULT_SIZE,
                                                         javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addGap(262, 262, 262))))
-                        .addGroup(layout.createSequentialGroup()
-                                .addGap(293, 293, 293)
-                                .addComponent(StartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 176,
-                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)));
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(TimeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 261,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(203, 203, 203))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout
+                                                .createSequentialGroup()
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                                .addComponent(StartButton,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 212,
+                                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(PlayAsLabel,
+                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                        Short.MAX_VALUE)
+                                                                .addGap(98, 98, 98)
+                                                                .addComponent(WhiteRadioButton,
+                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                        Short.MAX_VALUE)
+                                                                .addGap(18, 18, 18)
+                                                                .addComponent(BlackRadioButton,
+                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                        Short.MAX_VALUE)))
+                                                .addGap(238, 238, 238))))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(TimeLabel1)
+                                .addGap(223, 223, 223)));
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(101, 101, 101)
+                                .addGap(45, 45, 45)
+                                .addComponent(TimeLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 107,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(TimeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 87,
                                                 Short.MAX_VALUE)
-                                        .addComponent(TimeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 41,
+                                        .addComponent(TimeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                javax.swing.GroupLayout.DEFAULT_SIZE,
                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(17, 17, 17)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(WhiteRadioButton)
+                                        .addComponent(BlackRadioButton)
                                         .addComponent(PlayAsLabel, javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(WhiteRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(BlackRadioButton, javax.swing.GroupLayout.PREFERRED_SIZE, 50,
-                                                javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(136, 136, 136)
+                                                javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
                                 .addComponent(StartButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66,
                                         javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(131, 131, 131)));
+                                .addGap(111, 111, 111)));
     }// </editor-fold>//GEN-END:initComponents
 
     private void TimeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_TimeComboBoxActionPerformed
@@ -117,12 +156,6 @@ public class HostPanel extends javax.swing.JPanel {
 
     private void StartButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_StartButtonActionPerformed
         // TODO add your handling code here:
-
-        // BoardPanel b = new BoardPanel();
-        // this.setLayout(new java.awt.BorderLayout());
-        // this.removeAll();
-        // this.add(b);
-        // this.revalidate();
 
         HostPanel hostPanel = this;
         BoardPanelServer b = new BoardPanelServer();
@@ -139,19 +172,15 @@ public class HostPanel extends javax.swing.JPanel {
 
         serverThread.start();
 
-        // new Server(3000);
-
-        // Thread serverThread = new Thread(new Runnable() {
-
-        // public void run() {
-
-        // new Server(3000, b);
-        // }
-        // });
-
-        // serverThread.start();
-
     }// GEN-LAST:event_StartButtonActionPerformed
+
+    private void BlackRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_BlackRadioButtonActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_BlackRadioButtonActionPerformed
+
+    private void WhiteRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_WhiteRadioButtonActionPerformed
+        // TODO add your handling code here:
+    }// GEN-LAST:event_WhiteRadioButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton BlackRadioButton;
@@ -159,6 +188,8 @@ public class HostPanel extends javax.swing.JPanel {
     private javax.swing.JButton StartButton;
     private javax.swing.JComboBox<String> TimeComboBox;
     private javax.swing.JLabel TimeLabel;
+    private javax.swing.JLabel TimeLabel1;
     private javax.swing.JRadioButton WhiteRadioButton;
+    private javax.swing.ButtonGroup buttonGroup1;
     // End of variables declaration//GEN-END:variables
 }
