@@ -52,11 +52,11 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace pref="12" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jButton1" min="-2" pref="226" max="-2" attributes="0"/>
+                              <Component id="AboutButton" min="-2" pref="226" max="-2" attributes="0"/>
                               <Component id="HostButton" min="-2" pref="226" max="-2" attributes="0"/>
-                              <Component id="JoinButton" alignment="0" min="-2" pref="226" max="-2" attributes="0"/>
                               <Component id="QuitButton" alignment="0" min="-2" pref="226" max="-2" attributes="0"/>
                               <Component id="NameField" alignment="0" min="-2" pref="226" max="-2" attributes="0"/>
+                              <Component id="JoinButton" alignment="0" min="-2" pref="226" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="8" max="32767" attributes="0"/>
                       </Group>
@@ -74,11 +74,11 @@
                   <Component id="NameField" min="-2" pref="34" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="32767" attributes="0"/>
                   <Component id="HostButton" min="-2" pref="59" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="32767" attributes="0"/>
-                  <Component id="jButton1" min="-2" pref="59" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="32767" attributes="0"/>
+                  <EmptySpace pref="12" max="32767" attributes="0"/>
                   <Component id="JoinButton" min="-2" pref="59" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="32767" attributes="0"/>
+                  <Component id="AboutButton" min="-2" pref="59" max="-2" attributes="0"/>
+                  <EmptySpace pref="12" max="32767" attributes="0"/>
                   <Component id="QuitButton" min="-2" pref="60" max="-2" attributes="0"/>
                   <EmptySpace pref="32" max="32767" attributes="0"/>
               </Group>
@@ -128,7 +128,7 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="QuitButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="AboutButton">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Silom" size="18" style="0"/>
@@ -139,7 +139,7 @@
             <Property name="text" type="java.lang.String" value="About"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AboutButtonActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="NameField">
