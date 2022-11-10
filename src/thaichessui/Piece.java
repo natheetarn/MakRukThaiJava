@@ -9,18 +9,18 @@ package thaichessui;
  * @author ROG Zephyrus M
  */
 public abstract class Piece {
-    private Color color;
+    private String color;
     private boolean killed = false;
 
-    public Piece(Color color){
-        this.setColor(color)
+    public Piece(String color){
+        this.setColor(color);
     }
 
-    public Color getColor(){
+    public String getColor(){
         return this.color;
     }
 
-    public void setColor(Color color){
+    public void setColor(String color){
         this.color = color;
     }
 

@@ -10,16 +10,16 @@ import javax.swing.*;
  */
 public class Tile extends JPanel{
     private boolean isOccupied;
-    private Color color;
+    private String color;
     private Piece piece;
     
-    Tile(boolean isOccupied, Color color) {
+    Tile(boolean isOccupied, String color) {
         this.isOccupied = isOccupied;
         this.color = color;
         this.piece = null;
     }
     
-    public Color getColor(){
+    public String getColor(){
         return this.color;
     }
 }

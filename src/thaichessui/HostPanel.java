@@ -51,6 +51,11 @@ public class HostPanel extends javax.swing.JPanel {
         BlackRadioButton.setText("Black");
 
         StartButton.setText("Start");
+        StartButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StartButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -97,6 +102,14 @@ public class HostPanel extends javax.swing.JPanel {
     private void TimeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TimeComboBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TimeComboBoxActionPerformed
+
+    private void StartButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StartButtonActionPerformed
+        BoardPanel boardPanel = new BoardPanel();
+        this.setLayout(new java.awt.BorderLayout());
+        this.removeAll();
+        this.add(boardPanel);
+        this.revalidate();
+    }//GEN-LAST:event_StartButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
