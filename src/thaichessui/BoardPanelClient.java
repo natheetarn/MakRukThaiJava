@@ -4,6 +4,7 @@
  */
 package thaichessui;
 
+import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -11,6 +12,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
@@ -18,15 +20,43 @@ import javax.swing.JOptionPane;
  */
 public class BoardPanelClient extends javax.swing.JPanel {
 
-    public static Socket socket = null;
-    public static ObjectInputStream in = null;
-    public static ObjectOutputStream out = null;
+    private static Socket socket = null;
+    private static ObjectInputStream in = null;
+    private static ObjectOutputStream out = null;
+
+    private int myCurTime = 0;
+    private int opponentCurTime = 0;
+    private Timer myTimer = null;
+    private Timer opponentTimer = null;
 
     /**
      * Creates new form BoardPanel
      */
     public BoardPanelClient() {
         initComponents();
+        initTimer();
+    }
+
+    public void initTimer() {
+        myTimer = new Timer(1000, new java.awt.event.ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                myTime.setText(String.valueOf(myCurTime));
+                myCurTime++;
+            }
+        });
+
+        opponentTimer = new Timer(1000, new java.awt.event.ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // TODO Auto-generated method stub
+                opponentTime.setText(String.valueOf(opponentCurTime));
+                opponentCurTime++;
+            }
+        });
     }
 
     public static void closeConnection() {
@@ -53,6 +83,7 @@ public class BoardPanelClient extends javax.swing.JPanel {
         try {
             socket = new Socket(address, port);
             System.out.println("Connected");
+            opponentTimer.start();
 
             chatPrintln("GLHF!!!");
 
@@ -108,6 +139,8 @@ public class BoardPanelClient extends javax.swing.JPanel {
                         return;
                     } else if ((int) o == Main.YOUR_TURN_CODE) {
                         myButton.setEnabled(true);
+                        stopOpponentTimer();
+                        startMyTimer();
                     }
                 } else if (o instanceof String) {
                     message = (String) o;
@@ -117,6 +150,22 @@ public class BoardPanelClient extends javax.swing.JPanel {
                 System.out.println(ex);
             }
         } while (!message.equals("Client - END"));
+    }
+
+    public void startMyTimer() {
+        myTimer.start();
+    }
+
+    public void stopMyTimer() {
+        myTimer.stop();
+    }
+
+    public void startOpponentTimer() {
+        opponentTimer.start();
+    }
+
+    public void stopOpponentTimer() {
+        opponentTimer.stop();
     }
 
     /**
@@ -229,6 +278,9 @@ public class BoardPanelClient extends javax.swing.JPanel {
     private void myButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_myButtonActionPerformed
         // TODO add your handling code here:
         myButton.setEnabled(false);
+        stopMyTimer();
+        startOpponentTimer();
+
         try {
             out.writeObject(Main.YOUR_TURN_CODE);
         } catch (IOException ex) {
