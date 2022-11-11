@@ -157,20 +157,20 @@ public class HostPanel extends javax.swing.JPanel {
     private void StartButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_StartButtonActionPerformed
         // TODO add your handling code here:
 
-        HostPanel hostPanel = this;
-        BoardPanelServer b = new BoardPanelServer();
-        hostPanel.setLayout(new java.awt.BorderLayout());
-        hostPanel.removeAll();
-        hostPanel.add(b);
-        hostPanel.revalidate();
+        BoardPanel b = new BoardPanel();
+        // BoardPanelServer b = new BoardPanelServer();
+        this.setLayout(new java.awt.BorderLayout());
+        this.removeAll();
+        this.add(b);
+        this.revalidate();
 
-        Thread serverThread = new Thread(new Runnable() {
-            public void run() {
-                b.run(3000);
-            }
-        });
+        // Thread serverThread = new Thread(new Runnable() {
+        // public void run() {
+        // b.run(3000);
+        // }
+        // });
 
-        serverThread.start();
+        // serverThread.start();
 
     }// GEN-LAST:event_StartButtonActionPerformed
 
