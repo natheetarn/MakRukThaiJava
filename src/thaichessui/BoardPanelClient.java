@@ -18,15 +18,31 @@ import javax.swing.JOptionPane;
  */
 public class BoardPanelClient extends javax.swing.JPanel {
 
-    private Socket socket = null;
-    private ObjectInputStream in = null;
-    private ObjectOutputStream out = null;
+    public static Socket socket = null;
+    public static ObjectInputStream in = null;
+    public static ObjectOutputStream out = null;
 
     /**
      * Creates new form BoardPanel
      */
     public BoardPanelClient() {
         initComponents();
+    }
+
+    public static void closeConnection() {
+        try {
+            if (socket != null) {
+                out.writeObject(MainMenu.FORCE_EXIT_CODE);
+                socket.close();
+                in.close();
+                out.close();
+            }
+
+            socket = null;
+        } catch (IOException i) {
+            System.out.println(i);
+        }
+
     }
 
     public void chatPrintln(String str) {
@@ -45,7 +61,7 @@ public class BoardPanelClient extends javax.swing.JPanel {
         } catch (UnknownHostException u) {
             System.out.println(u);
         } catch (IOException i) {
-            JOptionPane.showMessageDialog(null, "There is no host right now!", "Sad", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "There is no host right now!", "Oh no!", JOptionPane.WARNING_MESSAGE);
 
             HostPanel hostPanel = new HostPanel();
 
@@ -67,6 +83,16 @@ public class BoardPanelClient extends javax.swing.JPanel {
             out.close();
             socket.close();
             socket = null;
+
+            JOptionPane.showMessageDialog(null, "Oops! Your opponent disconnected, guess its your win!", "🗿",
+                    JOptionPane.PLAIN_MESSAGE);
+
+            MenuPanel menuPanel = new MenuPanel();
+
+            this.setLayout(new java.awt.BorderLayout());
+            this.removeAll();
+            this.add(menuPanel);
+            this.revalidate();
         } catch (IOException i) {
             System.out.println(i);
         }
@@ -76,8 +102,15 @@ public class BoardPanelClient extends javax.swing.JPanel {
         String message = "";
         do {
             try {
-                message = (String) in.readObject();
-                chatPrintln(message);
+                Object o = in.readObject();
+                if (o instanceof Integer) {
+                    if ((int) o == MainMenu.FORCE_EXIT_CODE) {
+                        return;
+                    }
+                } else if (o instanceof String) {
+                    message = (String) o;
+                    chatPrintln(message);
+                }
             } catch (ClassNotFoundException classNotFoundException) {
             }
         } while (!message.equals("Client - END"));
@@ -92,13 +125,15 @@ public class BoardPanelClient extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
-    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    // <editor-fold defaultstate="collapsed" desc="Generated
+    // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jTextField1 = new javax.swing.JTextField();
+        jTextArea1.setEditable(false);
 
         jLabel1.setText("Chat");
 
@@ -115,37 +150,44 @@ public class BoardPanelClient extends javax.swing.JPanel {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(549, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(91, 91, 91))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(16, 16, 16))))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap(549, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+                                                layout.createSequentialGroup()
+                                                        .addComponent(jLabel1)
+                                                        .addGap(91, 91, 91))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout
+                                                .createSequentialGroup()
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                        .addComponent(jTextField1,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 173,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(jScrollPane2,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE, 173,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGap(16, 16, 16)))));
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
-        );
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(65, 65, 65)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 213,
+                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                        javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(46, Short.MAX_VALUE)));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
         try {
             if (socket == null) {
-                chatPrintln("Host has disconnected");
+                System.out.println("should not reach here");
             } else {
                 chatPrintln("Client: " + jTextField1.getText());
                 out.writeObject("Client: " + jTextField1.getText());

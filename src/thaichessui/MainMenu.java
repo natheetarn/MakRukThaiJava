@@ -10,6 +10,8 @@ package thaichessui;
  */
 public class MainMenu extends javax.swing.JFrame {
 
+    public static final int FORCE_EXIT_CODE = -1;
+
     /**
      * Creates new form MainMenu
      */
@@ -67,6 +69,13 @@ public class MainMenu extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+
+        Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+            public void run() {
+                BoardPanelServer.closeConnection();
+                BoardPanelClient.closeConnection();
+            }
+        }));
 
         /* Set the Nimbus look and feel */
         // <editor-fold defaultstate="collapsed" desc=" Look and feel setting code
