@@ -11,6 +11,7 @@ package thaichessui;
 public class Main extends javax.swing.JFrame {
 
     public static final int FORCE_EXIT_CODE = -1;
+    public static final int YOUR_TURN_CODE = 1;
 
     /**
      * Creates new form Main
