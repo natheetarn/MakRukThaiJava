@@ -33,7 +33,7 @@ public class BoardPanelServer extends javax.swing.JPanel {
     public static void closeConnection() {
         try {
             if (socket != null) {
-                out.writeObject(MainMenu.FORCE_EXIT_CODE);
+                out.writeObject(Main.FORCE_EXIT_CODE);
                 socket.close();
                 in.close();
                 out.close();
@@ -41,8 +41,8 @@ public class BoardPanelServer extends javax.swing.JPanel {
             }
 
             socket = null;
-        } catch (IOException i) {
-            System.out.println(i);
+        } catch (IOException ex) {
+            System.out.println(ex);
         }
 
     }
@@ -84,8 +84,8 @@ public class BoardPanelServer extends javax.swing.JPanel {
             this.removeAll();
             this.add(menuPanel);
             this.revalidate();
-        } catch (IOException i) {
-            System.out.println(i);
+        } catch (IOException ex) {
+            System.out.println(ex);
         }
     }
 
@@ -95,14 +95,14 @@ public class BoardPanelServer extends javax.swing.JPanel {
             try {
                 Object o = in.readObject();
                 if (o instanceof Integer) {
-                    if ((int) o == MainMenu.FORCE_EXIT_CODE) {
+                    if ((int) o == Main.FORCE_EXIT_CODE) {
                         return;
                     }
                 } else if (o instanceof String) {
                     message = (String) o;
                     chatPrintln(message);
                 }
-            } catch (ClassNotFoundException classNotFoundException) {
+            } catch (ClassNotFoundException ex) {
             }
         } while (!message.equals("Client: END"));
     }
@@ -182,8 +182,8 @@ public class BoardPanelServer extends javax.swing.JPanel {
                 chatPrintln("Server: " + jTextField1.getText());
                 out.writeObject("Server: " + jTextField1.getText());
             }
-        } catch (IOException i) {
-            System.out.println(i);
+        } catch (IOException ex) {
+            System.out.println(ex);
         }
 
         jTextField1.setText("");

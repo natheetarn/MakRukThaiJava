@@ -32,15 +32,15 @@ public class BoardPanelClient extends javax.swing.JPanel {
     public static void closeConnection() {
         try {
             if (socket != null) {
-                out.writeObject(MainMenu.FORCE_EXIT_CODE);
+                out.writeObject(Main.FORCE_EXIT_CODE);
                 socket.close();
                 in.close();
                 out.close();
             }
 
             socket = null;
-        } catch (IOException i) {
-            System.out.println(i);
+        } catch (IOException ex) {
+            System.out.println(ex);
         }
 
     }
@@ -58,9 +58,9 @@ public class BoardPanelClient extends javax.swing.JPanel {
 
             out = new ObjectOutputStream(socket.getOutputStream());
             in = new ObjectInputStream(socket.getInputStream());
-        } catch (UnknownHostException u) {
-            System.out.println(u);
-        } catch (IOException i) {
+        } catch (UnknownHostException ex) {
+            System.out.println(ex);
+        } catch (IOException ex) {
             JOptionPane.showMessageDialog(null, "There is no host right now!", "Oh no!", JOptionPane.WARNING_MESSAGE);
 
             HostPanel hostPanel = new HostPanel();
@@ -74,8 +74,8 @@ public class BoardPanelClient extends javax.swing.JPanel {
 
         try {
             whileChatting();
-        } catch (IOException i) {
-            System.out.println(i);
+        } catch (IOException ex) {
+            System.out.println(ex);
         }
 
         try {
@@ -93,8 +93,8 @@ public class BoardPanelClient extends javax.swing.JPanel {
             this.removeAll();
             this.add(menuPanel);
             this.revalidate();
-        } catch (IOException i) {
-            System.out.println(i);
+        } catch (IOException ex) {
+            System.out.println(ex);
         }
     }
 
@@ -104,14 +104,15 @@ public class BoardPanelClient extends javax.swing.JPanel {
             try {
                 Object o = in.readObject();
                 if (o instanceof Integer) {
-                    if ((int) o == MainMenu.FORCE_EXIT_CODE) {
+                    if ((int) o == Main.FORCE_EXIT_CODE) {
                         return;
                     }
                 } else if (o instanceof String) {
                     message = (String) o;
                     chatPrintln(message);
                 }
-            } catch (ClassNotFoundException classNotFoundException) {
+            } catch (ClassNotFoundException ex) {
+                System.out.println(ex);
             }
         } while (!message.equals("Client - END"));
     }
@@ -192,8 +193,8 @@ public class BoardPanelClient extends javax.swing.JPanel {
                 chatPrintln("Client: " + jTextField1.getText());
                 out.writeObject("Client: " + jTextField1.getText());
             }
-        } catch (IOException i) {
-            System.out.println(i);
+        } catch (IOException ex) {
+            System.out.println(ex);
         }
 
         jTextField1.setText("");
