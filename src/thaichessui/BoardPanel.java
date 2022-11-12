@@ -4,32 +4,37 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
-public class BoardPanel extends JPanel{
+public class BoardPanel extends JPanel {
 
     private JPanel chessBoard;
     private JButton[][] chessBoardSquares = new JButton[8][8];
     private Board boardData = new Board();
-    public BoardPanel(){
+
+    public BoardPanel() {
         initComponents();
     }
 
-    private void initComponents(){
+    private void initComponents() {
         boardData.populateBoardWithTiles();
-        chessBoard = new JPanel(new GridLayout(0,9));
+        GridLayout g = new GridLayout(8, 8);
+        g.setHgap(-3);
+        g.setVgap(-3);
+        chessBoard = new JPanel(g);
         this.add(chessBoard);
 
-        Insets buttonMargin = new Insets(0,0,0,0);
         for (int ii = 0; ii < chessBoardSquares.length; ii++) {
             for (int jj = 0; jj < chessBoardSquares[ii].length; jj++) {
                 JButton b = new JButton();
-                b.setMargin(buttonMargin);
+                b.setPreferredSize(new Dimension(80, 80));
+                b.setBorder(new LineBorder(Color.GRAY));
+                // b.setMargin(buttonMargin);
                 // our chess pieces are 64x64 px in size, so we'll
                 // 'fill this in' using a transparent icon..
                 // ImageIcon icon = new ImageIcon(
-                //         new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB));
+                // new BufferedImage(64, 64, BufferedImage.TYPE_INT_ARGB));
                 // b.setIcon(icon);
                 if ((jj % 2 == 1 && ii % 2 == 1)
-                        //) {
+                        // ) {
                         || (jj % 2 == 0 && ii % 2 == 0)) {
                     b.setBackground(Color.WHITE);
                 } else {
