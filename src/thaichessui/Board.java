@@ -30,15 +30,15 @@ public class Board {
             for (int j = 0; j < BOARD_SIZE; j++) {
                 if (i % 2 == 0) {
                     if (j % 2 == 0)
-                        board[i][j] = new Tile(false, "BLACK");
+                        board[i][j] = new Tile( "BLACK",i,j);
                     else
-                        board[i][j] = new Tile(false, "WHITE");
+                        board[i][j] = new Tile( "WHITE",i,j);
                 }
                 else {
                     if (j % 2 == 0)
-                        board[i][j] = new Tile(false, "WHITE");
+                        board[i][j] = new Tile("WHITE",i,j);
                     else
-                        board[i][j] = new Tile(false, "BLACK");
+                        board[i][j] = new Tile( "BLACK",i,j);
                 }
             }
         }

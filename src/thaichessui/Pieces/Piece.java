@@ -2,7 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package thaichessui;
+package thaichessui.Pieces;
+import java.util.ArrayList;
+
+import thaichessui.Board;
+import thaichessui.Tile;
 
 /**
  *
@@ -11,6 +15,7 @@ package thaichessui;
 public abstract class Piece {
     private String color;
     private boolean killed = false;
+    
 
     public Piece(String color){
         this.setColor(color);
@@ -32,7 +37,9 @@ public abstract class Piece {
         this.killed = killed;
     }
 
-    public abstract boolean canMove(Board board, Tile begin, Tile dest);
+    public abstract ArrayList<Tile> getLegalMoves(Board board, int file, int rank);
+
+    // public abstract boolean canMove(Board board, Tile begin, Tile dest);
 
 
 
