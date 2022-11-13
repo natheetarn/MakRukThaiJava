@@ -12,19 +12,19 @@ import thaichessui.Pieces.Piece;
  */
 public class Tile{
     private boolean isOccupied;
-    private String color;
+    private java.awt.Color color;
     private Piece piece;
     private int rank;
     private int file;
-    Tile(String color, int file, int rank) {
+    Tile(java.awt.Color color, int row, int col) {
         this.color = color;
         this.piece = null;
         this.isOccupied = false;
-        this.file = file;
-        this.rank = rank;
+        this.rank = row;
+        this.file = col;
     }
     
-    public String getColor(){
+    public java.awt.Color getColor(){
         return this.color;
     }
 
@@ -32,8 +32,8 @@ public class Tile{
         return this.isOccupied;
     }
 
-    public void setOccupied(){
-        this.isOccupied = !this.isOccupied;
+    public void setOccupied(boolean o){
+        this.isOccupied = o;
     }
 
     public Piece getPiece(){
@@ -42,6 +42,11 @@ public class Tile{
 
     public void setPiece(Piece p){
         this.piece = p;
+        if (p!=null){
+            this.setOccupied(true);
+        } else {
+            this.setOccupied(false);
+        }
     }
 
     public int getFile(){

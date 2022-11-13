@@ -13,19 +13,21 @@ import thaichessui.Tile;
  * @author ROG Zephyrus M
  */
 public abstract class Piece {
-    private String color;
+    protected String name;
+    private java.awt.Color color;
     private boolean killed = false;
     
 
-    public Piece(String color){
+    public Piece(java.awt.Color color){
         this.setColor(color);
+        this.name = "emptyPiece";
     }
 
-    public String getColor(){
+    public java.awt.Color getColor(){
         return this.color;
     }
 
-    public void setColor(String color){
+    public void setColor(java.awt.Color color){
         this.color = color;
     }
 
@@ -35,6 +37,10 @@ public abstract class Piece {
 
     public void setKilled(boolean killed){
         this.killed = killed;
+    }
+
+    public String getName(){
+        return this.name;
     }
 
     public abstract ArrayList<Tile> getLegalMoves(Board board, int file, int rank);

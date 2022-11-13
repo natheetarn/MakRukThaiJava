@@ -1,45 +1,52 @@
 package thaichessui.Pieces;
 import thaichessui.Board;
 import thaichessui.Tile;
+
+import java.awt.Color;
 import java.util.ArrayList;
 
 public class BeaPiece extends Piece {
 
-    public BeaPiece(String color){
+
+    public BeaPiece(java.awt.Color color){
         super(color);
+        this.name = "BeaPiece";
     }
 
-    public ArrayList<Tile> getLegalMoves(Board board,int file, int rank){
+    public ArrayList<Tile> getLegalMoves(Board board,int row, int col){
         ArrayList<Tile>legalMoves = new ArrayList<Tile>();
-        if (this.getColor() == "WHITE"){ //move forward
-            if( file >= 0 && file <= 7 && 
-                rank+1 >= 0 && rank+1 <= 7 && 
-                board.board[file][rank+1].getOccupied()){
-                legalMoves.add(board.board[file][rank+1]);
+        if (this.getColor() == Color.white){ //move forward
+            if( row+1 >= 0 && row+1 <= 7 && 
+                col >= 0 && col <= 7 && 
+                !board.board[row+1][col].getOccupied()){
+                legalMoves.add(board.board[row+1][col]);
+                // System.out.println("1stCase : " + (row+1) + col);
             }
 
-            if( file >= 0 && file+1 <= 7 && //capture
-                rank+1 >= 0 && rank+1 <= 7 && 
-                board.board[file+1][rank+1].getOccupied()){
-                legalMoves.add(board.board[file+1][rank+1]);
-            }
+            // if( row >= 0 && row+1 <= 7 && //capture
+            //     col+1 >= 0 && col+1 <= 7 && 
+            //     board.board[row+1][col+1].getOccupied()){
+            //     legalMoves.add(board.board[row+1][col+1]);
+                
+            // }
 
-            if( file-1 >= 0 && file <= 7 && //capture
-                rank+1 >= 0 && rank+1 <= 7 && 
-                board.board[file+1][rank+1].getOccupied()){
-                legalMoves.add(board.board[file-1][rank+1]);
+            // if( row-1 >= 0 && row <= 7 && //capture
+            //     col+1 >= 0 && col+1 <= 7 && 
+            //     board.board[row+1][col+1].getOccupied()){
+            //     legalMoves.add(board.board[row-1][col+1]);
+            // }
+        }
+
+        if (this.getColor() == Color.BLACK){ //move forward
+            if( row >= 0 && row <= 7 && 
+                col >= 1 && col <= 7 &&
+                !board.board[row-1][col].getOccupied()){
+                legalMoves.add(board.board[row-1][col]);
+                System.out.println("2ndCase");
             }
         }
 
-        if (this.getColor() == "BLACK"){ //move forward
-            if( file >= 0 && file <= 7 && 
-                rank >= 1 && rank <= 7 &&
-                board.board[file][rank-1].getOccupied()){
-                legalMoves.add(board.board[file][rank-1]);
-            }
-        }
-
-
+        System.out.println("MOVES FROM" + row + col);
         return legalMoves;
     }
 

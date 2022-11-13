@@ -4,6 +4,10 @@
  */
 package thaichessui;
 
+import java.awt.Color;
+
+import thaichessui.Pieces.BeaPiece;
+
 /**
  *
  * @author ROG Zephyrus M
@@ -26,21 +30,27 @@ public class Board {
      * Method to populate board with black and white tiles
      */
     void populateBoardWithTiles() {
-        for (int i = 0; i < BOARD_SIZE; i++) {
-            for (int j = 0; j < BOARD_SIZE; j++) {
-                if (i % 2 == 0) {
-                    if (j % 2 == 0)
-                        board[i][j] = new Tile( "BLACK",i,j);
+        for (int ii= 0; ii < BOARD_SIZE; ii++) {
+            for (int jj = 0; jj < BOARD_SIZE; jj++) {
+                if (ii % 2 == 0) {
+                    if (jj % 2 == 0)
+                        board[ii][jj] = new Tile( Color.BLACK,ii,jj);
                     else
-                        board[i][j] = new Tile( "WHITE",i,j);
+                        board[ii][jj] = new Tile( Color.WHITE,ii,jj);
                 }
                 else {
-                    if (j % 2 == 0)
-                        board[i][j] = new Tile("WHITE",i,j);
+                    if (jj % 2 == 0)
+                        board[ii][jj] = new Tile(Color.WHITE,ii,jj);
                     else
-                        board[i][j] = new Tile( "BLACK",i,j);
+                        board[ii][jj] = new Tile( Color.BLACK,ii,jj);
                 }
             }
+        }
+    }
+
+    void setStartingPiecesWhite(){
+        for (int i = 0; i < 8; i++){
+            board[2][i].setPiece(new BeaPiece(Color.WHITE));
         }
     }
 }
