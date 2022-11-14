@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.event.MouseInputAdapter;
+import javax.swing.event.SwingPropertyChangeSupport;
 
 import thaichessui.Pieces.Piece;
 
@@ -44,35 +45,72 @@ public class BoardPanel extends JPanel {
                 // tileActionPerformed(evt);
                 // }
                 // });
-                b.addMouseListener(new MouseInputAdapter() {
-                    public void mouseEntered(java.awt.event.MouseEvent evt) {
-                        int row = (int) ((JButton) evt.getSource()).getClientProperty("row");
-                        int col = (int) ((JButton) evt.getSource()).getClientProperty("col");
-                        Piece p = boardData.board[row][col].getPiece();
-                        if (p == null) {
-                            System.out.println("NO PIECE");
-                        }
-                        if (p != null) {
-                            System.out.println(p.getLegalMoves(boardData, row, col, isHostView));
-                            showLegal(p.getLegalMoves(boardData, row, col, isHostView), Color.CYAN);
-                        }
-                        System.out.println("row " + row + "col " + col);
-                    }
 
-                    public void mouseExited(java.awt.event.MouseEvent evt) {
-                        int row = (int) ((JButton) evt.getSource()).getClientProperty("row");
-                        int col = (int) ((JButton) evt.getSource()).getClientProperty("col");
-                        Piece p = boardData.board[row][col].getPiece();
-                        if (p == null) {
-                            System.out.println("NO PIECE");
+
+
+                b.addActionListener(e -> {
+                    int row = (int) b.getClientProperty("row");
+                    int col = (int) b.getClientProperty("col");
+                    Tile t = boardData.board[row][col];
+                    System.out.println("row: " + row + " col: " + col);
+                    if (t.getOccupied() == true) {
+                        if(findSelected()){
+                            Tile a = returnSelectedTile();
+                            try{ ArrayList<Tile> validMoves = a.getPiece().getLegalMoves(boardData, a.getRank(), a.getFile(), isHostView);
+                                returnColor(validMoves);}
+                                catch(Exception ex){System.out.println("no legal moves");}
+                                a.setSelected(false);
                         }
-                        if (p != null) {
-                            System.out.println(p.getLegalMoves(boardData, row, col, isHostView));
-                            returnColor(p.getLegalMoves(boardData, row, col, isHostView));
+                        t.setSelected(true);
+                        try{showLegal(t.getPiece().getLegalMoves(boardData, row, col, isHostView),Color.CYAN);}
+                        catch(Exception ex){System.out.println("no legal moves");}
+                    }
+                    else{
+                        if(findSelected()){
+                            Tile oldTile = returnSelectedTile();
+                            Tile newTile = boardData.board[row][col];
+                            try{ArrayList<Tile> validMoves = oldTile.getPiece().getLegalMoves(boardData, oldTile.getRank(),oldTile.getFile() , isHostView);
+                                returnColor(validMoves);
+                                move(validMoves, oldTile, newTile,boardData);}
+                            catch(Exception ex){System.out.println("no legal moves");}
                         }
-                        System.out.println("row " + row + "col " + col);
                     }
                 });
+
+
+                // b.addMouseListener(new MouseInputAdapter() {
+                //     public void mouseEntered(java.awt.event.MouseEvent evt) {
+                //         int row = (int) ((JButton) evt.getSource()).getClientProperty("row");
+                //         int col = (int) ((JButton) evt.getSource()).getClientProperty("col");
+                //         Piece p = boardData.board[row][col].getPiece();
+                //         if (p == null) {
+                //             System.out.println("NO PIECE");
+                //         }
+                //         if (p != null) {
+                //             System.out.println(p.getLegalMoves(boardData, row, col, isHostView));
+                //             showLegal(p.getLegalMoves(boardData, row, col, isHostView), Color.CYAN);
+                //         }
+                //         System.out.println("row " + row + "col " + col);
+                //     }
+
+                //     public void mouseExited(java.awt.event.MouseEvent evt) {
+                //         int row = (int) ((JButton) evt.getSource()).getClientProperty("row");
+                //         int col = (int) ((JButton) evt.getSource()).getClientProperty("col");
+                //         Piece p = boardData.board[row][col].getPiece();
+                //         if (p == null) {
+                //             System.out.println("NO PIECE");
+                //         }
+                //         if (p != null) {
+                //             System.out.println(p.getLegalMoves(boardData, row, col, isHostView));
+                //             returnColor(p.getLegalMoves(boardData, row, col, isHostView));
+                //         }
+                //         System.out.println("row " + row + "col " + col);
+                //     }
+                // });
+
+
+
+
                 // b.setMargin(buttonMargin);
                 // our chess pieces are 64x64 px in size, so we'll
                 // 'fill this in' using a transparent icon..
@@ -108,6 +146,20 @@ public class BoardPanel extends JPanel {
         }
     }
 
+    public void move(ArrayList<Tile> possibleMoves, Tile oldTIle , Tile newTile, Board board) {
+        for(Tile d : possibleMoves){
+            if(d == newTile){
+                newTile.setPiece(oldTIle.getPiece());
+                newTile.setOccupied(true);
+                oldTIle.setPiece(null);
+                oldTIle.setOccupied(false);
+                oldTIle.setSelected(false);
+                updateBoard();
+                break;
+            }
+        }
+    }
+
     void updateBoard() {
         for (int ii = 0; ii < chessBoardSquares.length; ii++) {
             for (int jj = 0; jj < chessBoardSquares[ii].length; jj++) {
@@ -115,8 +167,34 @@ public class BoardPanel extends JPanel {
                 if (p != null) {
                     chessBoardSquares[ii][jj].setText(boardData.board[ii][jj].getPiece().getName());
                 }
+                if (p == null) {
+                    chessBoardSquares[ii][jj].setText("");
+                }
             }
         }
+    }
+
+    Tile returnSelectedTile(){
+        for (int ii = 0; ii < chessBoardSquares.length; ii++) {
+            for (int jj = 0; jj < chessBoardSquares[ii].length; jj++) {
+                if(boardData.board[ii][jj].getSelected() == true){
+                    return boardData.board[ii][jj];
+                }
+            }
+        }
+        return null;
+    }
+
+    boolean findSelected(){
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                if (boardData.board[i][j].getSelected()) {
+                    System.out.println("Found Seceted Piece");
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     private void tileActionPerformed(java.awt.event.ActionEvent evt) {
