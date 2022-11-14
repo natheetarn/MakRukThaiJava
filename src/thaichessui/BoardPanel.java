@@ -51,33 +51,30 @@ public class BoardPanel extends JPanel {
                 b.addActionListener(e -> {
                     int row = (int) b.getClientProperty("row");
                     int col = (int) b.getClientProperty("col");
+                    Tile t = boardData.board[row][col];
                     System.out.println("row: " + row + " col: " + col);
-                    if (boardData.board[row][col].getOccupied() == true) {
-                        System.out.println("valid tile (have piece)");
-                        boardData.board[row][col].setSelected(true);
-                        showLegal(boardData.board[row][col].getPiece().getLegalMoves(boardData, row, col, isHostView),Color.CYAN);
-                        System.out.println("The Piece is Selected");
+                    if (t.getOccupied() == true) {
+                        if(findSelected()){
+                            Tile a = returnSelectedTile();
+                            try{ ArrayList<Tile> validMoves = a.getPiece().getLegalMoves(boardData, a.getRank(), a.getFile(), isHostView);
+                                returnColor(validMoves);}
+                                catch(Exception ex){System.out.println("no legal moves");}
+                                a.setSelected(false);
+                        }
+                        t.setSelected(true);
+                        try{showLegal(t.getPiece().getLegalMoves(boardData, row, col, isHostView),Color.CYAN);}
+                        catch(Exception ex){System.out.println("no legal moves");}
                     }
                     else{
                         if(findSelected()){
-                            System.out.println("valid tile (no piece)");
-                            System.out.println("The Piece is Moved");
                             Tile oldTile = returnSelectedTile();
-                            System.out.println(oldTile);
-
                             Tile newTile = boardData.board[row][col];
-                            System.out.println(newTile);
-                            ArrayList<Tile> validMoves = oldTile.getPiece().getLegalMoves(boardData, oldTile.getRank(),oldTile.getFile() , isHostView);
-                            returnColor(validMoves);
-                            move(validMoves, oldTile, newTile,boardData);
-                            
-
-            
+                            try{ArrayList<Tile> validMoves = oldTile.getPiece().getLegalMoves(boardData, oldTile.getRank(),oldTile.getFile() , isHostView);
+                                returnColor(validMoves);
+                                move(validMoves, oldTile, newTile,boardData);}
+                            catch(Exception ex){System.out.println("no legal moves");}
                         }
-
-
                     }
-
                 });
 
 

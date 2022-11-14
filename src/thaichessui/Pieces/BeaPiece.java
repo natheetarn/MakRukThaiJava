@@ -14,6 +14,7 @@ public class BeaPiece extends Piece {
     }
 
     public ArrayList<Tile> getLegalMoves(Board board, int row, int col, boolean isHostView) {
+        
         ArrayList<Tile> legalMoves = new ArrayList<Tile>();
         if (this.getColor() == Color.white) { // move forward
             int val = 1;
