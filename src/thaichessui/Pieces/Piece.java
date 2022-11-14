@@ -43,6 +43,10 @@ public abstract class Piece {
         return this.name;
     }
 
+
+
+    
+
     public abstract ArrayList<Tile> getLegalMoves(Board board, int file, int rank, boolean isHostView);
 
     // public abstract boolean canMove(Board board, Tile begin, Tile dest);

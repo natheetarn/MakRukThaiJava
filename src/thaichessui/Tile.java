@@ -11,11 +11,12 @@ import thaichessui.Pieces.Piece;
  * @author ROG Zephyrus M
  */
 public class Tile{
-    private boolean isOccupied;
+    private boolean isOccupied = false;
     private java.awt.Color color;
     private Piece piece;
     private int rank;
     private int file;
+    private boolean isSelected = false;
     Tile(java.awt.Color color, int row, int col) {
         this.color = color;
         this.piece = null;
@@ -30,6 +31,13 @@ public class Tile{
 
     public boolean getOccupied(){
         return this.isOccupied;
+    }
+
+    public boolean getSelected(){
+        return this.isSelected;
+    }
+    public boolean setSelected(boolean selected){
+        return this.isSelected = selected;
     }
 
     public void setOccupied(boolean o){
