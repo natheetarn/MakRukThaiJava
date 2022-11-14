@@ -17,8 +17,6 @@ public class Board {
     public static final int BOARD_SIZE = 8; // constant variable that sets the size of Chess board
     public Tile[][] board;
 
-    
-
     /**
      * Constructor for Board
      */
@@ -29,28 +27,47 @@ public class Board {
     /**
      * Method to populate board with black and white tiles
      */
-    void populateBoardWithTiles() {
-        for (int ii= 0; ii < BOARD_SIZE; ii++) {
+    void populateBoardWithTiles(boolean isHostView) {
+        for (int ii = 0; ii < BOARD_SIZE; ii++) {
             for (int jj = 0; jj < BOARD_SIZE; jj++) {
-                if (ii % 2 == 0) {
-                    if (jj % 2 == 0)
-                        board[ii][jj] = new Tile( Color.BLACK,ii,jj);
-                    else
-                        board[ii][jj] = new Tile( Color.WHITE,ii,jj);
-                }
-                else {
-                    if (jj % 2 == 0)
-                        board[ii][jj] = new Tile(Color.WHITE,ii,jj);
-                    else
-                        board[ii][jj] = new Tile( Color.BLACK,ii,jj);
+                if (isHostView) {
+                    if (ii % 2 == 0) {
+                        if (jj % 2 == 0)
+                            board[ii][jj] = new Tile(Color.WHITE, ii, jj);
+                        else
+                            board[ii][jj] = new Tile(Color.BLACK, ii, jj);
+                    } else {
+                        if (jj % 2 == 0)
+                            board[ii][jj] = new Tile(Color.BLACK, ii, jj);
+                        else
+                            board[ii][jj] = new Tile(Color.WHITE, ii, jj);
+                    }
+                } else {
+                    if (ii % 2 == 0) {
+                        if (jj % 2 == 0)
+                            board[ii][jj] = new Tile(Color.BLACK, ii, jj);
+                        else
+                            board[ii][jj] = new Tile(Color.WHITE, ii, jj);
+                    } else {
+                        if (jj % 2 == 0)
+                            board[ii][jj] = new Tile(Color.WHITE, ii, jj);
+                        else
+                            board[ii][jj] = new Tile(Color.BLACK, ii, jj);
+                    }
                 }
             }
         }
     }
 
-    void setStartingPiecesWhite(){
-        for (int i = 0; i < 8; i++){
-            board[2][i].setPiece(new BeaPiece(Color.WHITE));
+    void setStartingPiecesWhite(boolean isHostView) {
+        if (isHostView) {
+            for (int i = 0; i < 8; i++) {
+                board[5][i].setPiece(new BeaPiece(Color.WHITE));
+            }
+        } else {
+            for (int i = 0; i < 8; i++) {
+                board[2][i].setPiece(new BeaPiece(Color.WHITE));
+            }
         }
     }
 }

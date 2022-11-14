@@ -281,7 +281,7 @@ public class GamePanelServer extends javax.swing.JPanel {
                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(24, Short.MAX_VALUE)));
 
-        BoardPanel b = new BoardPanel();
+        BoardPanel b = new BoardPanel(true);
         leftPanel.setLayout(new java.awt.BorderLayout());
         leftPanel.removeAll();
         leftPanel.add(b);

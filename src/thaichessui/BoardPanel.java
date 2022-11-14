@@ -14,19 +14,21 @@ public class BoardPanel extends JPanel {
     private JPanel chessBoard;
     private JButton[][] chessBoardSquares = new JButton[8][8];
     private Board boardData = new Board();
+    private boolean isHostView;
 
-    public BoardPanel() {
+    public BoardPanel(boolean isHostView) {
+        this.isHostView = isHostView;
         initComponents();
-        boardData.setStartingPiecesWhite();
+        boardData.setStartingPiecesWhite(this.isHostView);
         updateBoard();
     }
 
     private void initComponents() {
         this.setPreferredSize(new Dimension(450, 400));
-        boardData.populateBoardWithTiles();
+        boardData.populateBoardWithTiles(this.isHostView);
         GridLayout g = new GridLayout(8, 8);
-        g.setHgap(-3);
-        g.setVgap(-3);
+        g.setHgap(-2);
+        g.setVgap(-2);
         chessBoard = new JPanel(g);
         this.add(chessBoard);
 
@@ -51,8 +53,8 @@ public class BoardPanel extends JPanel {
                             System.out.println("NO PIECE");
                         }
                         if (p != null) {
-                            System.out.println(p.getLegalMoves(boardData, row, col));
-                            showLegal(p.getLegalMoves(boardData, row, col), Color.CYAN);
+                            System.out.println(p.getLegalMoves(boardData, row, col, isHostView));
+                            showLegal(p.getLegalMoves(boardData, row, col, isHostView), Color.CYAN);
                         }
                         System.out.println("row " + row + "col " + col);
                     }
@@ -65,8 +67,8 @@ public class BoardPanel extends JPanel {
                             System.out.println("NO PIECE");
                         }
                         if (p != null) {
-                            System.out.println(p.getLegalMoves(boardData, row, col));
-                            returnColor(p.getLegalMoves(boardData, row, col));
+                            System.out.println(p.getLegalMoves(boardData, row, col, isHostView));
+                            returnColor(p.getLegalMoves(boardData, row, col, isHostView));
                         }
                         System.out.println("row " + row + "col " + col);
                     }
@@ -97,7 +99,7 @@ public class BoardPanel extends JPanel {
             for (int jj = 0; jj < 8; jj++) {
                 switch (jj) {
                     case 0:
-                        chessBoard.add(new JLabel("" + (ii + 1),
+                        chessBoard.add(new JLabel("" + (8 - ii),
                                 SwingConstants.CENTER));
                     default:
                         chessBoard.add(chessBoardSquares[ii][jj]);
@@ -125,8 +127,8 @@ public class BoardPanel extends JPanel {
             System.out.println("NO PIECE");
         }
         if (p != null) {
-            System.out.println(p.getLegalMoves(boardData, col, row));
-            showLegal(p.getLegalMoves(boardData, row, col), boardData.board[row][col].getColor());
+            System.out.println(p.getLegalMoves(boardData, col, row, isHostView));
+            showLegal(p.getLegalMoves(boardData, row, col, isHostView), boardData.board[row][col].getColor());
         }
         System.out.println("row " + row + "col " + col);
 

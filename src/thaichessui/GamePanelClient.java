@@ -297,7 +297,7 @@ public class GamePanelClient extends javax.swing.JPanel {
                                                 .addComponent(myButton)))
                                 .addContainerGap(11, Short.MAX_VALUE)));
 
-        BoardPanel b = new BoardPanel();
+        BoardPanel b = new BoardPanel(false);
         leftPanel.setLayout(new java.awt.BorderLayout());
         leftPanel.removeAll();
         leftPanel.add(b);
