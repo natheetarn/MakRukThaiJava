@@ -15,10 +15,6 @@ public class RuaPiece extends Piece {
 
     public ArrayList<Tile> getLegalMoves(Board board, int row, int col, boolean isHostView){
         ArrayList<Tile> legalMoves = new ArrayList<Tile>();
-        int val = 1;
-            if (isHostView) {
-                val = -1;
-            }
     
         int currRow = row+1;
         
@@ -28,7 +24,7 @@ public class RuaPiece extends Piece {
             currRow++;
         }
 
-        if(currRow <= 7 && board.board[currRow][col].getOccupied() && board.board[currRow][col].getColor() != board.board[row][col].getColor()){ // capture
+        if(currRow <= 7 && board.board[currRow][col].getOccupied() && board.board[currRow][col].getPiece().getColor() != board.board[row][col].getPiece().getColor()){ // capture
             legalMoves.add(board.board[currRow][col]);
         }
 
@@ -39,7 +35,7 @@ public class RuaPiece extends Piece {
             currRow--;
         }
 
-        if(currRow >= 0 && board.board[currRow][col].getOccupied() && board.board[currRow][col].getColor() != board.board[row][col].getColor()){ // capture
+        if(currRow >= 0 && board.board[currRow][col].getOccupied() && board.board[currRow][col].getPiece().getColor() != board.board[row][col].getPiece().getColor()){ // capture
             legalMoves.add(board.board[currRow][col]);
         }
 
@@ -50,7 +46,7 @@ public class RuaPiece extends Piece {
             currCol++;
         }
 
-        if(currCol <= 7 && board.board[row][currCol].getOccupied() && board.board[row][currCol].getColor() != board.board[row][col].getColor()){ // capture
+        if(currCol <= 7 && board.board[row][currCol].getOccupied() && board.board[row][currCol].getPiece().getColor() != board.board[row][col].getPiece().getColor()){ // capture
             legalMoves.add(board.board[row][currCol]);
         }
 
@@ -60,7 +56,7 @@ public class RuaPiece extends Piece {
             currCol--;
         }
 
-        if(currCol >= 0 && board.board[row][currCol].getOccupied() && board.board[row][currCol].getColor() != board.board[row][col].getColor()){ // capture
+        if(currCol >= 0 && board.board[row][currCol].getOccupied() && board.board[row][currCol].getPiece().getColor() != board.board[row][col].getPiece().getColor()){ // capture
             legalMoves.add(board.board[row][currCol]);
         }
 

@@ -20,6 +20,7 @@ public class BoardPanel extends JPanel {
         this.isHostView = isHostView;
         initComponents();
         boardData.setStartingPiecesWhite(this.isHostView);
+        boardData.setStartingPiecesBlack(this.isHostView);
         updateBoard();
     }
 
@@ -53,10 +54,14 @@ public class BoardPanel extends JPanel {
                             System.out.println("NO PIECE");
                         }
                         if (p != null) {
-                            System.out.println(p.getLegalMoves(boardData, row, col, isHostView));
-                            showLegal(p.getLegalMoves(boardData, row, col, isHostView), Color.CYAN);
+                            boolean sameColor = (isHostView && (p.getColor() == Color.WHITE))
+                                    || (!isHostView && (p.getColor() == Color.BLACK));
+                            if (sameColor) {
+                                System.out.println(p.getLegalMoves(boardData, row, col, isHostView));
+                                showLegal(p.getLegalMoves(boardData, row, col, isHostView), Color.CYAN);
+                            }
+                            System.out.println("row " + row + "col " + col);
                         }
-                        System.out.println("row " + row + "col " + col);
                     }
 
                     public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -112,7 +117,7 @@ public class BoardPanel extends JPanel {
                 for (int jj = 0; jj < 8; jj++) {
                     switch (jj) {
                         case 0:
-                            chessBoard.add(new JLabel("" + (ii+1),
+                            chessBoard.add(new JLabel("" + (ii + 1),
                                     SwingConstants.CENTER));
                         default:
                             chessBoard.add(chessBoardSquares[ii][jj]);
@@ -127,26 +132,27 @@ public class BoardPanel extends JPanel {
             for (int jj = 0; jj < chessBoardSquares[ii].length; jj++) {
                 Piece p = boardData.board[ii][jj].getPiece();
                 if (p != null) {
-                    chessBoardSquares[ii][jj].setText(boardData.board[ii][jj].getPiece().getName());
+                    chessBoardSquares[ii][jj].setText((boardData.board[ii][jj].getPiece().getColor() == Color.BLACK?"B":"W") + boardData.board[ii][jj].getPiece().getName());
                 }
             }
         }
     }
 
-    private void tileActionPerformed(java.awt.event.ActionEvent evt) {
-        int row = (int) ((JButton) evt.getSource()).getClientProperty("row");
-        int col = (int) ((JButton) evt.getSource()).getClientProperty("col");
-        Piece p = boardData.board[row][col].getPiece();
-        if (p == null) {
-            System.out.println("NO PIECE");
-        }
-        if (p != null) {
-            System.out.println(p.getLegalMoves(boardData, col, row, isHostView));
-            showLegal(p.getLegalMoves(boardData, row, col, isHostView), boardData.board[row][col].getColor());
-        }
-        System.out.println("row " + row + "col " + col);
+    // private void tileActionPerformed(java.awt.event.ActionEvent evt) {
+    // int row = (int) ((JButton) evt.getSource()).getClientProperty("row");
+    // int col = (int) ((JButton) evt.getSource()).getClientProperty("col");
+    // Piece p = boardData.board[row][col].getPiece();
+    // if (p == null) {
+    // System.out.println("NO PIECE");
+    // }
+    // if (p != null) {
+    // System.out.println(p.getLegalMoves(boardData, col, row, isHostView));
+    // showLegal(p.getLegalMoves(boardData, row, col, isHostView),
+    // boardData.board[row][col].getColor());
+    // }
+    // System.out.println("row " + row + "col " + col);
 
-    }
+    // }
 
     private void showLegal(ArrayList<Tile> legalTiles, Color c) {
         for (Tile t : legalTiles) {

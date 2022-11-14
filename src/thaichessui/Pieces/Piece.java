@@ -16,7 +16,6 @@ import thaichessui.Tile;
 public abstract class Piece {
     protected String name;
     private java.awt.Color color;
-    private boolean killed = false;
 
     public Piece(java.awt.Color color) {
         this.setColor(color);
@@ -30,15 +29,7 @@ public abstract class Piece {
     public void setColor(java.awt.Color color) {
         this.color = color;
     }
-
-    public boolean isKilled() {
-        return this.killed;
-    }
-
-    public void setKilled(boolean killed) {
-        this.killed = killed;
-    }
-
+    
     public String getName() {
         return this.name;
     }
