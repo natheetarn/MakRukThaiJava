@@ -487,8 +487,7 @@ public class HostPanel extends javax.swing.JPanel {
         private void StartButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_StartButtonActionPerformed
                 // TODO add your handling code here:
 
-                // BoardPanel b = new BoardPanel();
-                BoardPanelServer b = new BoardPanelServer();
+                GamePanelServer b = new GamePanelServer();
                 this.setLayout(new java.awt.BorderLayout());
                 this.removeAll();
                 this.add(b);
@@ -529,7 +528,7 @@ public class HostPanel extends javax.swing.JPanel {
         }// GEN-LAST:event_NameFieldActionPerformed
 
         private void JoinButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_JoinButtonActionPerformed
-                BoardPanelClient b = new BoardPanelClient();
+                GamePanelClient b = new GamePanelClient();
                 this.setLayout(new java.awt.BorderLayout());
                 this.removeAll();
                 this.add(b);

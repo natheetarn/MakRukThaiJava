@@ -4,22 +4,57 @@
  */
 package thaichessui;
 import javax.swing.*;
+
+import thaichessui.Pieces.Piece;
 /**
  *
  * @author ROG Zephyrus M
  */
-public class Tile extends JPanel{
+public class Tile{
     private boolean isOccupied;
-    private String color;
+    private java.awt.Color color;
     private Piece piece;
-    
-    Tile(boolean isOccupied, String color) {
-        this.isOccupied = isOccupied;
+    private int rank;
+    private int file;
+    Tile(java.awt.Color color, int row, int col) {
         this.color = color;
         this.piece = null;
+        this.isOccupied = false;
+        this.rank = row;
+        this.file = col;
     }
     
-    public String getColor(){
+    public java.awt.Color getColor(){
         return this.color;
     }
+
+    public boolean getOccupied(){
+        return this.isOccupied;
+    }
+
+    public void setOccupied(boolean o){
+        this.isOccupied = o;
+    }
+
+    public Piece getPiece(){
+        return this.piece;
+    }
+
+    public void setPiece(Piece p){
+        this.piece = p;
+        if (p!=null){
+            this.setOccupied(true);
+        } else {
+            this.setOccupied(false);
+        }
+    }
+
+    public int getFile(){
+        return this.file;
+    }
+
+    public int getRank(){
+        return this.rank;
+    }
+
 }
