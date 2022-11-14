@@ -66,14 +66,14 @@ public class Board {
                 
             }
 
-            board[3][3].setPiece(new MetPiece(Color.WHITE));
+            board[3][3].setPiece(new ConePiece(Color.WHITE));
             // board[3][6].setPiece(new RuaPiece(Color.BLACK));
         } else {
             for (int i = 0; i < 8; i++) {
                 board[getOpposite(5)][getOpposite(i)].setPiece(new BiaPiece(Color.WHITE));
             }
 
-            board[getOpposite(3)][getOpposite(3)].setPiece(new MetPiece(Color.WHITE));
+            board[getOpposite(3)][getOpposite(3)].setPiece(new ConePiece(Color.WHITE));
             // board[4][3].setPiece(new RuaPiece(Color.WHITE));
         }
     }
@@ -84,7 +84,7 @@ public class Board {
                 board[getOpposite(5)][getOpposite(i)].setPiece(new BiaPiece(Color.BLACK));
             }
 
-            board[getOpposite(3)][getOpposite(3)].setPiece(new MetPiece(Color.BLACK));
+            board[getOpposite(3)][getOpposite(3)].setPiece(new ConePiece(Color.BLACK));
             
             // board[3][6].setPiece(new RuaPiece(Color.BLACK));
         } else {
@@ -93,7 +93,7 @@ public class Board {
                 
             }
 
-            board[3][3].setPiece(new MetPiece(Color.BLACK));
+            board[3][3].setPiece(new ConePiece(Color.BLACK));
             // board[4][3].setPiece(new RuaPiece(Color.WHITE));
         }
     }
