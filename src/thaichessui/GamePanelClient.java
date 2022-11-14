@@ -18,7 +18,7 @@ import javax.swing.Timer;
  *
  * @author kaikaew
  */
-public class BoardPanelClient extends javax.swing.JPanel {
+public class GamePanelClient extends javax.swing.JPanel {
 
     private static Socket socket = null;
     private static ObjectInputStream in = null;
@@ -32,7 +32,7 @@ public class BoardPanelClient extends javax.swing.JPanel {
     /**
      * Creates new form BoardPanel
      */
-    public BoardPanelClient() {
+    public GamePanelClient() {
         initComponents();
         initTimer();
     }
@@ -179,6 +179,7 @@ public class BoardPanelClient extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -189,6 +190,7 @@ public class BoardPanelClient extends javax.swing.JPanel {
         opponentTime = new javax.swing.JLabel();
         myTime = new javax.swing.JLabel();
         myButton = new javax.swing.JButton();
+        leftPanel = new javax.swing.JPanel();
 
         jLabel1.setText("Chat");
 
@@ -212,67 +214,94 @@ public class BoardPanelClient extends javax.swing.JPanel {
                 myButtonActionPerformed(evt);
             }
         });
-
         myButton.setEnabled(false);
+
+        javax.swing.GroupLayout leftPanelLayout = new javax.swing.GroupLayout(leftPanel);
+        leftPanel.setLayout(leftPanelLayout);
+        leftPanelLayout.setHorizontalGroup(
+                leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 345, Short.MAX_VALUE));
+        leftPanelLayout.setVerticalGroup(
+                leftPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, 270, Short.MAX_VALUE));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(124, 124, 124)
+                                .addGap(19, 19, 19)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(opponentTime)
+                                                .addGap(0, 0, Short.MAX_VALUE))
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGroup(layout
                                                         .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout
-                                                                .createSequentialGroup()
-                                                                .addComponent(myTime)
-                                                                .addPreferredGap(
-                                                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                                        Short.MAX_VALUE)
-                                                                .addComponent(jScrollPane2,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 173,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(layout
+                                                                .createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
+                                                                        layout.createSequentialGroup()
+                                                                                .addComponent(myTime)
+                                                                                .addGap(65, 65, 65))
+                                                                .addComponent(myButton))
+                                                        .addComponent(leftPanel, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                .addGroup(layout
+                                                        .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                         .addGroup(layout.createSequentialGroup()
-                                                                .addComponent(myButton)
-                                                                .addPreferredGap(
-                                                                        javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                                                                        353, Short.MAX_VALUE)
-                                                                .addComponent(jTextField1,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE, 173,
-                                                                        javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                                .addGap(16, 16, 16))
-                                        .addGroup(layout.createSequentialGroup()
-                                                .addGap(32, 32, 32)
-                                                .addComponent(opponentTime)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED,
-                                                        javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(jLabel1)
-                                                .addGap(91, 91, 91)))));
+                                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                                .addGroup(layout.createParallelGroup(
+                                                                        javax.swing.GroupLayout.Alignment.LEADING)
+                                                                        .addComponent(jScrollPane2,
+                                                                                javax.swing.GroupLayout.Alignment.TRAILING,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                173,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                        .addComponent(jTextField1,
+                                                                                javax.swing.GroupLayout.Alignment.TRAILING,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                                                173,
+                                                                                javax.swing.GroupLayout.PREFERRED_SIZE))
+                                                                .addGap(16, 16, 16))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addGap(32, 256, Short.MAX_VALUE)
+                                                                .addComponent(jLabel1)
+                                                                .addGap(91, 91, 91)))))));
         layout.setVerticalGroup(
                 layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addGap(65, 65, 65)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jLabel1)
-                                        .addComponent(opponentTime))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGap(20, 20, 20)
+                                .addComponent(opponentTime)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(layout.createSequentialGroup()
+                                                .addGap(28, 28, 28)
+                                                .addComponent(jLabel1)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 213,
                                                         javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE,
                                                         javax.swing.GroupLayout.DEFAULT_SIZE,
-                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addContainerGap(46, Short.MAX_VALUE))
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGroup(layout.createSequentialGroup()
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(leftPanel, javax.swing.GroupLayout.PREFERRED_SIZE,
+                                                        javax.swing.GroupLayout.DEFAULT_SIZE,
+                                                        javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(myTime)
-                                                .addGap(18, 18, 18)
-                                                .addComponent(myButton)
-                                                .addGap(47, 47, 47)))));
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(myButton)))
+                                .addContainerGap(11, Short.MAX_VALUE)));
+
+        BoardPanel b = new BoardPanel();
+        leftPanel.setLayout(new java.awt.BorderLayout());
+        leftPanel.removeAll();
+        leftPanel.add(b);
+        leftPanel.revalidate();
     }// </editor-fold>//GEN-END:initComponents
 
     private void myButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_myButtonActionPerformed
@@ -310,6 +339,7 @@ public class BoardPanelClient extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JPanel leftPanel;
     private javax.swing.JButton myButton;
     private javax.swing.JLabel myTime;
     private javax.swing.JLabel opponentTime;

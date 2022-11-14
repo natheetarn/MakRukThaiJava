@@ -73,8 +73,8 @@ public class Main extends javax.swing.JFrame {
 
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
             public void run() {
-                BoardPanelServer.closeConnection();
-                BoardPanelClient.closeConnection();
+                GamePanelServer.closeConnection();
+                GamePanelClient.closeConnection();
             }
         }));
 
