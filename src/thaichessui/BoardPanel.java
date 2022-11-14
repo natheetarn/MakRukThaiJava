@@ -95,14 +95,28 @@ public class BoardPanel extends JPanel {
 
             }
         }
-        for (int ii = 0; ii < 8; ii++) {
-            for (int jj = 0; jj < 8; jj++) {
-                switch (jj) {
-                    case 0:
-                        chessBoard.add(new JLabel("" + (8 - ii),
-                                SwingConstants.CENTER));
-                    default:
-                        chessBoard.add(chessBoardSquares[ii][jj]);
+        if (this.isHostView) {
+            for (int ii = 0; ii < 8; ii++) {
+                for (int jj = 0; jj < 8; jj++) {
+                    switch (jj) {
+                        case 0:
+                            chessBoard.add(new JLabel("" + (8 - ii),
+                                    SwingConstants.CENTER));
+                        default:
+                            chessBoard.add(chessBoardSquares[ii][jj]);
+                    }
+                }
+            }
+        } else {
+            for (int ii = 0; ii < 8; ii++) {
+                for (int jj = 0; jj < 8; jj++) {
+                    switch (jj) {
+                        case 0:
+                            chessBoard.add(new JLabel("" + (ii+1),
+                                    SwingConstants.CENTER));
+                        default:
+                            chessBoard.add(chessBoardSquares[ii][jj]);
+                    }
                 }
             }
         }
