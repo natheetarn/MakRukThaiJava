@@ -201,9 +201,14 @@ public class BoardPanel extends JPanel {
                 Piece p = boardData.board[ii][jj].getPiece();
                 if (p != null) {
                     chessBoardSquares[ii][jj].setText((boardData.board[ii][jj].getPiece().getColor() == Color.BLACK?"B":"W") + boardData.board[ii][jj].getPiece().getName());
+                    if (boardData.board[ii][jj].getPiece().getIcon() != null){
+                        chessBoardSquares[ii][jj].setText("");
+                        chessBoardSquares[ii][jj].setIcon(boardData.board[ii][jj].getPiece().getIcon());
+                    }
                 }
                 if (p == null) {
                     chessBoardSquares[ii][jj].setText("");
+                    chessBoardSquares[ii][jj].setIcon(null);
                 }
             }
         }
