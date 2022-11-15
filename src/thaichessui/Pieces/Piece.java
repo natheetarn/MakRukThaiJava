@@ -9,12 +9,15 @@ import java.util.ArrayList;
 import thaichessui.Board;
 import thaichessui.Tile;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author ROG Zephyrus M
  */
 public abstract class Piece {
     protected String name;
+    protected ImageIcon icon;
     private java.awt.Color color;
 
     public Piece(java.awt.Color color) {
@@ -32,6 +35,10 @@ public abstract class Piece {
     
     public String getName() {
         return this.name;
+    }
+    
+    public ImageIcon getIcon() {
+        return this.icon;
     }
 
 
