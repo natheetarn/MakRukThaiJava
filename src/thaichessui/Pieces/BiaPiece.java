@@ -6,11 +6,15 @@ import thaichessui.Tile;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 public class BiaPiece extends Piece {
 
     public BiaPiece(java.awt.Color color) {
         super(color);
         this.name = "BeaPiece";
+        //We have to change this later depending on the color
+        this.icon = new ImageIcon(getClass().getResource("/thaichessui/images/bia_black.png"));
     }
 
     public ArrayList<Tile> getLegalMoves(Board board, int row, int col, boolean isHostView) {
