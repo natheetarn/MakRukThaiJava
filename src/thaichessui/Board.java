@@ -6,7 +6,7 @@ package thaichessui;
 
 import java.awt.Color;
 
-import thaichessui.Pieces.BeaPiece;
+import thaichessui.Pieces.*;
 
 /**
  *
@@ -45,14 +45,14 @@ public class Board {
                 } else {
                     if (ii % 2 == 0) {
                         if (jj % 2 == 0)
-                            board[ii][jj] = new Tile(Color.BLACK, ii, jj);
+                            board[getOpposite(ii)][getOpposite(jj)] = new Tile(Color.WHITE, getOpposite(ii), getOpposite(jj));
                         else
-                            board[ii][jj] = new Tile(Color.WHITE, ii, jj);
+                            board[getOpposite(ii)][getOpposite(jj)] = new Tile(Color.BLACK, getOpposite(ii), getOpposite(jj));
                     } else {
                         if (jj % 2 == 0)
-                            board[ii][jj] = new Tile(Color.WHITE, ii, jj);
+                            board[getOpposite(ii)][getOpposite(jj)] = new Tile(Color.BLACK, getOpposite(ii), getOpposite(jj));
                         else
-                            board[ii][jj] = new Tile(Color.BLACK, ii, jj);
+                            board[getOpposite(ii)][getOpposite(jj)] = new Tile(Color.WHITE, getOpposite(ii), getOpposite(jj));
                     }
                 }
             }
@@ -62,12 +62,44 @@ public class Board {
     void setStartingPiecesWhite(boolean isHostView) {
         if (isHostView) {
             for (int i = 0; i < 8; i++) {
-                board[5][i].setPiece(new BeaPiece(Color.WHITE));
+                board[5][i].setPiece(new BiaPiece(Color.WHITE));
+                
             }
+
+            board[3][3].setPiece(new ConePiece(Color.WHITE));
+            // board[3][6].setPiece(new RuaPiece(Color.BLACK));
         } else {
             for (int i = 0; i < 8; i++) {
-                board[2][i].setPiece(new BeaPiece(Color.WHITE));
+                board[getOpposite(5)][getOpposite(i)].setPiece(new BiaPiece(Color.WHITE));
             }
+
+            board[getOpposite(3)][getOpposite(3)].setPiece(new ConePiece(Color.WHITE));
+            // board[4][3].setPiece(new RuaPiece(Color.WHITE));
         }
     }
+
+    void setStartingPiecesBlack(boolean isHostView) {
+        if (isHostView) {
+            for (int i = 0; i < 8; i++) {
+                board[getOpposite(5)][getOpposite(i)].setPiece(new BiaPiece(Color.BLACK));
+            }
+
+            board[getOpposite(3)][getOpposite(3)].setPiece(new ConePiece(Color.BLACK));
+            
+            // board[3][6].setPiece(new RuaPiece(Color.BLACK));
+        } else {
+            for (int i = 0; i < 8; i++) {
+                board[5][i].setPiece(new BiaPiece(Color.BLACK));
+                
+            }
+
+            board[3][3].setPiece(new ConePiece(Color.BLACK));
+            // board[4][3].setPiece(new RuaPiece(Color.WHITE));
+        }
+    }
+
+    public int getOpposite(int n){
+        return 7 - n;
+    }
+
 }
