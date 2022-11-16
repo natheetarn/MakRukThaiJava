@@ -149,6 +149,14 @@ public class GamePanelClient extends javax.swing.JPanel {
                 } else if (o instanceof String) {
                     message = (String) o;
                     chatPrintln(message);
+                } else if (o instanceof int[]) {
+                    int arr[] = (int[]) o;
+                    Tile oldTile = boardPanel.getBoardData().board[arr[0]][arr[1]];
+                    Tile newTile = boardPanel.getBoardData().board[arr[2]][arr[3]];
+                    boardPanel.setEnable(true);
+                    stopOpponentTimer();
+                    startMyTimer();
+                    boardPanel.updateOpponent(oldTile, newTile);
                 }
             } catch (ClassNotFoundException ex) {
                 System.out.println(ex);

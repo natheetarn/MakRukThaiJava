@@ -223,13 +223,18 @@ public class BoardPanel extends JPanel {
                         if (findSelected()) {
                             Tile oldTile = returnSelectedTile();
                             Tile newTile = boardData.board[row][col];
+
+                            Tile opOldTile = getOppositeTile(oldTile);
+                            Tile opNewTile = getOppositeTile(newTile);
                             try {
                                 ArrayList<Tile> validMoves = oldTile.getPiece().getLegalMoves(boardData,
                                         oldTile.getRank(), oldTile.getFile(), isHostView);
                                 returnColor(validMoves);
                                 if (move(validMoves, oldTile, newTile, boardData)) {
                                     boardPanel.setEnable(false);
-                                    out.writeObject(Main.YOUR_TURN_CODE);
+                                    int arr[] = { opOldTile.getRank(), opOldTile.getFile(), opNewTile.getRank(),
+                                            opNewTile.getFile() };
+                                    out.writeObject(arr);
                                     myTimer.stop();
                                     opponentTimer.start();
                                 }
@@ -241,6 +246,14 @@ public class BoardPanel extends JPanel {
                 });
             }
         }
+    }
+
+    public Board getBoardData() {
+        return boardData;
+    }
+
+    public Tile getOppositeTile(Tile tile) {
+        return boardData.board[7 - tile.getRank()][7 - tile.getFile()];
     }
 
     public boolean move(ArrayList<Tile> possibleMoves, Tile oldTIle, Tile newTile, Board board) {
@@ -258,6 +271,15 @@ public class BoardPanel extends JPanel {
         }
 
         return false;
+    }
+
+    public void updateOpponent(Tile oldTile, Tile newTile) {
+        newTile.setPiece(oldTile.getPiece());
+        newTile.setOccupied(true);
+        oldTile.setPiece(null);
+        oldTile.setOccupied(false);
+        oldTile.setSelected(false);
+        updateBoard();
     }
 
     void updateBoard() {
