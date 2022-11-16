@@ -1,6 +1,7 @@
 
 package thaichessui.Pieces;
 
+import java.awt.Color;
 import java.util.ArrayList;
 
 import thaichessui.Board;
@@ -21,7 +22,9 @@ public class ConePiece extends Piece{
 
     public ArrayList<Tile> getLegalMoves(Board board, int row, int col, boolean isHostView) {
         ArrayList<Tile> legalMoves = new ArrayList<Tile>();
-
+        if(this.getColor() == Color.WHITE && !isHostView){
+            return legalMoves;
+        }
         // top left
         if (row - 1 >= 0 && row - 1 <= 7
                 && col - 1 >= 0 && col - 1 <= 7) {
