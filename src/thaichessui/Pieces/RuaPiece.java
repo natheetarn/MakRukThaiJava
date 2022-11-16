@@ -21,7 +21,9 @@ public class RuaPiece extends Piece {
 
     public ArrayList<Tile> getLegalMoves(Board board, int row, int col, boolean isHostView){
         ArrayList<Tile> legalMoves = new ArrayList<Tile>();
-    
+        if(this.getColor() == java.awt.Color.WHITE && !isHostView){
+            return legalMoves;
+        }
         int currRow = row+1;
         
         //down
