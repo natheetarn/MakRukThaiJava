@@ -29,6 +29,8 @@ public class GamePanelClient extends javax.swing.JPanel {
     private Timer myTimer = null;
     private Timer opponentTimer = null;
 
+    private BoardPanel boardPanel = null;
+
     /**
      * Creates new form BoardPanel
      */
@@ -89,6 +91,7 @@ public class GamePanelClient extends javax.swing.JPanel {
 
             out = new ObjectOutputStream(socket.getOutputStream());
             in = new ObjectInputStream(socket.getInputStream());
+            boardPanel.listenToEvent(boardPanel, out, myTimer, opponentTimer);
         } catch (UnknownHostException ex) {
             System.out.println(ex);
         } catch (IOException ex) {
@@ -139,12 +142,21 @@ public class GamePanelClient extends javax.swing.JPanel {
                         return;
                     } else if ((int) o == Main.YOUR_TURN_CODE) {
                         myButton.setEnabled(true);
+                        boardPanel.setEnable(true);
                         stopOpponentTimer();
                         startMyTimer();
                     }
                 } else if (o instanceof String) {
                     message = (String) o;
                     chatPrintln(message);
+                } else if (o instanceof int[]) {
+                    int arr[] = (int[]) o;
+                    Tile oldTile = boardPanel.getBoardData().board[arr[0]][arr[1]];
+                    Tile newTile = boardPanel.getBoardData().board[arr[2]][arr[3]];
+                    boardPanel.setEnable(true);
+                    stopOpponentTimer();
+                    startMyTimer();
+                    boardPanel.updateOpponent(oldTile, newTile);
                 }
             } catch (ClassNotFoundException ex) {
                 System.out.println(ex);
@@ -297,11 +309,12 @@ public class GamePanelClient extends javax.swing.JPanel {
                                                 .addComponent(myButton)))
                                 .addContainerGap(11, Short.MAX_VALUE)));
 
-        BoardPanel b = new BoardPanel(false);
+        boardPanel = new BoardPanel(false);
         leftPanel.setLayout(new java.awt.BorderLayout());
         leftPanel.removeAll();
-        leftPanel.add(b);
+        leftPanel.add(boardPanel);
         leftPanel.revalidate();
+        boardPanel.setEnable(false);
     }// </editor-fold>//GEN-END:initComponents
 
     private void myButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_myButtonActionPerformed

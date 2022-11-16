@@ -14,7 +14,12 @@ public class BiaPiece extends Piece {
         super(color);
         this.name = "BeaPiece";
         //We have to change this later depending on the color
-       
+        if(this.getColor() == Color.BLACK){
+        this.icon = new ImageIcon(getClass().getResource("/thaichessui/images/bia_black.png"));}
+        else{
+            this.icon = new ImageIcon(getClass().getResource("/thaichessui/images/bia_white.png"));
+        }
+
     }
 
     public ArrayList<Tile> getLegalMoves(Board board, int row, int col, boolean isHostView) {

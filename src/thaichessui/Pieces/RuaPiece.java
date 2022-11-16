@@ -1,21 +1,29 @@
 package thaichessui.Pieces;
 
 import java.util.ArrayList;
-
+import java.awt.Color;
 import thaichessui.Board;
 import thaichessui.Tile;
-
+import javax.swing.ImageIcon;
 public class RuaPiece extends Piece {
 
 
     public RuaPiece(java.awt.Color color) {
         super(color);
         this.name = "RuaPiece";
+        if(color == java.awt.Color.WHITE){
+            this.icon = new ImageIcon(getClass().getResource("/thaichessui/images/ruea_white.png"));
+        }
+        else{
+            this.icon = new ImageIcon(getClass().getResource("/thaichessui/images/ruea_black.png"));
+        }
     }
 
     public ArrayList<Tile> getLegalMoves(Board board, int row, int col, boolean isHostView){
         ArrayList<Tile> legalMoves = new ArrayList<Tile>();
-    
+        if((this.getColor() == Color.WHITE && !isHostView) || (this.getColor() == Color.BLACK && isHostView)){
+            return legalMoves;
+        }
         int currRow = row+1;
         
         //down

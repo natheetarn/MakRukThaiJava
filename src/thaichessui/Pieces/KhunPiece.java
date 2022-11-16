@@ -1,25 +1,34 @@
+
 package thaichessui.Pieces;
 
-import java.util.ArrayList;
 import java.awt.Color;
+import java.util.ArrayList;
+
 import thaichessui.Board;
 import thaichessui.Tile;
 import javax.swing.ImageIcon;
-
-public class MetPiece extends Piece {
-
-    public MetPiece(java.awt.Color color) {
+public class KhunPiece extends Piece{
+    
+    private boolean isChecked = false;
+    public KhunPiece(java.awt.Color color) {
         super(color);
-        
-        this.name = "MetPiece";
+        this.name = "ConePiece";
         if(color == java.awt.Color.WHITE){
-            this.icon = new ImageIcon(getClass().getResource("/thaichessui/images/Met_white.png"));
+            this.icon = new ImageIcon(getClass().getResource("/thaichessui/images/Khun_white.png"));
         }
         else{
-            this.icon = new ImageIcon(getClass().getResource("/thaichessui/images/met_black.png"));
+            this.icon = new ImageIcon(getClass().getResource("/thaichessui/images/Khun_black.png"));
         }
-
     }
+
+    public void setChecked(boolean b){
+        this.isChecked = b;
+    }
+    
+    public boolean getChecked(){
+        return this.isChecked;
+    }
+
 
     public ArrayList<Tile> getLegalMoves(Board board, int row, int col, boolean isHostView) {
         ArrayList<Tile> legalMoves = new ArrayList<Tile>();
@@ -45,6 +54,18 @@ public class MetPiece extends Piece {
                 legalMoves.add(t);
             }
         }
+
+
+        //top middle
+        if (row - 1 >= 0 && row - 1 <= 7
+                && col >= 0 && col <= 7) {
+            Tile t = board.board[row - 1][col];
+            if (!t.getOccupied()//free
+                    || (t.getPiece().getColor() != board.board[row][col].getPiece().getColor())) { //capture
+                legalMoves.add(t);
+            }
+        }
+
         // bottom left
         if (row + 1 >= 0 && row + 1 <= 7
                 && col - 1 >= 0 && col - 1 <= 7) {
@@ -59,6 +80,37 @@ public class MetPiece extends Piece {
         if (row + 1 >= 0 && row + 1 <= 7
                 && col + 1 >= 0 && col + 1 <= 7) {
             Tile t = board.board[row + 1][col + 1];
+            if (!t.getOccupied()//free
+                    || (t.getPiece().getColor() != board.board[row][col].getPiece().getColor())) { //capture
+                legalMoves.add(t);
+            }
+        }
+
+        //bottom middle
+
+        if (row + 1 >= 0 && row + 1 <= 7
+                && col >= 0 && col <= 7) {
+            Tile t = board.board[row + 1][col];
+            if (!t.getOccupied()//free
+                    || (t.getPiece().getColor() != board.board[row][col].getPiece().getColor())) { //capture
+                legalMoves.add(t);
+            }
+        }
+
+        //left
+        if (row >= 0 && row  <= 7
+                && col - 1>= 0 && col - 1 <= 7) {
+            Tile t = board.board[row][col - 1];
+            if (!t.getOccupied()//free
+                    || (t.getPiece().getColor() != board.board[row][col].getPiece().getColor())) { //capture
+                legalMoves.add(t);
+            }
+        }
+
+        //right
+        if (row >= 0 && row  <= 7
+                && col + 1>= 0 && col + 1 <= 7) {
+            Tile t = board.board[row][col + 1];
             if (!t.getOccupied()//free
                     || (t.getPiece().getColor() != board.board[row][col].getPiece().getColor())) { //capture
                 legalMoves.add(t);
