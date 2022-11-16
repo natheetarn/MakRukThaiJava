@@ -23,7 +23,7 @@ public class MetPiece extends Piece {
 
     public ArrayList<Tile> getLegalMoves(Board board, int row, int col, boolean isHostView) {
         ArrayList<Tile> legalMoves = new ArrayList<Tile>();
-        if(this.getColor() == Color.WHITE && !isHostView){
+        if((this.getColor() == Color.WHITE && !isHostView) || (this.getColor() == Color.BLACK && isHostView)){
             return legalMoves;
         }
         // top left

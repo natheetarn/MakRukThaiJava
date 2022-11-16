@@ -1,7 +1,7 @@
 package thaichessui.Pieces;
 
 import java.util.ArrayList;
-
+import java.awt.Color;
 import thaichessui.Board;
 import thaichessui.Tile;
 import javax.swing.ImageIcon;
@@ -21,7 +21,7 @@ public class RuaPiece extends Piece {
 
     public ArrayList<Tile> getLegalMoves(Board board, int row, int col, boolean isHostView){
         ArrayList<Tile> legalMoves = new ArrayList<Tile>();
-        if(this.getColor() == java.awt.Color.WHITE && !isHostView){
+        if((this.getColor() == Color.WHITE && !isHostView) || (this.getColor() == Color.BLACK && isHostView)){
             return legalMoves;
         }
         int currRow = row+1;
