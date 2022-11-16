@@ -203,10 +203,31 @@ public class BoardPanel extends JPanel {
                         if (findSelected()) {
                             Tile a = returnSelectedTile();
                             try {
-                                ArrayList<Tile> validMoves = a.getPiece().getLegalMoves(boardData,
-                                        a.getRank(),
-                                        a.getFile(), isHostView);
-                                returnColor(validMoves);
+                                Tile oldTile = boardData.board[returnSelectedTile()
+                                        .getRank()][returnSelectedTile().getFile()];
+                                Tile newTile = t;
+
+                                Tile opOldTile = getOppositeTile(oldTile);
+                                Tile opNewTile = getOppositeTile(newTile);
+
+                                if (newTile.getPiece().getColor() != oldTile.getPiece().getColor()) {
+                                    ArrayList<Tile> validMoves = a.getPiece().getLegalMoves(boardData,
+                                            a.getRank(),
+                                            a.getFile(), isHostView);
+                                    returnColor(validMoves);
+                                    if (move(validMoves,
+                                            boardData.board[returnSelectedTile().getRank()][returnSelectedTile()
+                                                    .getFile()],
+                                            t, boardData)) {
+                                        returnColor(validMoves);
+                                        boardPanel.setEnable(false);
+                                        int arr[] = { opOldTile.getRank(), opOldTile.getFile(), opNewTile.getRank(),
+                                                opNewTile.getFile() };
+                                        out.writeObject(arr);
+                                        myTimer.stop();
+                                        opponentTimer.start();
+                                    }
+                                }
                             } catch (Exception ex) {
                                 System.out.println("no legal moves");
                             }
