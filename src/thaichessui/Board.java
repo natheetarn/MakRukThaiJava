@@ -45,14 +45,18 @@ public class Board {
                 } else {
                     if (ii % 2 == 0) {
                         if (jj % 2 == 0)
-                            board[getOpposite(ii)][getOpposite(jj)] = new Tile(Color.WHITE, getOpposite(ii), getOpposite(jj));
+                            board[getOpposite(ii)][getOpposite(jj)] = new Tile(Color.WHITE, getOpposite(ii),
+                                    getOpposite(jj));
                         else
-                            board[getOpposite(ii)][getOpposite(jj)] = new Tile(Color.green, getOpposite(ii), getOpposite(jj));
+                            board[getOpposite(ii)][getOpposite(jj)] = new Tile(Color.green, getOpposite(ii),
+                                    getOpposite(jj));
                     } else {
                         if (jj % 2 == 0)
-                            board[getOpposite(ii)][getOpposite(jj)] = new Tile(Color.GREEN, getOpposite(ii), getOpposite(jj));
+                            board[getOpposite(ii)][getOpposite(jj)] = new Tile(Color.GREEN, getOpposite(ii),
+                                    getOpposite(jj));
                         else
-                            board[getOpposite(ii)][getOpposite(jj)] = new Tile(Color.WHITE, getOpposite(ii), getOpposite(jj));
+                            board[getOpposite(ii)][getOpposite(jj)] = new Tile(Color.WHITE, getOpposite(ii),
+                                    getOpposite(jj));
                     }
                 }
             }
@@ -63,7 +67,6 @@ public class Board {
         if (isHostView) {
             for (int i = 0; i < 8; i++) {
                 board[5][i].setPiece(new BiaPiece(Color.WHITE));
-                
             }
 
             board[3][3].setPiece(new ConePiece(Color.WHITE));
@@ -85,12 +88,12 @@ public class Board {
             }
 
             board[getOpposite(3)][getOpposite(3)].setPiece(new ConePiece(Color.BLACK));
-            
+
             // board[3][6].setPiece(new RuaPiece(Color.BLACK));
         } else {
             for (int i = 0; i < 8; i++) {
                 board[5][i].setPiece(new BiaPiece(Color.BLACK));
-                
+
             }
 
             board[3][3].setPiece(new ConePiece(Color.BLACK));
@@ -98,7 +101,7 @@ public class Board {
         }
     }
 
-    public int getOpposite(int n){
+    public int getOpposite(int n) {
         return 7 - n;
     }
 
