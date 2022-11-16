@@ -227,11 +227,12 @@ public class BoardPanel extends JPanel {
                                 ArrayList<Tile> validMoves = oldTile.getPiece().getLegalMoves(boardData,
                                         oldTile.getRank(), oldTile.getFile(), isHostView);
                                 returnColor(validMoves);
-                                move(validMoves, oldTile, newTile, boardData);
-                                boardPanel.setEnable(false);
-                                out.writeObject(Main.YOUR_TURN_CODE);
-                                myTimer.stop();
-                                opponentTimer.start();
+                                if (move(validMoves, oldTile, newTile, boardData)) {
+                                    boardPanel.setEnable(false);
+                                    out.writeObject(Main.YOUR_TURN_CODE);
+                                    myTimer.stop();
+                                    opponentTimer.start();
+                                }
                             } catch (Exception ex) {
                                 System.out.println("no legal moves");
                             }
@@ -242,7 +243,7 @@ public class BoardPanel extends JPanel {
         }
     }
 
-    public void move(ArrayList<Tile> possibleMoves, Tile oldTIle, Tile newTile, Board board) {
+    public boolean move(ArrayList<Tile> possibleMoves, Tile oldTIle, Tile newTile, Board board) {
         for (Tile d : possibleMoves) {
             if (d == newTile) {
                 newTile.setPiece(oldTIle.getPiece());
@@ -251,9 +252,12 @@ public class BoardPanel extends JPanel {
                 oldTIle.setOccupied(false);
                 oldTIle.setSelected(false);
                 updateBoard();
-                break;
+                return true;
+
             }
         }
+
+        return false;
     }
 
     void updateBoard() {
