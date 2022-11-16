@@ -5,11 +5,18 @@ import java.util.ArrayList;
 
 import thaichessui.Board;
 import thaichessui.Tile;
+import javax.swing.ImageIcon;
 public class ConePiece extends Piece{
 
     public ConePiece(java.awt.Color color) {
         super(color);
         this.name = "ConePiece";
+        if(color == java.awt.Color.WHITE){
+            this.icon = new ImageIcon(getClass().getResource("/thaichessui/images/khon_white.png"));
+        }
+        else{
+            this.icon = new ImageIcon(getClass().getResource("/thaichessui/images/khon_black.png"));
+        }
     }
 
     public ArrayList<Tile> getLegalMoves(Board board, int row, int col, boolean isHostView) {
@@ -34,6 +41,7 @@ public class ConePiece extends Piece{
                 legalMoves.add(t);
             }
         }
+
 
         //top middle
         if (row - 1 >= 0 && row - 1 <= 7

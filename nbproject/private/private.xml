@@ -3,14 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/sinon/Documents/GitHub/MakRukThaiJava/src/thaichessui/Board.java</file>
-            <file>file:/C:/Users/sinon/Documents/GitHub/MakRukThaiJava/src/thaichessui/Main.java</file>
-            <file>file:/C:/Users/sinon/Documents/GitHub/MakRukThaiJava/src/thaichessui/MenuPanel.java</file>
-            <file>file:/C:/Users/sinon/Documents/GitHub/MakRukThaiJava/src/thaichessui/AboutPanel.java</file>
-            <file>file:/C:/Users/sinon/Documents/GitHub/MakRukThaiJava/src/thaichessui/BoardPanel.java</file>
-            <file>file:/C:/Users/sinon/Documents/GitHub/MakRukThaiJava/src/thaichessui/tempCodeRunnerFile.java</file>
-            <file>file:/C:/Users/sinon/Documents/GitHub/MakRukThaiJava/src/thaichessui/Tile.java</file>
-            <file>file:/C:/Users/sinon/Documents/GitHub/MakRukThaiJava/src/thaichessui/HostPanel.java</file>
+            <file>file:/Users/butus/Documents/GitHub2/MakRukThaiJava/src/thaichessui/Board.java</file>
+            <file>file:/Users/butus/Documents/GitHub2/MakRukThaiJava/src/thaichessui/GamePanelServer.java</file>
+            <file>file:/Users/butus/Documents/GitHub2/MakRukThaiJava/src/thaichessui/Main.java</file>
+            <file>file:/Users/butus/Documents/GitHub2/MakRukThaiJava/src/thaichessui/HostPanel.java</file>
+            <file>file:/Users/butus/Documents/GitHub2/MakRukThaiJava/src/thaichessui/images/bigwhiteknight.png</file>
+            <file>file:/Users/butus/Documents/GitHub2/MakRukThaiJava/src/thaichessui/images/bigblackrook.png</file>
+            <file>file:/Users/butus/Documents/GitHub2/MakRukThaiJava/src/thaichessui/MenuPanel.java</file>
+            <file>file:/Users/butus/Documents/GitHub2/MakRukThaiJava/src/thaichessui/BoardPanel.java</file>
+            <file>file:/Users/butus/Documents/GitHub2/MakRukThaiJava/src/thaichessui/Tile.java</file>
+            <file>file:/Users/butus/Documents/GitHub2/MakRukThaiJava/src/thaichessui/tempCodeRunnerFile.java</file>
+            <file>file:/Users/butus/Documents/GitHub2/MakRukThaiJava/src/thaichessui/images/bia_black.png</file>
+            <file>file:/Users/butus/Documents/GitHub2/MakRukThaiJava/src/thaichessui/GamePanelClient.java</file>
         </group>
     </open-files>
 </project-private>

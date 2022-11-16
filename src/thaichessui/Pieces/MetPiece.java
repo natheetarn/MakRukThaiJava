@@ -4,12 +4,21 @@ import java.util.ArrayList;
 
 import thaichessui.Board;
 import thaichessui.Tile;
+import javax.swing.ImageIcon;
 
 public class MetPiece extends Piece {
 
     public MetPiece(java.awt.Color color) {
         super(color);
+        
         this.name = "MetPiece";
+        if(color == java.awt.Color.WHITE){
+            this.icon = new ImageIcon(getClass().getResource("/thaichessui/images/Met_white.png"));
+        }
+        else{
+            this.icon = new ImageIcon(getClass().getResource("/thaichessui/images/met_black.png"));
+        }
+
     }
 
     public ArrayList<Tile> getLegalMoves(Board board, int row, int col, boolean isHostView) {
