@@ -16,9 +16,9 @@ public class PromotedBiaPiece extends MetPiece {
         super(color);
         this.name = "PromotedBiaPiece";
         if (color == java.awt.Color.WHITE) {
-            this.icon = new ImageIcon(getClass().getResource("/thaichessui/images/bia_white.png"));
+            this.icon = new ImageIcon(getClass().getResource("/thaichessui/images/white_promoted.png"));
         } else {
-            this.icon = new ImageIcon(getClass().getResource("/thaichessui/images/bia_black.png"));
+            this.icon = new ImageIcon(getClass().getResource("/thaichessui/images/black_promoted.png"));
         }
     }
 

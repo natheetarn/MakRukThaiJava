@@ -10,7 +10,9 @@ import javax.swing.Timer;
 import javax.swing.event.MouseInputAdapter;
 import javax.swing.event.SwingPropertyChangeSupport;
 
+import thaichessui.Pieces.BiaPiece;
 import thaichessui.Pieces.Piece;
+import thaichessui.Pieces.PromotedBiaPiece;
 
 public class BoardPanel extends JPanel {
 
@@ -234,27 +236,26 @@ public class BoardPanel extends JPanel {
                                     // cature
                                 }
 
-
-
                             } catch (Exception ex) {
                                 System.out.println("no legal moves");
                             }
 
-                            
-                        a.setSelected(false);
+                            a.setSelected(false);
                         }
-                        if(flag == false){t.setSelected(true);
+                        if (flag == false) {
+                            t.setSelected(true);
                             try {
                                 resetboardcolor();
                                 showLegal(t.getPiece().getLegalMoves(boardData, row, col, isHostView),
-                                
+
                                         Color.CYAN);
-                                        flag = true;
+                                flag = true;
                             } catch (Exception ex) {
                                 System.out.println("no legal moves");
 
-                            }}
-                        
+                            }
+                        }
+
                     } else {
                         if (findSelected()) {
                             Tile oldTile = returnSelectedTile();
@@ -292,14 +293,39 @@ public class BoardPanel extends JPanel {
         return boardData.board[7 - tile.getRank()][7 - tile.getFile()];
     }
 
-    public boolean move(ArrayList<Tile> possibleMoves, Tile oldTIle, Tile newTile, Board board) {
+    public boolean move(ArrayList<Tile> possibleMoves, Tile oldTile, Tile newTile, Board board) {
         for (Tile d : possibleMoves) {
             if (d == newTile) {
-                newTile.setPiece(oldTIle.getPiece());
+
+                newTile.setPiece(oldTile.getPiece());
+                if (isHostView) {
+                    if ((oldTile.getPiece().getColor() == Color.WHITE) && oldTile.getPiece() instanceof BiaPiece){
+                        if (newTile.getRank() == 2) {
+                            newTile.setPiece(new PromotedBiaPiece(Color.WHITE));
+                        }
+                    }
+                    else if((oldTile.getPiece().getColor()== Color.BLACK) && oldTile.getPiece() instanceof BiaPiece){
+                        if (newTile.getRank() == 5) {
+                            newTile.setPiece(new PromotedBiaPiece(Color.BLACK));
+                        }
+                    }
+                } else if (!isHostView){
+                    if ((oldTile.getPiece().getColor() == Color.WHITE) && oldTile.getPiece() instanceof BiaPiece){
+                        if (newTile.getRank() == 5) {
+                            newTile.setPiece(new PromotedBiaPiece(Color.WHITE));
+                        }
+                    }
+                    else if((oldTile.getPiece().getColor()== Color.BLACK) && oldTile.getPiece() instanceof BiaPiece){
+                        if (newTile.getRank() == 2) {
+                            newTile.setPiece(new PromotedBiaPiece(Color.BLACK));
+                        }
+                    }
+                }
+                    
                 newTile.setOccupied(true);
-                oldTIle.setPiece(null);
-                oldTIle.setOccupied(false);
-                oldTIle.setSelected(false);
+                oldTile.setPiece(null);
+                oldTile.setOccupied(false);
+                oldTile.setSelected(false);
                 updateBoard();
                 return true;
 
@@ -410,8 +436,8 @@ public class BoardPanel extends JPanel {
             chessBoardSquares[t.getRank()][t.getFile()].setBackground(t.getColor());
         }
     }
-    
-    void resetboardcolor(){
+
+    void resetboardcolor() {
         for (int ii = 0; ii < 8; ii++) {
             for (int jj = 0; jj < 8; jj++) {
                 if (isHostView) {
@@ -419,26 +445,27 @@ public class BoardPanel extends JPanel {
                         if (jj % 2 == 0)
                             chessBoardSquares[ii][jj].setBackground(Color.WHITE);
                         else
-                        chessBoardSquares[ii][jj].setBackground(Color.GREEN);
+                            chessBoardSquares[ii][jj].setBackground(Color.GREEN);
                     } else {
                         if (jj % 2 == 0)
-                        chessBoardSquares[ii][jj].setBackground(Color.GREEN);
+                            chessBoardSquares[ii][jj].setBackground(Color.GREEN);
                         else
-                        chessBoardSquares[ii][jj].setBackground(Color.WHITE);
+                            chessBoardSquares[ii][jj].setBackground(Color.WHITE);
                     }
                 } else {
                     if (ii % 2 == 0) {
                         if (jj % 2 == 0)
-                        chessBoardSquares[ii][jj].setBackground(Color.WHITE);
+                            chessBoardSquares[ii][jj].setBackground(Color.WHITE);
                         else
-                        chessBoardSquares[ii][jj].setBackground(Color.green);
+                            chessBoardSquares[ii][jj].setBackground(Color.green);
                     } else {
                         if (jj % 2 == 0)
-                        chessBoardSquares[ii][jj].setBackground(Color.green);
+                            chessBoardSquares[ii][jj].setBackground(Color.green);
                         else
-                        chessBoardSquares[ii][jj].setBackground(Color.WHITE);
+                            chessBoardSquares[ii][jj].setBackground(Color.WHITE);
                     }
-                };
+                }
+                ;
             }
         }
     }
