@@ -13,10 +13,10 @@ public class MahPiece extends Piece{
         super(color);
         this.name = "ConePiece";
         if(color == java.awt.Color.WHITE){
-            this.icon = new ImageIcon(getClass().getResource("/thaichessui/images/khon_white.png"));
+            this.icon = new ImageIcon(getClass().getResource("/thaichessui/images/ma_white.png"));
         }
         else{
-            this.icon = new ImageIcon(getClass().getResource("/thaichessui/images/khon_black.png"));
+            this.icon = new ImageIcon(getClass().getResource("/thaichessui/images/ma_black.png"));
         }
     }
 

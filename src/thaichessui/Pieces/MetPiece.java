@@ -13,7 +13,7 @@ public class MetPiece extends Piece {
         
         this.name = "MetPiece";
         if(color == java.awt.Color.WHITE){
-            this.icon = new ImageIcon(getClass().getResource("/thaichessui/images/Met_white.png"));
+            this.icon = new ImageIcon(getClass().getResource("/thaichessui/images/met_white.png"));
         }
         else{
             this.icon = new ImageIcon(getClass().getResource("/thaichessui/images/met_black.png"));
