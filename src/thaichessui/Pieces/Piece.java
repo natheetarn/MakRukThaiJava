@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import thaichessui.Board;
 import thaichessui.Tile;
 
-import javax.swing.ImageIcon;
+
 
 /**
  *
@@ -17,7 +17,7 @@ import javax.swing.ImageIcon;
  */
 public abstract class Piece {
     protected String name;
-    protected ImageIcon icon;
+   
     private java.awt.Color color;
 
     public Piece(java.awt.Color color) {
@@ -37,9 +37,6 @@ public abstract class Piece {
         return this.name;
     }
     
-    public ImageIcon getIcon() {
-        return this.icon;
-    }
 
 
     public abstract ArrayList<Tile> getLegalMoves(Board board, int row, int col, boolean isHostView);

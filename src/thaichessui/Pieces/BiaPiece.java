@@ -6,7 +6,7 @@ import thaichessui.Tile;
 import java.awt.Color;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
+
 
 public class BiaPiece extends Piece {
 
@@ -19,6 +19,7 @@ public class BiaPiece extends Piece {
         else{
             this.icon = new ImageIcon(getClass().getResource("/thaichessui/images/bia_white.png"));
         }
+
     }
 
     public ArrayList<Tile> getLegalMoves(Board board, int row, int col, boolean isHostView) {
