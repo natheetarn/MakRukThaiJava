@@ -299,29 +299,29 @@ public class BoardPanel extends JPanel {
 
                 newTile.setPiece(oldTile.getPiece());
                 if (isHostView) {
-                    if ((oldTile.getPiece().getColor() == Color.WHITE) && oldTile.getPiece() instanceof BiaPiece){
+                    if ((oldTile.getPiece().getColor() == Color.WHITE) && oldTile.getPiece() instanceof BiaPiece) {
                         if (newTile.getRank() == 2) {
                             newTile.setPiece(new PromotedBiaPiece(Color.WHITE));
                         }
-                    }
-                    else if((oldTile.getPiece().getColor()== Color.BLACK) && oldTile.getPiece() instanceof BiaPiece){
+                    } else if ((oldTile.getPiece().getColor() == Color.BLACK)
+                            && oldTile.getPiece() instanceof BiaPiece) {
                         if (newTile.getRank() == 5) {
                             newTile.setPiece(new PromotedBiaPiece(Color.BLACK));
                         }
                     }
-                } else if (!isHostView){
-                    if ((oldTile.getPiece().getColor() == Color.WHITE) && oldTile.getPiece() instanceof BiaPiece){
+                } else if (!isHostView) {
+                    if ((oldTile.getPiece().getColor() == Color.WHITE) && oldTile.getPiece() instanceof BiaPiece) {
                         if (newTile.getRank() == 5) {
                             newTile.setPiece(new PromotedBiaPiece(Color.WHITE));
                         }
-                    }
-                    else if((oldTile.getPiece().getColor()== Color.BLACK) && oldTile.getPiece() instanceof BiaPiece){
+                    } else if ((oldTile.getPiece().getColor() == Color.BLACK)
+                            && oldTile.getPiece() instanceof BiaPiece) {
                         if (newTile.getRank() == 2) {
                             newTile.setPiece(new PromotedBiaPiece(Color.BLACK));
                         }
                     }
                 }
-                    
+
                 newTile.setOccupied(true);
                 oldTile.setPiece(null);
                 oldTile.setOccupied(false);
@@ -337,6 +337,31 @@ public class BoardPanel extends JPanel {
 
     public void updateOpponent(Tile oldTile, Tile newTile) {
         newTile.setPiece(oldTile.getPiece());
+
+        if (isHostView) {
+            if ((oldTile.getPiece().getColor() == Color.WHITE) && oldTile.getPiece() instanceof BiaPiece) {
+                if (newTile.getRank() == 2) {
+                    newTile.setPiece(new PromotedBiaPiece(Color.WHITE));
+                }
+            } else if ((oldTile.getPiece().getColor() == Color.BLACK)
+                    && oldTile.getPiece() instanceof BiaPiece) {
+                if (newTile.getRank() == 5) {
+                    newTile.setPiece(new PromotedBiaPiece(Color.BLACK));
+                }
+            }
+        } else if (!isHostView) {
+            if ((oldTile.getPiece().getColor() == Color.WHITE) && oldTile.getPiece() instanceof BiaPiece) {
+                if (newTile.getRank() == 5) {
+                    newTile.setPiece(new PromotedBiaPiece(Color.WHITE));
+                }
+            } else if ((oldTile.getPiece().getColor() == Color.BLACK)
+                    && oldTile.getPiece() instanceof BiaPiece) {
+                if (newTile.getRank() == 2) {
+                    newTile.setPiece(new PromotedBiaPiece(Color.BLACK));
+                }
+            }
+        }
+
         newTile.setOccupied(true);
         oldTile.setPiece(null);
         oldTile.setOccupied(false);
