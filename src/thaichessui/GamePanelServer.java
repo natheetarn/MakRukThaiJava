@@ -5,7 +5,6 @@
 package thaichessui;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -29,6 +28,8 @@ public class GamePanelServer extends javax.swing.JPanel {
     private int opponentCurTime = 0;
     private Timer myTimer = null;
     private Timer opponentTimer = null;
+
+    BoardPanel boardPanel = null;
 
     /**
      * Creates new form BoardPanel
@@ -92,12 +93,15 @@ public class GamePanelServer extends javax.swing.JPanel {
             System.out.println("Client accepted");
             chatPrintln("Client connected!");
             myButton.setEnabled(true);
+            boardPanel.setEnable(true);
+
             startMyTimer();
 
             chatPrintln("GLHF!!!");
 
             out = new ObjectOutputStream(socket.getOutputStream());
             in = new ObjectInputStream(socket.getInputStream());
+            boardPanel.listenToEvent(boardPanel, out, myTimer, opponentTimer);
             whileChatting();
 
             System.out.println("closing connection");
@@ -130,6 +134,7 @@ public class GamePanelServer extends javax.swing.JPanel {
                         return;
                     } else if ((int) o == Main.YOUR_TURN_CODE) {
                         myButton.setEnabled(true);
+                        boardPanel.setEnable(true);
                         stopOpponentTimer();
                         startMyTimer();
                     }
@@ -281,11 +286,12 @@ public class GamePanelServer extends javax.swing.JPanel {
                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(24, Short.MAX_VALUE)));
 
-        BoardPanel b = new BoardPanel(true);
+        boardPanel = new BoardPanel(true);
         leftPanel.setLayout(new java.awt.BorderLayout());
         leftPanel.removeAll();
-        leftPanel.add(b);
+        leftPanel.add(boardPanel);
         leftPanel.revalidate();
+        boardPanel.setEnable(false);
     }// </editor-fold>//GEN-END:initComponents
 
     private void myButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_myButtonActionPerformed
