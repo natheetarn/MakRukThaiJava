@@ -35,10 +35,10 @@ public class Board {
                         if (jj % 2 == 0)
                             board[ii][jj] = new Tile(Color.WHITE, ii, jj);
                         else
-                            board[ii][jj] = new Tile(Color.BLACK, ii, jj);
+                            board[ii][jj] = new Tile(Color.green, ii, jj);
                     } else {
                         if (jj % 2 == 0)
-                            board[ii][jj] = new Tile(Color.BLACK, ii, jj);
+                            board[ii][jj] = new Tile(Color.green, ii, jj);
                         else
                             board[ii][jj] = new Tile(Color.WHITE, ii, jj);
                     }
@@ -47,10 +47,10 @@ public class Board {
                         if (jj % 2 == 0)
                             board[getOpposite(ii)][getOpposite(jj)] = new Tile(Color.WHITE, getOpposite(ii), getOpposite(jj));
                         else
-                            board[getOpposite(ii)][getOpposite(jj)] = new Tile(Color.BLACK, getOpposite(ii), getOpposite(jj));
+                            board[getOpposite(ii)][getOpposite(jj)] = new Tile(Color.green, getOpposite(ii), getOpposite(jj));
                     } else {
                         if (jj % 2 == 0)
-                            board[getOpposite(ii)][getOpposite(jj)] = new Tile(Color.BLACK, getOpposite(ii), getOpposite(jj));
+                            board[getOpposite(ii)][getOpposite(jj)] = new Tile(Color.GREEN, getOpposite(ii), getOpposite(jj));
                         else
                             board[getOpposite(ii)][getOpposite(jj)] = new Tile(Color.WHITE, getOpposite(ii), getOpposite(jj));
                     }

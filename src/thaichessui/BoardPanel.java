@@ -148,7 +148,7 @@ public class BoardPanel extends JPanel {
                 if (boardData.board[ii][jj].getColor() == Color.WHITE) {
                     b.setBackground(Color.WHITE);
                 } else {
-                    b.setBackground(Color.BLACK);
+                    b.setBackground(Color.GREEN);
                 }
                 chessBoardSquares[ii][jj] = b;
 

@@ -6,13 +6,20 @@ import thaichessui.Tile;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 public class PromotedBiaPiece extends MetPiece {
     protected String name;
     private java.awt.Color color;
 
-    public PromotedBiaPiece(java.awt.Color color){
+    public PromotedBiaPiece(java.awt.Color color) {
         super(color);
         this.name = "PromotedBiaPiece";
+        if (color == java.awt.Color.WHITE) {
+            this.icon = new ImageIcon(getClass().getResource("/thaichessui/images/bia_white.png"));
+        } else {
+            this.icon = new ImageIcon(getClass().getResource("/thaichessui/images/bia_black.png"));
+        }
     }
 
 }

@@ -33,7 +33,7 @@ public class GamePanelServer extends javax.swing.JPanel {
     /**
      * Creates new form BoardPanel
      */
-    public GamePanelServer() {
+    public GamePanelServer() { 
         initComponents();
         initTimer();
     }
