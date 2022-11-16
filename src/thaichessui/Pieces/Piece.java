@@ -6,6 +6,9 @@ package thaichessui.Pieces;
 
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+
 import thaichessui.Board;
 import thaichessui.Tile;
 
@@ -19,7 +22,7 @@ public abstract class Piece {
     protected String name;
    
     private java.awt.Color color;
-
+    protected ImageIcon icon;
     public Piece(java.awt.Color color) {
         this.setColor(color);
         this.name = "emptyPiece";
@@ -40,6 +43,10 @@ public abstract class Piece {
 
 
     public abstract ArrayList<Tile> getLegalMoves(Board board, int row, int col, boolean isHostView);
+
+    public ImageIcon getIcon() {
+        return this.icon;
+    }
 
 
     // public abstract boolean canMove(Board board, Tile begin, Tile dest);

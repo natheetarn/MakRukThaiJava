@@ -6,6 +6,8 @@ import thaichessui.Tile;
 import java.awt.Color;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
+
 
 
 public class BiaPiece extends Piece {
