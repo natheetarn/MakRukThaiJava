@@ -198,6 +198,7 @@ public class BoardPanel extends JPanel {
                     int row = (int) b.getClientProperty("row");
                     int col = (int) b.getClientProperty("col");
                     Tile t = boardData.board[row][col];
+                    boolean flag = false;
                     System.out.println("row: " + row + " col: " + col);
                     if (t.getOccupied() == true) {
                         if (findSelected()) {
@@ -215,6 +216,8 @@ public class BoardPanel extends JPanel {
                                             a.getRank(),
                                             a.getFile(), isHostView);
                                     returnColor(validMoves);
+
+                                    // capture
                                     if (move(validMoves,
                                             boardData.board[returnSelectedTile().getRank()][returnSelectedTile()
                                                     .getFile()],
@@ -226,20 +229,32 @@ public class BoardPanel extends JPanel {
                                         out.writeObject(arr);
                                         myTimer.stop();
                                         opponentTimer.start();
+                                        flag = true;
                                     }
+                                    // cature
                                 }
+
+
+
                             } catch (Exception ex) {
                                 System.out.println("no legal moves");
                             }
-                            a.setSelected(false);
+
+                            
+                        a.setSelected(false);
                         }
-                        t.setSelected(true);
-                        try {
-                            showLegal(t.getPiece().getLegalMoves(boardData, row, col, isHostView),
-                                    Color.CYAN);
-                        } catch (Exception ex) {
-                            System.out.println("no legal moves");
-                        }
+                        if(flag == false){t.setSelected(true);
+                            try {
+                                resetboardcolor();
+                                showLegal(t.getPiece().getLegalMoves(boardData, row, col, isHostView),
+                                
+                                        Color.CYAN);
+                                        flag = true;
+                            } catch (Exception ex) {
+                                System.out.println("no legal moves");
+
+                            }}
+                        
                     } else {
                         if (findSelected()) {
                             Tile oldTile = returnSelectedTile();
@@ -393,6 +408,38 @@ public class BoardPanel extends JPanel {
     private void returnColor(ArrayList<Tile> legalTiles) {
         for (Tile t : legalTiles) {
             chessBoardSquares[t.getRank()][t.getFile()].setBackground(t.getColor());
+        }
+    }
+    
+    void resetboardcolor(){
+        for (int ii = 0; ii < 8; ii++) {
+            for (int jj = 0; jj < 8; jj++) {
+                if (isHostView) {
+                    if (ii % 2 == 0) {
+                        if (jj % 2 == 0)
+                            chessBoardSquares[ii][jj].setBackground(Color.WHITE);
+                        else
+                        chessBoardSquares[ii][jj].setBackground(Color.GREEN);
+                    } else {
+                        if (jj % 2 == 0)
+                        chessBoardSquares[ii][jj].setBackground(Color.GREEN);
+                        else
+                        chessBoardSquares[ii][jj].setBackground(Color.WHITE);
+                    }
+                } else {
+                    if (ii % 2 == 0) {
+                        if (jj % 2 == 0)
+                        chessBoardSquares[ii][jj].setBackground(Color.WHITE);
+                        else
+                        chessBoardSquares[ii][jj].setBackground(Color.green);
+                    } else {
+                        if (jj % 2 == 0)
+                        chessBoardSquares[ii][jj].setBackground(Color.green);
+                        else
+                        chessBoardSquares[ii][jj].setBackground(Color.WHITE);
+                    }
+                };
+            }
         }
     }
 
