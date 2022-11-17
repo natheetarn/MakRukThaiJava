@@ -88,10 +88,10 @@ public class GamePanelServer extends javax.swing.JPanel {
                     // JOptionPane.showMessageDialog(null, "You are out of time! Your opponent get
                     // the dubs!", "😭😭",
                     // JOptionPane.PLAIN_MESSAGE);
-                    LosePanel losePanel = new LosePanel("You are out of time!");
+                    ResultPanel winPanel = new ResultPanel(Main.RESULT_LOSE, "You are out of time!");
                     gps.setLayout(new java.awt.BorderLayout());
                     gps.removeAll();
-                    gps.add(losePanel);
+                    gps.add(winPanel);
                     gps.revalidate();
 
                     stopMyTimer();
@@ -113,7 +113,7 @@ public class GamePanelServer extends javax.swing.JPanel {
                     // "🥳🥳",
                     // JOptionPane.PLAIN_MESSAGE);
 
-                    WinPanel winPanel = new WinPanel("The opponent is out of time!");
+                    ResultPanel winPanel = new ResultPanel(Main.RESULT_WIN, "The opponent is out of time!");
                     gps.setLayout(new java.awt.BorderLayout());
                     gps.removeAll();
                     gps.add(winPanel);
@@ -169,7 +169,7 @@ public class GamePanelServer extends javax.swing.JPanel {
             String timeObject[] = { timeOption };
             out.writeObject(timeObject);
             boardPanel.listenToEvent(boardPanel, out, myTimer, opponentTimer);
-            whileChatting();
+            whileGaming();
 
             System.out.println("closing connection");
 
@@ -186,7 +186,7 @@ public class GamePanelServer extends javax.swing.JPanel {
                 // JOptionPane.showMessageDialog(null, "Oops! Your opponent disconnected, guess
                 // its your win!", "🗿",
                 // JOptionPane.PLAIN_MESSAGE);
-                WinPanel winPanel = new WinPanel("Your opponent disconnected");
+                ResultPanel winPanel = new ResultPanel(Main.RESULT_WIN, "Your opponent disconnected");
 
                 this.setLayout(new java.awt.BorderLayout());
                 this.removeAll();
@@ -199,7 +199,7 @@ public class GamePanelServer extends javax.swing.JPanel {
         }
     }
 
-    public void whileChatting() throws IOException {
+    public void whileGaming() throws IOException {
         String message = "";
         do {
             try {

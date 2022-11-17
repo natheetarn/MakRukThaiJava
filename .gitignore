@@ -25,3 +25,4 @@ replay_pid*
 
 build/*
 .DS_Store
+src/.DS_Store
