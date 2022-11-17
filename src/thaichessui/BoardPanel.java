@@ -11,6 +11,7 @@ import javax.swing.event.MouseInputAdapter;
 import javax.swing.event.SwingPropertyChangeSupport;
 
 import thaichessui.Pieces.BiaPiece;
+import thaichessui.Pieces.KhunPiece;
 import thaichessui.Pieces.Piece;
 import thaichessui.Pieces.PromotedBiaPiece;
 
@@ -327,6 +328,7 @@ public class BoardPanel extends JPanel {
                 oldTile.setOccupied(false);
                 oldTile.setSelected(false);
                 updateBoard();
+                lookForCheck(newTile.getPiece().getColor());
                 return true;
 
             }
@@ -367,6 +369,29 @@ public class BoardPanel extends JPanel {
         oldTile.setOccupied(false);
         oldTile.setSelected(false);
         updateBoard();
+    }
+
+    private boolean lookForCheck(Color c){
+        ArrayList<Tile> legalMoves = new ArrayList<Tile>();
+        for (int ii = 0; ii < chessBoardSquares.length; ii++) {
+            for (int jj = 0; jj < chessBoardSquares[ii].length; jj++) {
+                Piece p = boardData.board[ii][jj].getPiece();
+                if (p != null && p.getColor() == c) {
+                    legalMoves.addAll(p.getLegalMoves(boardData, ii, jj, isHostView));
+                }
+            }
+        }
+
+        for (Tile d : legalMoves){
+            if(d.getOccupied() && d.getPiece() instanceof KhunPiece && d.getPiece().getColor() != c){
+                ((KhunPiece) d.getPiece()).setChecked(true);
+                chessBoardSquares[d.getRank()][d.getFile()].setBackground(Color.red);//for testing
+                return true;
+                
+            }
+        }
+
+        return false;
     }
 
     void updateBoard() {
