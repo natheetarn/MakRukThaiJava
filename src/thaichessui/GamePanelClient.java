@@ -370,7 +370,7 @@ public class GamePanelClient extends javax.swing.JPanel {
                                                 .addComponent(myTime)))
                                 .addContainerGap(40, Short.MAX_VALUE)));
 
-        boardPanel = new BoardPanel(true);
+        boardPanel = new BoardPanel(false);
         leftPanel.setLayout(new java.awt.BorderLayout());
         leftPanel.removeAll();
         leftPanel.add(boardPanel);

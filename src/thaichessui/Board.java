@@ -146,4 +146,27 @@ public class Board {
         return 7 - n;
     }
 
+    public Tile getKhunTile(boolean isHostView) {
+        if (isHostView) {
+            for (int i = 0; i < board.length; i++) {
+                for (int j = 0; j < board[i].length; j++) {
+                    if (board[i][j].getPiece() != null && board[i][j].getPiece() instanceof KhunPiece
+                            && board[i][j].getPiece().getColor() == Color.WHITE) {
+                        return board[i][j];
+                    }
+                }
+            }
+        } else {
+            for (int i = 0; i < board.length; i++) {
+                for (int j = 0; j < board[i].length; j++) {
+                    if (board[i][j].getPiece() != null && board[i][j].getPiece() instanceof KhunPiece
+                            && board[i][j].getPiece().getColor() == Color.BLACK) {
+                        return board[i][j];
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
 }
