@@ -242,8 +242,11 @@ public class HostPanel extends javax.swing.JPanel {
 
                 jPanel7.setBackground(new java.awt.Color(245, 245, 252));
 
-                TimeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 min", "3 min", "5 min",
-                                "10 min", "30 min", "1 hr", "2 hr", "Unlimited" }));
+                TimeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {
+                                Main.TIME_OPTION_1_MIN, Main.TIME_OPTION_3_MIN,
+                                Main.TIME_OPTION_5_MIN, Main.TIME_OPTION_10_MIN,
+                                Main.TIME_OPTION_30_MIN, Main.TIME_OPTION_1_HR
+                }));
                 TimeComboBox.addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent evt) {
                                 TimeComboBoxActionPerformed(evt);
@@ -487,7 +490,7 @@ public class HostPanel extends javax.swing.JPanel {
         private void StartButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_StartButtonActionPerformed
                 // TODO add your handling code here:
 
-                GamePanelServer b = new GamePanelServer();
+                GamePanelServer b = new GamePanelServer((String) TimeComboBox.getSelectedItem());
                 this.setLayout(new java.awt.BorderLayout());
                 this.removeAll();
                 this.add(b);

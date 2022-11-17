@@ -30,23 +30,73 @@ public class GamePanelClient extends javax.swing.JPanel {
     private Timer opponentTimer = null;
 
     private BoardPanel boardPanel = null;
+    private boolean timeoutFlag = false;
 
     /**
      * Creates new form BoardPanel
      */
     public GamePanelClient() {
         initComponents();
-        initTimer();
+        // initTimer();
     }
 
-    public void initTimer() {
+    public void initTimer(String timeOption) {
+        switch (timeOption) {
+            case Main.TIME_OPTION_1_MIN:
+                myCurTime = 60;
+                opponentCurTime = 60;
+                break;
+            case Main.TIME_OPTION_3_MIN:
+                myCurTime = 60 * 3;
+                opponentCurTime = 60 * 3;
+                break;
+            case Main.TIME_OPTION_5_MIN:
+                myCurTime = 60 * 5;
+                opponentCurTime = 60 * 5;
+                break;
+            case Main.TIME_OPTION_10_MIN:
+                myCurTime = 60 * 10;
+                opponentCurTime = 60 * 10;
+                break;
+            case Main.TIME_OPTION_30_MIN:
+                myCurTime = 60 * 30;
+                opponentCurTime = 60 * 30;
+                break;
+            case Main.TIME_OPTION_1_HR:
+                myCurTime = 60 * 60;
+                opponentCurTime = 60 * 60;
+                break;
+            default:
+                myCurTime = 60 * 60;
+                opponentCurTime = 60 * 60;
+        }
+
+        myTime.setText(String.valueOf(myCurTime));
+        opponentTime.setText(String.valueOf(opponentCurTime));
+
+        GamePanelClient gpc = this;
+
         myTimer = new Timer(1000, new java.awt.event.ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
                 myTime.setText(String.valueOf(myCurTime));
-                myCurTime++;
+                myCurTime--;
+                if (myCurTime <= 0) {
+                    // JOptionPane.showMessageDialog(null, "You are out of time! Your opponent get
+                    // the dubs!", "😭😭",
+                    // JOptionPane.PLAIN_MESSAGE);
+                    LosePanel losePanel = new LosePanel("You are out of time!");
+                    gpc.setLayout(new java.awt.BorderLayout());
+                    gpc.removeAll();
+                    gpc.add(losePanel);
+                    gpc.revalidate();
+
+                    stopMyTimer();
+                    stopOpponentTimer();
+                    timeoutFlag = true;
+                }
             }
         });
 
@@ -56,7 +106,23 @@ public class GamePanelClient extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
                 opponentTime.setText(String.valueOf(opponentCurTime));
-                opponentCurTime++;
+                opponentCurTime--;
+                if (opponentCurTime <= 0) {
+                    // JOptionPane.showMessageDialog(null, "The opponent is out of time! Winner
+                    // winner chicken dinner!",
+                    // "🥳🥳",
+                    // JOptionPane.PLAIN_MESSAGE);
+
+                    WinPanel winPanel = new WinPanel("The opponent is out of time!");
+                    gpc.setLayout(new java.awt.BorderLayout());
+                    gpc.removeAll();
+                    gpc.add(winPanel);
+                    gpc.revalidate();
+
+                    stopMyTimer();
+                    stopOpponentTimer();
+                    timeoutFlag = true;
+                }
             }
         });
     }
@@ -85,13 +151,12 @@ public class GamePanelClient extends javax.swing.JPanel {
         try {
             socket = new Socket(address, port);
             System.out.println("Connected");
-            opponentTimer.start();
+            // opponentTimer.start();
 
             chatPrintln("GLHF!!!");
 
             out = new ObjectOutputStream(socket.getOutputStream());
             in = new ObjectInputStream(socket.getInputStream());
-            boardPanel.listenToEvent(boardPanel, out, myTimer, opponentTimer);
         } catch (UnknownHostException ex) {
             System.out.println(ex);
         } catch (IOException ex) {
@@ -113,20 +178,27 @@ public class GamePanelClient extends javax.swing.JPanel {
         }
 
         try {
-            in.close();
-            out.close();
-            socket.close();
-            socket = null;
+            if (socket != null) {
+                in.close();
+                out.close();
+                socket.close();
+                socket = null;
+            }
 
-            JOptionPane.showMessageDialog(null, "Oops! Your opponent disconnected, guess its your win!", "🗿",
-                    JOptionPane.PLAIN_MESSAGE);
+            stopMyTimer();
+            stopOpponentTimer();
+            if (!timeoutFlag) {
+                // JOptionPane.showMessageDialog(null, "Oops! Your opponent disconnected, guess
+                // its your win!", "🗿",
+                // JOptionPane.PLAIN_MESSAGE);
+                WinPanel winPanel = new WinPanel("Your opponent disconnected");
 
-            MenuPanel menuPanel = new MenuPanel();
+                this.setLayout(new java.awt.BorderLayout());
+                this.removeAll();
+                this.add(winPanel);
+                this.revalidate();
+            }
 
-            this.setLayout(new java.awt.BorderLayout());
-            this.removeAll();
-            this.add(menuPanel);
-            this.revalidate();
         } catch (IOException ex) {
             System.out.println(ex);
         }
@@ -141,7 +213,6 @@ public class GamePanelClient extends javax.swing.JPanel {
                     if ((int) o == Main.FORCE_EXIT_CODE) {
                         return;
                     } else if ((int) o == Main.YOUR_TURN_CODE) {
-                        myButton.setEnabled(true);
                         boardPanel.setEnable(true);
                         stopOpponentTimer();
                         startMyTimer();
@@ -157,6 +228,10 @@ public class GamePanelClient extends javax.swing.JPanel {
                     stopOpponentTimer();
                     startMyTimer();
                     boardPanel.updateOpponent(oldTile, newTile);
+                } else if (o instanceof String[]) {
+                    String timeOption[] = (String[]) o;
+                    initTimer(timeOption[0]);
+                    boardPanel.listenToEvent(boardPanel, out, myTimer, opponentTimer);
                 }
             } catch (ClassNotFoundException ex) {
                 System.out.println(ex);
@@ -192,6 +267,7 @@ public class GamePanelClient extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
     // <editor-fold defaultstate="collapsed" desc="Generated
+    // <editor-fold defaultstate="collapsed" desc="Generated
     // Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -201,7 +277,6 @@ public class GamePanelClient extends javax.swing.JPanel {
         jTextField1 = new javax.swing.JTextField();
         opponentTime = new javax.swing.JLabel();
         myTime = new javax.swing.JLabel();
-        myButton = new javax.swing.JButton();
         leftPanel = new javax.swing.JPanel();
 
         jLabel1.setText("Chat");
@@ -209,6 +284,7 @@ public class GamePanelClient extends javax.swing.JPanel {
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
+        jTextArea1.setEditable(false);
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -219,14 +295,6 @@ public class GamePanelClient extends javax.swing.JPanel {
         opponentTime.setText("0");
 
         myTime.setText("0");
-
-        myButton.setText("press");
-        myButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                myButtonActionPerformed(evt);
-            }
-        });
-        myButton.setEnabled(false);
 
         javax.swing.GroupLayout leftPanelLayout = new javax.swing.GroupLayout(leftPanel);
         leftPanel.setLayout(leftPanelLayout);
@@ -250,14 +318,9 @@ public class GamePanelClient extends javax.swing.JPanel {
                                         .addGroup(layout.createSequentialGroup()
                                                 .addGroup(layout
                                                         .createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                        .addGroup(layout
-                                                                .createParallelGroup(
-                                                                        javax.swing.GroupLayout.Alignment.LEADING)
-                                                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING,
-                                                                        layout.createSequentialGroup()
-                                                                                .addComponent(myTime)
-                                                                                .addGap(65, 65, 65))
-                                                                .addComponent(myButton))
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(myTime)
+                                                                .addGap(65, 65, 65))
                                                         .addComponent(leftPanel, javax.swing.GroupLayout.PREFERRED_SIZE,
                                                                 javax.swing.GroupLayout.DEFAULT_SIZE,
                                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -304,31 +367,16 @@ public class GamePanelClient extends javax.swing.JPanel {
                                                         javax.swing.GroupLayout.DEFAULT_SIZE,
                                                         javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(myTime)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(myButton)))
-                                .addContainerGap(11, Short.MAX_VALUE)));
+                                                .addComponent(myTime)))
+                                .addContainerGap(40, Short.MAX_VALUE)));
 
-        boardPanel = new BoardPanel(false);
+        boardPanel = new BoardPanel(true);
         leftPanel.setLayout(new java.awt.BorderLayout());
         leftPanel.removeAll();
         leftPanel.add(boardPanel);
         leftPanel.revalidate();
         boardPanel.setEnable(false);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void myButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_myButtonActionPerformed
-        // TODO add your handling code here:
-        myButton.setEnabled(false);
-        stopMyTimer();
-        startOpponentTimer();
-
-        try {
-            out.writeObject(Main.YOUR_TURN_CODE);
-        } catch (IOException ex) {
-            System.out.println(ex);
-        }
-    }// GEN-LAST:event_myButtonActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
@@ -353,7 +401,6 @@ public class GamePanelClient extends javax.swing.JPanel {
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JPanel leftPanel;
-    private javax.swing.JButton myButton;
     private javax.swing.JLabel myTime;
     private javax.swing.JLabel opponentTime;
     // End of variables declaration//GEN-END:variables
