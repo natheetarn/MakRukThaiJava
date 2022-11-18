@@ -14,6 +14,7 @@ import thaichessui.Pieces.BiaPiece;
 import thaichessui.Pieces.KhunPiece;
 import thaichessui.Pieces.Piece;
 import thaichessui.Pieces.PromotedBiaPiece;
+import thaichessui.Pieces.RuaPiece;
 
 public class BoardPanel extends JPanel {
 
@@ -232,6 +233,12 @@ public class BoardPanel extends JPanel {
                                         out.writeObject(arr);
                                         myTimer.stop();
                                         opponentTimer.start();
+                                        if (isCheck()) {
+                                            System.out.println("Check");
+                                            if (isCheckmate()) {
+                                                System.out.println("Checkmate");
+                                            }
+                                        }
                                         flag = true;
                                     }
                                     // cature
@@ -245,11 +252,14 @@ public class BoardPanel extends JPanel {
                         }
                         if (flag == false) {
                             t.setSelected(true);
+                            ArrayList<Tile> legalMoves = t.getPiece().getLegalMoves(boardData, row, col, isHostView);
+                            if (t.getPiece() instanceof KhunPiece) {
+                                legalMoves = getSafeKhunMoves(legalMoves, true);
+                            }
+
                             try {
                                 resetboardcolor();
-                                showLegal(t.getPiece().getLegalMoves(boardData, row, col, isHostView),
-
-                                        Color.CYAN);
+                                showLegal(legalMoves, Color.CYAN);
                                 flag = true;
                             } catch (Exception ex) {
                                 System.out.println("no legal moves");
@@ -275,6 +285,12 @@ public class BoardPanel extends JPanel {
                                     out.writeObject(arr);
                                     myTimer.stop();
                                     opponentTimer.start();
+                                    if (isCheck()) {
+                                        System.out.println("Check");
+                                        if (isCheckmate()) {
+                                            System.out.println("Checkmate");
+                                        }
+                                    }
                                 }
                             } catch (Exception ex) {
                                 System.out.println("no legal moves");
@@ -371,7 +387,147 @@ public class BoardPanel extends JPanel {
         updateBoard();
     }
 
-    private boolean lookForCheck(Color c){
+    public ArrayList<Tile> getSafeKhunMoves(ArrayList<Tile> legalmoves, boolean isOpposed) {
+        ArrayList<Tile> newLegalmoves = new ArrayList<Tile>();
+
+        for (Tile lm : legalmoves) {
+            newLegalmoves.add(lm);
+        }
+
+        ArrayList<Tile> opposedTiles = getMyTiles();
+        if (isOpposed) {
+            opposedTiles = getOpponentTiles();
+        }
+
+        for (Tile lm : legalmoves) {
+            boolean moveFlag = false;
+
+            for (Tile ot : opposedTiles) {
+                ArrayList<Tile> opposedMoves = ot.getPiece().getLegalMoves(boardData, ot.getRank(), ot.getFile(),
+                        isOpposed ? !isHostView : isHostView); // !isHostView because we tryna get legal moves for the
+                                                               // opponent
+
+                for (Tile om : opposedMoves) {
+                    if (om.getRank() == lm.getRank() && om.getFile() == lm.getFile()) {
+                        newLegalmoves.remove(lm);
+                        moveFlag = true;
+                        break;
+                    }
+                }
+
+                if (moveFlag) {
+                    break;
+                }
+            }
+        }
+
+        return newLegalmoves;
+    }
+
+    public ArrayList<Tile> getOpponentTiles() {
+        ArrayList<Tile> opponentTiles = new ArrayList<Tile>();
+        for (int i = 0; i < boardData.board.length; i++) {
+            for (int j = 0; j < boardData.board.length; j++) {
+                Piece p = boardData.board[i][j].getPiece();
+                if (isHostView) {
+                    if (p != null && p.getColor() == Color.BLACK) {
+                        opponentTiles.add(boardData.board[i][j]);
+                    }
+                } else {
+                    if (p != null && p.getColor() == Color.WHITE) {
+                        opponentTiles.add(boardData.board[i][j]);
+                    }
+                }
+            }
+        }
+
+        return opponentTiles;
+    }
+
+    public ArrayList<Tile> getMyTiles() {
+        ArrayList<Tile> myTiles = new ArrayList<Tile>();
+        for (int i = 0; i < boardData.board.length; i++) {
+            for (int j = 0; j < boardData.board.length; j++) {
+                Piece p = boardData.board[i][j].getPiece();
+                if (isHostView) {
+                    if (p != null && p.getColor() == Color.WHITE) {
+                        myTiles.add(boardData.board[i][j]);
+                    }
+                } else {
+                    if (p != null && p.getColor() == Color.BLACK) {
+                        myTiles.add(boardData.board[i][j]);
+                    }
+                }
+            }
+        }
+
+        return myTiles;
+    }
+
+    public boolean isCheck() {
+        // get khun tile of the opponent
+        Tile khunTile = boardData.getKhunTile(!isHostView);
+        System.out.println("HEREEREE");
+
+        ArrayList<Tile> myTiles = getMyTiles();
+
+        for (Tile mt : myTiles) {
+            ArrayList<Tile> myMoves = mt.getPiece().getLegalMoves(boardData, mt.getRank(), mt.getFile(),
+                    isHostView);
+
+            for (Tile mm : myMoves) {
+                if (mm.getRank() == khunTile.getRank() && mm.getFile() == khunTile.getFile()) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public boolean isCheckmate() {
+        Tile khunTile = boardData.getKhunTile(!isHostView);
+
+        System.out.println(khunTile.getRank() + ">>>" + khunTile.getFile());
+
+        if (isCheck()) {
+            ArrayList<Tile> safeMoves = getSafeKhunMoves(khunTile.getPiece().getLegalMoves(
+                    boardData, khunTile.getRank(), khunTile.getFile(), !isHostView),
+                    false);
+            if (safeMoves.size() > 0) {
+                return false;
+            }
+        }
+
+        ArrayList<Tile> opponentTiles = getOpponentTiles();
+
+        for (Tile ot : opponentTiles) {
+            ArrayList<Tile> opponentMoves = ot.getPiece().getLegalMoves(boardData,
+                    ot.getRank(), ot.getFile(), !isHostView);
+            for (Tile mm : opponentMoves) {
+                simulateMove(ot, mm);
+                if (!isCheck()) {
+                    simulateMove(mm, ot);
+                    return false;
+                }
+
+                simulateMove(mm, ot);
+            }
+        }
+
+        return true;
+    }
+
+    // move without updating board, use for when checking for checkmate
+    public void simulateMove(Tile oldTile, Tile newTile) {
+        newTile.setPiece(oldTile.getPiece());
+        newTile.setOccupied(true);
+        oldTile.setPiece(null);
+        oldTile.setOccupied(false);
+        oldTile.setSelected(false);
+    }
+
+    private boolean lookForCheck(Color c) {
         ArrayList<Tile> legalMoves = new ArrayList<Tile>();
         for (int ii = 0; ii < chessBoardSquares.length; ii++) {
             for (int jj = 0; jj < chessBoardSquares[ii].length; jj++) {
@@ -382,12 +538,12 @@ public class BoardPanel extends JPanel {
             }
         }
 
-        for (Tile d : legalMoves){
-            if(d.getOccupied() && d.getPiece() instanceof KhunPiece && d.getPiece().getColor() != c){
+        for (Tile d : legalMoves) {
+            if (d.getOccupied() && d.getPiece() instanceof KhunPiece && d.getPiece().getColor() != c) {
                 ((KhunPiece) d.getPiece()).setChecked(true);
-                chessBoardSquares[d.getRank()][d.getFile()].setBackground(Color.red);//for testing
+                chessBoardSquares[d.getRank()][d.getFile()].setBackground(Color.red);// for testing
                 return true;
-                
+
             }
         }
 

@@ -8,17 +8,15 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
-
-
 public class BiaPiece extends Piece {
 
     public BiaPiece(java.awt.Color color) {
         super(color);
         this.name = "BeaPiece";
-        //We have to change this later depending on the color
-        if(this.getColor() == Color.BLACK){
-        this.icon = new ImageIcon(getClass().getResource("/thaichessui/images/bia_black.png"));}
-        else{
+        // We have to change this later depending on the color
+        if (this.getColor() == Color.BLACK) {
+            this.icon = new ImageIcon(getClass().getResource("/thaichessui/images/bia_black.png"));
+        } else {
             this.icon = new ImageIcon(getClass().getResource("/thaichessui/images/bia_white.png"));
         }
 
@@ -43,7 +41,7 @@ public class BiaPiece extends Piece {
                 }
             }
 
-            //capture front right
+            // capture front right
             if (row - 1 >= 0 && row - 1 <= 7 &&
                     col + 1 >= 0 && col + 1 <= 7 &&
                     board.board[row - 1][col + 1].getOccupied()) {
@@ -84,7 +82,7 @@ public class BiaPiece extends Piece {
                 }
             }
 
-            //capture front right
+            // capture front right
             if (row - 1 >= 0 && row - 1 <= 7 &&
                     col + 1 >= 0 && col + 1 <= 7 &&
                     board.board[row - 1][col + 1].getOccupied()) {
@@ -95,7 +93,7 @@ public class BiaPiece extends Piece {
             }
         }
 
-        System.out.println("MOVES FROM" + row + col);
+        // System.out.println("MOVES FROM" + row + col);
         return legalMoves;
     }
 
