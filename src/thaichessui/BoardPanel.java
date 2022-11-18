@@ -404,6 +404,7 @@ public class BoardPanel extends JPanel {
         oldTile.setOccupied(false);
         oldTile.setSelected(false);
         updateBoard();
+        resetboardcolor();
     }
 
     public ArrayList<Tile> getSafeKhunMoves(ArrayList<Tile> legalmoves, boolean isOpposed) {
@@ -413,6 +414,8 @@ public class BoardPanel extends JPanel {
             newLegalmoves.add(lm);
         }
 
+        Tile khunTile = boardData.getKhunTile(isHostView);
+
         ArrayList<Tile> opposedTiles = getMyTiles();
         if (isOpposed) {
             opposedTiles = getOpponentTiles();
@@ -420,7 +423,7 @@ public class BoardPanel extends JPanel {
 
         for (Tile lm : legalmoves) {
             boolean moveFlag = false;
-
+            khunTile.setOccupied(false);
             for (Tile ot : opposedTiles) {
                 ArrayList<Tile> opposedMoves = ot.getPiece().getLegalMoves(boardData, ot.getRank(), ot.getFile(),
                         isOpposed ? !isHostView : isHostView); // !isHostView because we tryna get legal moves for the
@@ -438,6 +441,8 @@ public class BoardPanel extends JPanel {
                     break;
                 }
             }
+
+            khunTile.setOccupied(true);
         }
 
         return newLegalmoves;
@@ -492,7 +497,6 @@ public class BoardPanel extends JPanel {
     public boolean isCheck() {
         // get khun tile of the opponent
         Tile khunTile = boardData.getKhunTile(!isHostView);
-        System.out.println("HEREEREE");
 
         ArrayList<Tile> myTiles = getMyTiles();
 
@@ -545,35 +549,43 @@ public class BoardPanel extends JPanel {
 
     // move without updating board, use for when checking for checkmate
     public void simulateMove(Tile oldTile, Tile newTile) {
+        Tile tmp = newTile;
         newTile.setPiece(oldTile.getPiece());
-        newTile.setOccupied(true);
-        oldTile.setPiece(null);
-        oldTile.setOccupied(false);
+        newTile.setOccupied(oldTile.getOccupied());
+        oldTile.setPiece(tmp.getPiece());
+        oldTile.setOccupied(tmp.getOccupied());
         oldTile.setSelected(false);
+        // newTile.setPiece(oldTile.getPiece());
+        // newTile.setOccupied(true);
+        // oldTile.setPiece(null);
+        // oldTile.setOccupied(false);
+        // oldTile.setSelected(false);
     }
 
-    private boolean lookForCheck(Color c) {
-        ArrayList<Tile> legalMoves = new ArrayList<Tile>();
-        for (int ii = 0; ii < chessBoardSquares.length; ii++) {
-            for (int jj = 0; jj < chessBoardSquares[ii].length; jj++) {
-                Piece p = boardData.board[ii][jj].getPiece();
-                if (p != null && p.getColor() == c) {
-                    legalMoves.addAll(p.getLegalMoves(boardData, ii, jj, isHostView));
-                }
-            }
-        }
+    // private boolean lookForCheck(Color c) {
+    // ArrayList<Tile> legalMoves = new ArrayList<Tile>();
+    // for (int ii = 0; ii < chessBoardSquares.length; ii++) {
+    // for (int jj = 0; jj < chessBoardSquares[ii].length; jj++) {
+    // Piece p = boardData.board[ii][jj].getPiece();
+    // if (p != null && p.getColor() == c) {
+    // legalMoves.addAll(p.getLegalMoves(boardData, ii, jj, isHostView));
+    // }
+    // }
+    // }
 
-        for (Tile d : legalMoves) {
-            if (d.getOccupied() && d.getPiece() instanceof KhunPiece && d.getPiece().getColor() != c) {
-                ((KhunPiece) d.getPiece()).setChecked(true);
-                chessBoardSquares[d.getRank()][d.getFile()].setBackground(Color.red);// for testing
-                return true;
+    // for (Tile d : legalMoves) {
+    // if (d.getOccupied() && d.getPiece() instanceof KhunPiece &&
+    // d.getPiece().getColor() != c) {
+    // ((KhunPiece) d.getPiece()).setChecked(true);
+    // chessBoardSquares[d.getRank()][d.getFile()].setBackground(Color.red);// for
+    // testing
+    // return true;
 
-            }
-        }
+    // }
+    // }
 
-        return false;
-    }
+    // return false;
+    // }
 
     void updateBoard() {
         for (int ii = 0; ii < chessBoardSquares.length; ii++) {
