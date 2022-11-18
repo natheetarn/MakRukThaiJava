@@ -18,7 +18,8 @@ public class RuaPiece extends Piece {
         }
     }
 
-    public ArrayList<Tile> getLegalMoves(Board board, int row, int col, boolean isHostView) {
+    public ArrayList<Tile> getLegalMoves(Board board, int row, int col, boolean isHostView, boolean isUpSideDown) {
+        // int factor = isUpSideDown ? -1 : 1;
         ArrayList<Tile> legalMoves = new ArrayList<Tile>();
         if ((this.getColor() == Color.WHITE && !isHostView) || (this.getColor() == Color.BLACK && isHostView)) {
             return legalMoves;

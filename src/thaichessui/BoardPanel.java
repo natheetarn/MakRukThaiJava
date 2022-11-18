@@ -215,7 +215,7 @@ public class BoardPanel extends JPanel {
                                 if (newTile.getPiece().getColor() != oldTile.getPiece().getColor()) {
                                     ArrayList<Tile> validMoves = a.getPiece().getLegalMoves(boardData,
                                             a.getRank(),
-                                            a.getFile(), isHostView);
+                                            a.getFile(), isHostView, false);
                                     returnColor(validMoves);
                                     if (a.getPiece() instanceof KhunPiece) {
                                         validMoves = getSafeKhunMoves(validMoves, true);
@@ -264,7 +264,8 @@ public class BoardPanel extends JPanel {
 
                         if (flag == false) {
                             t.setSelected(true);
-                            ArrayList<Tile> legalMoves = t.getPiece().getLegalMoves(boardData, row, col, isHostView);
+                            ArrayList<Tile> legalMoves = t.getPiece().getLegalMoves(
+                                    boardData, row, col, isHostView, false);
                             if (t.getPiece() instanceof KhunPiece) {
                                 legalMoves = getSafeKhunMoves(legalMoves, true);
                             }
@@ -294,7 +295,7 @@ public class BoardPanel extends JPanel {
                             Tile opNewTile = getOppositeTile(newTile);
                             try {
                                 ArrayList<Tile> validMoves = oldTile.getPiece().getLegalMoves(boardData,
-                                        oldTile.getRank(), oldTile.getFile(), isHostView);
+                                        oldTile.getRank(), oldTile.getFile(), isHostView, false);
                                 if (oldTile.getPiece() instanceof KhunPiece) {
                                     validMoves = getSafeKhunMoves(validMoves, true);
                                 }
@@ -362,7 +363,7 @@ public class BoardPanel extends JPanel {
             for (Tile ot : opponentTiles) {
                 if (ot.getPiece() != null) {
                     ArrayList<Tile> opponentMoves = ot.getPiece().getLegalMoves(
-                            boardData, ot.getRank(), ot.getFile(), !isHostView);
+                            boardData, ot.getRank(), ot.getFile(), !isHostView, true);
                     for (Tile om : opponentMoves) {
                         if (om.getRank() == khunTile.getRank() && om.getFile() == khunTile.getFile()) {
                             newLegalmoves.remove(lm);
@@ -490,26 +491,41 @@ public class BoardPanel extends JPanel {
 
         for (Tile lm : legalmoves) {
             boolean moveFlag = false;
-            khunTile.setOccupied(false);
-            for (Tile ot : opposedTiles) {
-                ArrayList<Tile> opposedMoves = ot.getPiece().getLegalMoves(boardData, ot.getRank(), ot.getFile(),
-                        isOpposed ? !isHostView : isHostView); // !isHostView because we tryna get legal moves for the
-                                                               // opponent
+            boolean isCapture = false;
+            Piece tmp = lm.getPiece();
+            if (lm.getPiece() != null) {
+                isCapture = true;
+            }
 
-                for (Tile om : opposedMoves) {
-                    if (om.getRank() == lm.getRank() && om.getFile() == lm.getFile()) {
-                        newLegalmoves.remove(lm);
-                        moveFlag = true;
+            simulateMove(khunTile, lm);
+
+            // khunTile.setOccupied(false);
+            for (Tile ot : opposedTiles) {
+                if (ot.getPiece() != null) {
+                    ArrayList<Tile> opposedMoves = ot.getPiece().getLegalMoves(boardData, ot.getRank(), ot.getFile(),
+                            isOpposed ? !isHostView : isHostView, true);
+                    // !isHostView because we tryna get legal moves for the opponent
+
+                    for (Tile om : opposedMoves) {
+                        if (om.getRank() == lm.getRank() && om.getFile() == lm.getFile()) {
+                            newLegalmoves.remove(lm);
+                            moveFlag = true;
+                            break;
+                        }
+                    }
+
+                    if (moveFlag) {
                         break;
                     }
                 }
-
-                if (moveFlag) {
-                    break;
-                }
             }
 
-            khunTile.setOccupied(true);
+            simulateMove(lm, khunTile);
+            if (isCapture) {
+                lm.setPiece(tmp);
+                lm.setOccupied(true);
+            }
+            // khunTile.setOccupied(true);
         }
 
         return newLegalmoves;
@@ -556,7 +572,7 @@ public class BoardPanel extends JPanel {
     }
 
     public void setKhunTileToRed(boolean mySide) {
-        Tile khunTile = boardData.getKhunTile(isHostView && mySide);
+        Tile khunTile = boardData.getKhunTile(mySide ? isHostView : !isHostView);
         chessBoardSquares[khunTile.getRank()][khunTile.getFile()]
                 .setBackground(Color.red);
     }
@@ -569,7 +585,7 @@ public class BoardPanel extends JPanel {
 
         for (Tile ot : opponentTiles) {
             ArrayList<Tile> opponentMoves = ot.getPiece().getLegalMoves(boardData, ot.getRank(), ot.getFile(),
-                    !isHostView);
+                    !isHostView, true);
 
             for (Tile om : opponentMoves) {
                 if (om.getRank() == khunTile.getRank() && om.getFile() == khunTile.getFile()) {
@@ -590,12 +606,14 @@ public class BoardPanel extends JPanel {
         ArrayList<Tile> myTiles = getMyTiles();
 
         for (Tile mt : myTiles) {
-            ArrayList<Tile> myMoves = mt.getPiece().getLegalMoves(boardData, mt.getRank(), mt.getFile(),
-                    isHostView);
+            if (mt.getPiece() != null) {
+                ArrayList<Tile> myMoves = mt.getPiece().getLegalMoves(boardData, mt.getRank(), mt.getFile(),
+                        isHostView, false);
 
-            for (Tile mm : myMoves) {
-                if (mm.getRank() == khunTile.getRank() && mm.getFile() == khunTile.getFile()) {
-                    return true;
+                for (Tile mm : myMoves) {
+                    if (mm.getRank() == khunTile.getRank() && mm.getFile() == khunTile.getFile()) {
+                        return true;
+                    }
                 }
             }
         }
@@ -608,7 +626,7 @@ public class BoardPanel extends JPanel {
 
         if (isCheck()) {
             ArrayList<Tile> safeMoves = getSafeKhunMoves(khunTile.getPiece().getLegalMoves(
-                    boardData, khunTile.getRank(), khunTile.getFile(), !isHostView),
+                    boardData, khunTile.getRank(), khunTile.getFile(), !isHostView, true),
                     false);
             if (safeMoves.size() > 0) {
                 return false;
@@ -619,7 +637,7 @@ public class BoardPanel extends JPanel {
 
         for (Tile ot : opponentTiles) {
             ArrayList<Tile> opponentMoves = ot.getPiece().getLegalMoves(boardData,
-                    ot.getRank(), ot.getFile(), !isHostView);
+                    ot.getRank(), ot.getFile(), !isHostView, true);
             for (Tile mm : opponentMoves) {
                 boolean isCapture = false;
                 // in case you capture a piece when backtrack after simulateMove
@@ -735,19 +753,21 @@ public class BoardPanel extends JPanel {
         return false;
     }
 
-    private void tileActionPerformed(java.awt.event.ActionEvent evt) {
-        int row = (int) ((JButton) evt.getSource()).getClientProperty("row");
-        int col = (int) ((JButton) evt.getSource()).getClientProperty("col");
-        Piece p = boardData.board[row][col].getPiece();
-        if (p == null) {
-            System.out.println("NO PIECE");
-        }
-        if (p != null) {
-            System.out.println(p.getLegalMoves(boardData, col, row, isHostView));
-            showLegal(p.getLegalMoves(boardData, row, col, isHostView), boardData.board[row][col].getColor());
-        }
-        System.out.println("row " + row + "col " + col);
-    }
+    // private void tileActionPerformed(java.awt.event.ActionEvent evt) {
+    // int row = (int) ((JButton) evt.getSource()).getClientProperty("row");
+    // int col = (int) ((JButton) evt.getSource()).getClientProperty("col");
+    // Piece p = boardData.board[row][col].getPiece();
+    // if (p == null) {
+    // System.out.println("NO PIECE");
+    // }
+    // if (p != null) {
+    // System.out.println(p.getLegalMoves(boardData, col, row, isHostView));
+    // showLegal(p.getLegalMoves(boardData, row, col, isHostView),
+    // boardData.board[row][col].getColor());
+    // }
+    // System.out.println("row " + row + "col " + col);
+    // }
+
     // private void tileActionPerformed(java.awt.event.ActionEvent evt) {
     // int row = (int) ((JButton) evt.getSource()).getClientProperty("row");
     // int col = (int) ((JButton) evt.getSource()).getClientProperty("col");
