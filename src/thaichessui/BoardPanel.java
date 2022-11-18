@@ -261,6 +261,7 @@ public class BoardPanel extends JPanel {
 
                             a.setSelected(false);
                         }
+
                         if (flag == false) {
                             t.setSelected(true);
                             ArrayList<Tile> legalMoves = t.getPiece().getLegalMoves(boardData, row, col, isHostView);
@@ -351,25 +352,36 @@ public class BoardPanel extends JPanel {
         ArrayList<Tile> opponentTiles = getOpponentTiles();
         for (Tile lm : legalmoves) {
             boolean moveFlag = false;
+            boolean isCapture = false;
+            Piece tmp = lm.getPiece();
+            if (lm.getPiece() != null) {
+                isCapture = true;
+            }
 
             simulateMove(t, lm);
             for (Tile ot : opponentTiles) {
-                ArrayList<Tile> opponentMoves = ot.getPiece().getLegalMoves(
-                        boardData, ot.getRank(), ot.getFile(), !isHostView);
-                for (Tile om : opponentMoves) {
-                    if (om.getRank() == khunTile.getRank() && om.getFile() == khunTile.getFile()) {
-                        newLegalmoves.remove(lm);
-                        moveFlag = true;
+                if (ot.getPiece() != null) {
+                    ArrayList<Tile> opponentMoves = ot.getPiece().getLegalMoves(
+                            boardData, ot.getRank(), ot.getFile(), !isHostView);
+                    for (Tile om : opponentMoves) {
+                        if (om.getRank() == khunTile.getRank() && om.getFile() == khunTile.getFile()) {
+                            newLegalmoves.remove(lm);
+                            moveFlag = true;
+                            break;
+                        }
+                    }
+
+                    if (moveFlag) {
                         break;
                     }
-                }
-
-                if (moveFlag) {
-                    break;
                 }
             }
 
             simulateMove(lm, t);
+            if (isCapture) {
+                lm.setPiece(tmp);
+                lm.setOccupied(true);
+            }
         }
 
         return newLegalmoves;
@@ -629,6 +641,10 @@ public class BoardPanel extends JPanel {
         oldTile.setPiece(null);
         oldTile.setOccupied(false);
         // oldTile.setSelected(false);
+    }
+
+    public void backtrackMove(Tile oldTile, Tile newTile) {
+
     }
 
     // private boolean lookForCheck(Color c) {
