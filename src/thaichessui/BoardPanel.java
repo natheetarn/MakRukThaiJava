@@ -220,6 +220,9 @@ public class BoardPanel extends JPanel {
                                             a.getRank(),
                                             a.getFile(), isHostView);
                                     returnColor(validMoves);
+                                    if (a.getPiece() instanceof KhunPiece) {
+                                        validMoves = getSafeKhunMoves(validMoves, true);
+                                    }
 
                                     // capture
                                     if (move(validMoves,
@@ -283,6 +286,9 @@ public class BoardPanel extends JPanel {
                             try {
                                 ArrayList<Tile> validMoves = oldTile.getPiece().getLegalMoves(boardData,
                                         oldTile.getRank(), oldTile.getFile(), isHostView);
+                                if (oldTile.getPiece() instanceof KhunPiece) {
+                                    validMoves = getSafeKhunMoves(validMoves, true);
+                                }
                                 returnColor(validMoves);
                                 if (move(validMoves, oldTile, newTile, boardData)) {
                                     boardPanel.setEnable(false);
