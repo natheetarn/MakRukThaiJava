@@ -211,6 +211,8 @@ public class GamePanelServer extends javax.swing.JPanel {
                         boardPanel.setEnable(true);
                         stopOpponentTimer();
                         startMyTimer();
+                    } else if ((int) o == Main.CHECK_CODE) {
+                        boardPanel.setKhunTileToRed(true);
                     }
                 } else if (o instanceof String) {
                     message = (String) o;

@@ -232,13 +232,19 @@ public class BoardPanel extends JPanel {
                                                 opNewTile.getFile() };
                                         out.writeObject(arr);
                                         myTimer.stop();
-                                        opponentTimer.start();
                                         if (isCheck()) {
-                                            System.out.println("Check");
+                                            setKhunTileToRed(false);
+                                            // Tile khunTile = boardData.getKhunTile(!isHostView);
+                                            // chessBoardSquares[khunTile.getRank()][khunTile.getFile()]
+                                            // .setBackground(Color.red);
+
+                                            out.writeObject(Main.CHECK_CODE);
                                             if (isCheckmate()) {
                                                 System.out.println("Checkmate");
                                             }
                                         }
+
+                                        opponentTimer.start();
                                         flag = true;
                                     }
                                     // cature
@@ -284,13 +290,20 @@ public class BoardPanel extends JPanel {
                                             opNewTile.getFile() };
                                     out.writeObject(arr);
                                     myTimer.stop();
-                                    opponentTimer.start();
                                     if (isCheck()) {
+                                        setKhunTileToRed(false);
+                                        // Tile khunTile = boardData.getKhunTile(!isHostView);
+                                        // chessBoardSquares[khunTile.getRank()][khunTile.getFile()]
+                                        // .setBackground(Color.red);
+
+                                        out.writeObject(Main.CHECK_CODE);
                                         System.out.println("Check");
                                         if (isCheckmate()) {
                                             System.out.println("Checkmate");
                                         }
                                     }
+
+                                    opponentTimer.start();
                                 }
                             } catch (Exception ex) {
                                 System.out.println("no legal moves");
@@ -344,7 +357,7 @@ public class BoardPanel extends JPanel {
                 oldTile.setOccupied(false);
                 oldTile.setSelected(false);
                 updateBoard();
-                lookForCheck(newTile.getPiece().getColor());
+                // lookForCheck(newTile.getPiece().getColor());
                 return true;
 
             }
@@ -462,6 +475,12 @@ public class BoardPanel extends JPanel {
         }
 
         return myTiles;
+    }
+
+    public void setKhunTileToRed(boolean mySide) {
+        Tile khunTile = boardData.getKhunTile(isHostView && mySide);
+        chessBoardSquares[khunTile.getRank()][khunTile.getFile()]
+                .setBackground(Color.red);
     }
 
     public boolean isCheck() {

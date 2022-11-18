@@ -12,6 +12,7 @@ public class Main extends javax.swing.JFrame {
 
     public static final int FORCE_EXIT_CODE = -1;
     public static final int YOUR_TURN_CODE = 1;
+    public static final int CHECK_CODE = 2;
 
     public static final String TIME_OPTION_1_MIN = "1 min";
     public static final String TIME_OPTION_3_MIN = "3 min";
