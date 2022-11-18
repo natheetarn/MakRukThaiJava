@@ -621,13 +621,28 @@ public class BoardPanel extends JPanel {
             ArrayList<Tile> opponentMoves = ot.getPiece().getLegalMoves(boardData,
                     ot.getRank(), ot.getFile(), !isHostView);
             for (Tile mm : opponentMoves) {
+                boolean isCapture = false;
+                // in case you capture a piece when backtrack after simulateMove
+                Piece tmp = mm.getPiece();
+                if (mm.getPiece() != null) {
+                    isCapture = true;
+                }
+
                 simulateMove(ot, mm);
                 if (!isCheck()) {
                     simulateMove(mm, ot);
+                    if (isCapture) {
+                        mm.setPiece(tmp);
+                        mm.setOccupied(true);
+                    }
                     return false;
                 }
 
                 simulateMove(mm, ot);
+                if (isCapture) {
+                    mm.setPiece(tmp);
+                    mm.setOccupied(true);
+                }
             }
         }
 
@@ -641,10 +656,6 @@ public class BoardPanel extends JPanel {
         oldTile.setPiece(null);
         oldTile.setOccupied(false);
         // oldTile.setSelected(false);
-    }
-
-    public void backtrackMove(Tile oldTile, Tile newTile) {
-
     }
 
     // private boolean lookForCheck(Color c) {
