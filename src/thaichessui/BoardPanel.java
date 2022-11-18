@@ -244,6 +244,7 @@ public class BoardPanel extends JPanel {
                                             out.writeObject(Main.CHECK_CODE);
                                             if (isCheckmate()) {
                                                 System.out.println("Checkmate");
+                                                out.writeObject(Main.CHECKMATE_CODE);
                                             }
                                         }
 
@@ -306,6 +307,7 @@ public class BoardPanel extends JPanel {
                                         System.out.println("Check");
                                         if (isCheckmate()) {
                                             System.out.println("Checkmate");
+                                            out.writeObject(Main.CHECKMATE_CODE);
                                         }
                                     }
 

@@ -11,6 +11,7 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import javax.swing.JOptionPane;
 import javax.swing.Timer;
 
 /**
@@ -88,10 +89,10 @@ public class GamePanelServer extends javax.swing.JPanel {
                     // JOptionPane.showMessageDialog(null, "You are out of time! Your opponent get
                     // the dubs!", "😭😭",
                     // JOptionPane.PLAIN_MESSAGE);
-                    ResultPanel winPanel = new ResultPanel(Main.RESULT_LOSE, "You are out of time!");
+                    ResultPanel resultPanel = new ResultPanel(Main.RESULT_LOSE, "You are out of time!");
                     gps.setLayout(new java.awt.BorderLayout());
                     gps.removeAll();
-                    gps.add(winPanel);
+                    gps.add(resultPanel);
                     gps.revalidate();
 
                     stopMyTimer();
@@ -113,10 +114,10 @@ public class GamePanelServer extends javax.swing.JPanel {
                     // "🥳🥳",
                     // JOptionPane.PLAIN_MESSAGE);
 
-                    ResultPanel winPanel = new ResultPanel(Main.RESULT_WIN, "The opponent is out of time!");
+                    ResultPanel resultPanel = new ResultPanel(Main.RESULT_WIN, "The opponent is out of time!");
                     gps.setLayout(new java.awt.BorderLayout());
                     gps.removeAll();
-                    gps.add(winPanel);
+                    gps.add(resultPanel);
                     gps.revalidate();
 
                     stopMyTimer();
@@ -186,11 +187,11 @@ public class GamePanelServer extends javax.swing.JPanel {
                 // JOptionPane.showMessageDialog(null, "Oops! Your opponent disconnected, guess
                 // its your win!", "🗿",
                 // JOptionPane.PLAIN_MESSAGE);
-                ResultPanel winPanel = new ResultPanel(Main.RESULT_WIN, "Your opponent disconnected");
+                ResultPanel resultPanel = new ResultPanel(Main.RESULT_WIN, "Your opponent disconnected");
 
                 this.setLayout(new java.awt.BorderLayout());
                 this.removeAll();
-                this.add(winPanel);
+                this.add(resultPanel);
                 this.revalidate();
             }
 
@@ -213,6 +214,34 @@ public class GamePanelServer extends javax.swing.JPanel {
                         startMyTimer();
                     } else if ((int) o == Main.CHECK_CODE) {
                         boardPanel.setKhunTileToRed(true);
+                    } else if ((int) o == Main.CHECKMATE_CODE) {
+                        out.writeObject(Main.GOT_CHECKMATED_CODE);
+                        JOptionPane.showMessageDialog(null, "You just got checkmated!!", "😭😭",
+                                JOptionPane.PLAIN_MESSAGE);
+
+                        ResultPanel resultPanel = new ResultPanel(Main.RESULT_LOSE, "You just got checkmated!");
+                        this.setLayout(new java.awt.BorderLayout());
+                        this.removeAll();
+                        this.add(resultPanel);
+                        this.revalidate();
+
+                        stopMyTimer();
+                        stopOpponentTimer();
+                        timeoutFlag = true;
+                    } else if ((int) o == Main.GOT_CHECKMATED_CODE) {
+                        JOptionPane.showMessageDialog(null, "You just checkmated your opponent!!", "🥳🥳",
+                                JOptionPane.PLAIN_MESSAGE);
+
+                        ResultPanel resultPanel = new ResultPanel(Main.RESULT_WIN,
+                                "You just checkmated your opponent!");
+                        this.setLayout(new java.awt.BorderLayout());
+                        this.removeAll();
+                        this.add(resultPanel);
+                        this.revalidate();
+
+                        stopMyTimer();
+                        stopOpponentTimer();
+                        timeoutFlag = true;
                     }
                 } else if (o instanceof String) {
                     message = (String) o;
