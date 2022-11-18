@@ -7,14 +7,11 @@ import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.Timer;
-import javax.swing.event.MouseInputAdapter;
-import javax.swing.event.SwingPropertyChangeSupport;
 
 import thaichessui.Pieces.BiaPiece;
 import thaichessui.Pieces.KhunPiece;
 import thaichessui.Pieces.Piece;
 import thaichessui.Pieces.PromotedBiaPiece;
-import thaichessui.Pieces.RuaPiece;
 
 public class BoardPanel extends JPanel {
 
@@ -224,6 +221,10 @@ public class BoardPanel extends JPanel {
                                         validMoves = getSafeKhunMoves(validMoves, true);
                                     }
 
+                                    if (getChecked()) {
+                                        validMoves = getMovesThatSaveKhun(a, validMoves);
+                                    }
+
                                     // capture
                                     if (move(validMoves,
                                             boardData.board[returnSelectedTile().getRank()][returnSelectedTile()
@@ -267,6 +268,10 @@ public class BoardPanel extends JPanel {
                                 legalMoves = getSafeKhunMoves(legalMoves, true);
                             }
 
+                            if (getChecked()) {
+                                legalMoves = getMovesThatSaveKhun(t, legalMoves);
+                            }
+
                             try {
                                 resetboardcolor();
                                 showLegal(legalMoves, Color.CYAN);
@@ -278,8 +283,10 @@ public class BoardPanel extends JPanel {
                         }
 
                     } else {
+                        System.out.println(findSelected());
                         if (findSelected()) {
                             Tile oldTile = returnSelectedTile();
+
                             Tile newTile = boardData.board[row][col];
 
                             Tile opOldTile = getOppositeTile(oldTile);
@@ -290,7 +297,13 @@ public class BoardPanel extends JPanel {
                                 if (oldTile.getPiece() instanceof KhunPiece) {
                                     validMoves = getSafeKhunMoves(validMoves, true);
                                 }
+
+                                if (getChecked()) {
+                                    validMoves = getMovesThatSaveKhun(oldTile, validMoves);
+                                }
+
                                 returnColor(validMoves);
+
                                 if (move(validMoves, oldTile, newTile, boardData)) {
                                     boardPanel.setEnable(false);
                                     int arr[] = { opOldTile.getRank(), opOldTile.getFile(), opNewTile.getRank(),
@@ -323,6 +336,45 @@ public class BoardPanel extends JPanel {
         }
     }
 
+    public ArrayList<Tile> getMovesThatSaveKhun(Tile t, ArrayList<Tile> legalmoves) {
+        if (t.getPiece() instanceof KhunPiece) {
+            return legalmoves;
+        }
+
+        Tile khunTile = boardData.getKhunTile(isHostView);
+
+        ArrayList<Tile> newLegalmoves = new ArrayList<Tile>();
+        for (Tile lm : legalmoves) {
+            newLegalmoves.add(lm);
+        }
+
+        ArrayList<Tile> opponentTiles = getOpponentTiles();
+        for (Tile lm : legalmoves) {
+            boolean moveFlag = false;
+
+            simulateMove(t, lm);
+            for (Tile ot : opponentTiles) {
+                ArrayList<Tile> opponentMoves = ot.getPiece().getLegalMoves(
+                        boardData, ot.getRank(), ot.getFile(), !isHostView);
+                for (Tile om : opponentMoves) {
+                    if (om.getRank() == khunTile.getRank() && om.getFile() == khunTile.getFile()) {
+                        newLegalmoves.remove(lm);
+                        moveFlag = true;
+                        break;
+                    }
+                }
+
+                if (moveFlag) {
+                    break;
+                }
+            }
+
+            simulateMove(lm, t);
+        }
+
+        return newLegalmoves;
+    }
+
     public Board getBoardData() {
         return boardData;
     }
@@ -332,6 +384,7 @@ public class BoardPanel extends JPanel {
     }
 
     public boolean move(ArrayList<Tile> possibleMoves, Tile oldTile, Tile newTile, Board board) {
+
         for (Tile d : possibleMoves) {
             if (d == newTile) {
 
@@ -496,6 +549,28 @@ public class BoardPanel extends JPanel {
                 .setBackground(Color.red);
     }
 
+    // check if our khun is checked
+    public boolean getChecked() {
+        Tile khunTile = boardData.getKhunTile(isHostView);
+
+        ArrayList<Tile> opponentTiles = getOpponentTiles();
+
+        for (Tile ot : opponentTiles) {
+            ArrayList<Tile> opponentMoves = ot.getPiece().getLegalMoves(boardData, ot.getRank(), ot.getFile(),
+                    !isHostView);
+
+            for (Tile om : opponentMoves) {
+                if (om.getRank() == khunTile.getRank() && om.getFile() == khunTile.getFile()) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+
+    }
+
+    // check if the we check opponent's khun
     public boolean isCheck() {
         // get khun tile of the opponent
         Tile khunTile = boardData.getKhunTile(!isHostView);
@@ -518,8 +593,6 @@ public class BoardPanel extends JPanel {
 
     public boolean isCheckmate() {
         Tile khunTile = boardData.getKhunTile(!isHostView);
-
-        System.out.println(khunTile.getRank() + ">>>" + khunTile.getFile());
 
         if (isCheck()) {
             ArrayList<Tile> safeMoves = getSafeKhunMoves(khunTile.getPiece().getLegalMoves(
@@ -551,16 +624,10 @@ public class BoardPanel extends JPanel {
 
     // move without updating board, use for when checking for checkmate
     public void simulateMove(Tile oldTile, Tile newTile) {
-        Tile tmp = newTile;
         newTile.setPiece(oldTile.getPiece());
-        newTile.setOccupied(oldTile.getOccupied());
-        oldTile.setPiece(tmp.getPiece());
-        oldTile.setOccupied(tmp.getOccupied());
-        oldTile.setSelected(false);
-        // newTile.setPiece(oldTile.getPiece());
-        // newTile.setOccupied(true);
-        // oldTile.setPiece(null);
-        // oldTile.setOccupied(false);
+        newTile.setOccupied(true);
+        oldTile.setPiece(null);
+        oldTile.setOccupied(false);
         // oldTile.setSelected(false);
     }
 
