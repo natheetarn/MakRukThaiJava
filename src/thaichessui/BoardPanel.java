@@ -44,7 +44,7 @@ public class BoardPanel extends JPanel {
                 b.putClientProperty("col", jj);
                 b.setPreferredSize(new Dimension(50, 50));
                 b.setBorder(new LineBorder(Color.GRAY));
-                
+
                 if (boardData.board[ii][jj].getColor() == Color.WHITE) {
                     b.setBackground(Color.WHITE);
                 } else {
@@ -109,12 +109,12 @@ public class BoardPanel extends JPanel {
                                     returnColor(validMoves);
                                     if (a.getPiece() instanceof KhunPiece) {
                                         validMoves = getSafeKhunMoves(validMoves, true);
-                                        
+
                                     }
 
                                     if (getChecked()) {
                                         validMoves = getMovesThatSaveKhun(a, validMoves);
-                        
+
                                     }
 
                                     // capture
@@ -140,7 +140,7 @@ public class BoardPanel extends JPanel {
                                                 out.writeObject(Main.CHECKMATE_CODE);
                                             }
                                         }
-                                        
+
                                         
 
                                         opponentTimer.start();
@@ -561,19 +561,34 @@ public class BoardPanel extends JPanel {
         return true;
     }
 
+    public boolean isStaleMate() {
+        System.out.println("YAY");
+        ArrayList<Tile> myTiles = getMyTiles();
+        for (Tile t : myTiles) {
+            Piece p = t.getPiece();
+            if (p != null) {
+                if (p instanceof KhunPiece) {
+                    if (getSafeKhunMoves(p.getLegalMoves(boardData, t.getRank(), t.getFile(), isHostView, false),
+                            true).size() != 0) {
+                        for(Tile t2: (getSafeKhunMoves(p.getLegalMoves(boardData, t.getRank(), t.getFile(), isHostView, false),
+                        true))){
+                            System.out.println("moveable to" + t2.getRank() +" "+t2.getFile());
+                        }
+                        System.out.println("khun movable");
 
-    public boolean isStaleMate(){
-        Tile khunTile = boardData.getKhunTile(!isHostView);
+                        return false;
+                    }
+                } else {
+                    if (p.getLegalMoves(boardData, t.getRank(), t.getFile(), isHostView, false).size() != 0) {
+                        System.out.println("other piece movable");
 
-        if (!isCheck()) {
-            ArrayList<Tile> safeMoves = getSafeKhunMoves(khunTile.getPiece().getLegalMoves(
-                    boardData, khunTile.getRank(), khunTile.getFile(), !isHostView, true),
-                    false);
-            if (safeMoves.size() == 0) {
-                return true;
+                        return false;
+                    }
+                }
             }
         }
-        return false;
+        return true;
+
     }
 
     // move without updating board, use for when checking for checkmate
