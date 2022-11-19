@@ -1,6 +1,8 @@
 package thaichessui;
 
 import java.awt.*;
+import java.io.IOError;
+import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
@@ -91,9 +93,18 @@ public class BoardPanel extends JPanel {
                     Tile t = boardData.board[row][col];
                     boolean flag = false;
                     System.out.println("row: " + row + " col: " + col);
-                    if(isStaleMate()){
+                    if (isStaleMate()) {
                         System.out.println("STALEMATE");
+                        try {
+
+                            out.writeObject(Main.STALEMATE_CODE);
+                            myTimer.stop();
+                            opponentTimer.stop();
+                        } catch (IOException ex) {
+                            System.out.println(ex);
+                        }
                     }
+
                     if (t.getOccupied() == true) {
                         if (findSelected()) {
                             Tile a = returnSelectedTile();
@@ -143,8 +154,6 @@ public class BoardPanel extends JPanel {
                                                 out.writeObject(Main.CHECKMATE_CODE);
                                             }
                                         }
-
-                                        
 
                                         opponentTimer.start();
                                         flag = true;
@@ -379,7 +388,7 @@ public class BoardPanel extends JPanel {
             newLegalmoves.add(lm);
         }
 
-        Tile khunTile = boardData.getKhunTile(isHostView);
+        Tile khunTile = boardData.getKhunTile(isOpposed ? isHostView : !isHostView);
 
         ArrayList<Tile> opposedTiles = getMyTiles();
         if (isOpposed) {
@@ -523,7 +532,7 @@ public class BoardPanel extends JPanel {
 
         if (isCheck()) {
             ArrayList<Tile> safeMoves = getSafeKhunMoves(khunTile.getPiece().getLegalMoves(
-                    boardData, khunTile.getRank(), khunTile.getFile(), !isHostView, true),
+                    boardData, khunTile.getRank(), khunTile.getFile(), !isHostView, false),
                     false);
             if (safeMoves.size() > 0) {
                 return false;
@@ -565,7 +574,6 @@ public class BoardPanel extends JPanel {
     }
 
     public boolean isStaleMate() {
-        System.out.println("YAY");
         ArrayList<Tile> myTiles = getMyTiles();
         for (Tile t : myTiles) {
             Piece p = t.getPiece();
@@ -573,17 +581,18 @@ public class BoardPanel extends JPanel {
                 if (p instanceof KhunPiece) {
                     if (getSafeKhunMoves(p.getLegalMoves(boardData, t.getRank(), t.getFile(), isHostView, false),
                             true).size() != 0) {
-                        for(Tile t2: (getSafeKhunMoves(p.getLegalMoves(boardData, t.getRank(), t.getFile(), isHostView, false),
-                        true))){
-                            System.out.println("moveable to" + t2.getRank() +" "+t2.getFile());
-                        }
-                        System.out.println("khun movable");
+                        // for (Tile t2 : (getSafeKhunMoves(
+                        // p.getLegalMoves(boardData, t.getRank(), t.getFile(), isHostView, false),
+                        // true))) {
+                        // System.out.println("moveable to" + t2.getRank() + " " + t2.getFile());
+                        // }
 
+                        // System.out.println("khun movable");
                         return false;
                     }
                 } else {
                     if (p.getLegalMoves(boardData, t.getRank(), t.getFile(), isHostView, false).size() != 0) {
-                        System.out.println("other piece movable");
+                        // System.out.println("other piece movable");
 
                         return false;
                     }

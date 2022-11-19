@@ -15,6 +15,8 @@ public class Main extends javax.swing.JFrame {
     public static final int CHECK_CODE = 2;
     public static final int CHECKMATE_CODE = 3;
     public static final int GOT_CHECKMATED_CODE = 4;
+    public static final int STALEMATE_CODE = 5;
+    public static final int GOT_STALEMATED_CODE = 6;
 
     public static final String TIME_OPTION_1_MIN = "1 min";
     public static final String TIME_OPTION_3_MIN = "3 min";

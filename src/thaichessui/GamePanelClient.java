@@ -222,6 +222,8 @@ public class GamePanelClient extends javax.swing.JPanel {
                         boardPanel.setKhunTileToRed(true);
                     } else if ((int) o == Main.CHECKMATE_CODE) {
                         out.writeObject(Main.GOT_CHECKMATED_CODE);
+                        stopMyTimer();
+                        stopOpponentTimer();
                         JOptionPane.showMessageDialog(null, "You just got checkmated!!", "😭😭",
                                 JOptionPane.PLAIN_MESSAGE);
 
@@ -231,10 +233,10 @@ public class GamePanelClient extends javax.swing.JPanel {
                         this.add(resultPanel);
                         this.revalidate();
 
-                        stopMyTimer();
-                        stopOpponentTimer();
                         timeoutFlag = true;
                     } else if ((int) o == Main.GOT_CHECKMATED_CODE) {
+                        stopMyTimer();
+                        stopOpponentTimer();
                         JOptionPane.showMessageDialog(null, "You just checkmated your opponent!!", "🥳🥳",
                                 JOptionPane.PLAIN_MESSAGE);
 
@@ -245,8 +247,35 @@ public class GamePanelClient extends javax.swing.JPanel {
                         this.add(resultPanel);
                         this.revalidate();
 
+                        timeoutFlag = true;
+                    } else if ((int) o == Main.STALEMATE_CODE) {
+                        out.writeObject(Main.GOT_STALEMATED_CODE);
                         stopMyTimer();
                         stopOpponentTimer();
+                        JOptionPane.showMessageDialog(null, "Stalemate!!", "😬😬",
+                                JOptionPane.PLAIN_MESSAGE);
+
+                        ResultPanel resultPanel = new ResultPanel(Main.RESULT_TIE,
+                                "A stalemate!");
+                        this.setLayout(new java.awt.BorderLayout());
+                        this.removeAll();
+                        this.add(resultPanel);
+                        this.revalidate();
+
+                        timeoutFlag = true;
+                    } else if ((int) o == Main.GOT_STALEMATED_CODE) {
+                        stopMyTimer();
+                        stopOpponentTimer();
+                        JOptionPane.showMessageDialog(null, "Stalemate!!", "😬😬",
+                                JOptionPane.PLAIN_MESSAGE);
+
+                        ResultPanel resultPanel = new ResultPanel(Main.RESULT_TIE,
+                                "A stalemate!");
+                        this.setLayout(new java.awt.BorderLayout());
+                        this.removeAll();
+                        this.add(resultPanel);
+                        this.revalidate();
+
                         timeoutFlag = true;
                     }
 
