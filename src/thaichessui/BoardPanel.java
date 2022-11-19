@@ -131,6 +131,8 @@ public class BoardPanel extends JPanel {
 
                                     }
 
+                                    validMoves = getMovesNoKillKhun(a, validMoves);
+
                                     // capture
                                     if (move(validMoves,
                                             boardData.board[returnSelectedTile().getRank()][returnSelectedTile()
@@ -180,6 +182,8 @@ public class BoardPanel extends JPanel {
                                 legalMoves = getMovesThatSaveKhun(t, legalMoves);
                             }
 
+                            legalMoves = getMovesNoKillKhun(t, legalMoves);
+
                             try {
                                 resetboardcolor();
                                 showLegal(legalMoves, Color.CYAN);
@@ -209,6 +213,8 @@ public class BoardPanel extends JPanel {
                                 if (getChecked()) {
                                     validMoves = getMovesThatSaveKhun(oldTile, validMoves);
                                 }
+
+                                validMoves = getMovesNoKillKhun(oldTile, validMoves);
 
                                 returnColor(validMoves);
 
@@ -245,6 +251,58 @@ public class BoardPanel extends JPanel {
     }
 
     public ArrayList<Tile> getMovesThatSaveKhun(Tile t, ArrayList<Tile> legalmoves) {
+        if (t.getPiece() instanceof KhunPiece) {
+            return legalmoves;
+        }
+
+        Tile khunTile = boardData.getKhunTile(isHostView);
+
+        ArrayList<Tile> newLegalmoves = new ArrayList<Tile>();
+        for (Tile lm : legalmoves) {
+            newLegalmoves.add(lm);
+        }
+
+        ArrayList<Tile> opponentTiles = getOpponentTiles();
+        for (Tile lm : legalmoves) {
+            boolean moveFlag = false;
+            boolean isCapture = false;
+            Piece tmp = lm.getPiece();
+            if (lm.getPiece() != null) {
+                isCapture = true;
+            }
+
+            simulateMove(t, lm);
+            for (Tile ot : opponentTiles) {
+                if (ot.getPiece() != null) {
+                    ArrayList<Tile> opponentMoves = ot.getPiece().getLegalMoves(
+                            boardData, ot.getRank(), ot.getFile(), !isHostView, true);
+                    for (Tile om : opponentMoves) {
+                        if (om.getRank() == khunTile.getRank() && om.getFile() == khunTile.getFile()) {
+                            newLegalmoves.remove(lm);
+                            moveFlag = true;
+                            break;
+                        }
+                    }
+
+                    if (moveFlag) {
+                        break;
+                    }
+                }
+            }
+
+            simulateMove(lm, t);
+            if (isCapture) {
+                lm.setPiece(tmp);
+                lm.setOccupied(true);
+            }
+        }
+
+        return newLegalmoves;
+    }
+
+    // return all legal moves that a piece can
+    // move which will not lead to khun getting pinned
+    public ArrayList<Tile> getMovesNoKillKhun(Tile t, ArrayList<Tile> legalmoves) {
         if (t.getPiece() instanceof KhunPiece) {
             return legalmoves;
         }
