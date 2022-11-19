@@ -91,6 +91,9 @@ public class BoardPanel extends JPanel {
                     Tile t = boardData.board[row][col];
                     boolean flag = false;
                     System.out.println("row: " + row + " col: " + col);
+                    if(isStaleMate()){
+                        System.out.println("STALEMATE");
+                    }
                     if (t.getOccupied() == true) {
                         if (findSelected()) {
                             Tile a = returnSelectedTile();
