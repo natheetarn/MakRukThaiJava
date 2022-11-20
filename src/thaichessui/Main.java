@@ -19,8 +19,10 @@ public class Main extends javax.swing.JFrame {
     public static final int GOT_STALEMATED_CODE = 6;
     public static final int RESIGNED_CODE = 7;
     public static final int WON_BY_RESIGNED_CODE = 8;
-    // public static final int OFFER_DRAW_CODE = 9;
-    // public static final int OFFERED_DRAW_CODE = 10;
+    public static final int OFFER_DRAW_CODE = 9;
+    public static final int OFFERED_DRAW_CODE = 10;
+    public static final int ACCEPTED_DRAW = 11;
+    public static final int REFUSED_DRAW = 12;
 
 
     public static final String TIME_OPTION_1_MIN = "1 min";
