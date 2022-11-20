@@ -327,12 +327,15 @@ public class GamePanelServer extends javax.swing.JPanel {
 
                         timeoutFlag = true;
                     } else if ((int) o == Main.OFFERED_DRAW_CODE) {
-                        stopMyTimer();
-                        stopOpponentTimer();
                         String[] options = { "YES", "NO" };
+                        chatPrintln("offered a draw");
+                        out.writeObject("offered a draw");
                         int ans = JOptionPane.showOptionDialog(null, "opponent offered draw", "Draw?", 1, 3, null,
                                 options, message);
+
                         if (ans == 0) {
+                            stopMyTimer();
+                            stopOpponentTimer();
                             out.writeObject(Main.ACCEPTED_DRAW);
                             ResultPanel resultPanel = new ResultPanel(Main.RESULT_TIE,
                                     "DRAW");
@@ -340,8 +343,11 @@ public class GamePanelServer extends javax.swing.JPanel {
                             this.removeAll();
                             this.add(resultPanel);
                             this.revalidate();
+                            timeoutFlag = true;
                         } else {
                             out.writeObject(Main.REFUSED_DRAW);
+                            chatPrintln("the offer was rejected");
+                            out.writeObject("the offer was rejected");
                         }
                     } else if ((int) o == Main.ACCEPTED_DRAW) {
                         stopMyTimer();
@@ -352,6 +358,7 @@ public class GamePanelServer extends javax.swing.JPanel {
                         this.removeAll();
                         this.add(resultPanel);
                         this.revalidate();
+                        timeoutFlag = true;
                     }
                 } else if (o instanceof String) {
                     message = (String) o;
