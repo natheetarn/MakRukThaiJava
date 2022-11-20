@@ -24,6 +24,7 @@ public class Main extends javax.swing.JFrame {
     public static final String TIME_OPTION_10_MIN = "10 min";
     public static final String TIME_OPTION_30_MIN = "30 min";
     public static final String TIME_OPTION_1_HR = "1 hr";
+    public static final String TIME_OPTION_UNLIMITED = "Unlimited";
 
     public static final String RESULT_WIN = "You Win!! 🥳🥳";
     public static final String RESULT_LOSE = "You Lose!! 😭😭";

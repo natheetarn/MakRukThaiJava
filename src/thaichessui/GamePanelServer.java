@@ -24,8 +24,8 @@ public class GamePanelServer extends javax.swing.JPanel {
     private static ObjectInputStream in = null;
     private static ObjectOutputStream out = null;
 
-    private int myCurTime = 0;
-    private int opponentCurTime = 0;
+    private double myCurTime = 0;
+    private double opponentCurTime = 0;
     private Timer myTimer = null;
     private Timer opponentTimer = null;
     private String timeOption;
@@ -69,13 +69,17 @@ public class GamePanelServer extends javax.swing.JPanel {
                 myCurTime = 60 * 60;
                 opponentCurTime = 60 * 60;
                 break;
+            case Main.TIME_OPTION_UNLIMITED:
+                myCurTime = Double.POSITIVE_INFINITY;
+                opponentCurTime = Double.POSITIVE_INFINITY;
+                break;
             default:
                 myCurTime = 60 * 60;
                 opponentCurTime = 60 * 60;
         }
 
-        myTime.setText(String.valueOf(myCurTime));
-        opponentTime.setText(String.valueOf(opponentCurTime));
+        myTime.setText(String.format("%.0f", myCurTime));
+        opponentTime.setText(String.format("%.0f", opponentCurTime));
 
         GamePanelServer gps = this;
 
@@ -83,7 +87,7 @@ public class GamePanelServer extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
-                myTime.setText(String.valueOf(myCurTime));
+                myTime.setText(String.format("%.0f", myCurTime));
                 myCurTime--;
                 if (myCurTime <= 0) {
                     // JOptionPane.showMessageDialog(null, "You are out of time! Your opponent get
@@ -106,7 +110,7 @@ public class GamePanelServer extends javax.swing.JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // TODO Auto-generated method stub
-                opponentTime.setText(String.valueOf(opponentCurTime));
+                opponentTime.setText(String.format("%.0f", opponentCurTime));
                 opponentCurTime--;
                 if (opponentCurTime <= 0) {
                     // JOptionPane.showMessageDialog(null, "The opponent is out of time! Winner
