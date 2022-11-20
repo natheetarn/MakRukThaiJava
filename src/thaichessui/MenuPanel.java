@@ -110,7 +110,7 @@ public class MenuPanel extends javax.swing.JPanel {
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
-        IpText.setText("IP");
+        IpText.setText("0.tcp.ap.ngrok.io");
         IpText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 IpTextActionPerformed(evt);
