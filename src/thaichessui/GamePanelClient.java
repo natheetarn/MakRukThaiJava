@@ -37,6 +37,7 @@ public class GamePanelClient extends javax.swing.JPanel {
      */
     public GamePanelClient() {
         initComponents();
+        initBoard();
         // initTimer();
     }
 
@@ -321,6 +322,15 @@ public class GamePanelClient extends javax.swing.JPanel {
         opponentTimer.stop();
     }
 
+    private void initBoard(){
+        boardPanel = new BoardPanel(false);
+        leftPanel.setLayout(new java.awt.BorderLayout());
+        leftPanel.removeAll();
+        leftPanel.add(boardPanel);
+        leftPanel.revalidate();
+        boardPanel.setEnable(false);
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -436,12 +446,7 @@ public class GamePanelClient extends javax.swing.JPanel {
                                                 .addComponent(myTime)))
                                 .addContainerGap(40, Short.MAX_VALUE)));
 
-        boardPanel = new BoardPanel(false);
-        leftPanel.setLayout(new java.awt.BorderLayout());
-        leftPanel.removeAll();
-        leftPanel.add(boardPanel);
-        leftPanel.revalidate();
-        boardPanel.setEnable(false);
+        
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextField1ActionPerformed

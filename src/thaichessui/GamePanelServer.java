@@ -40,6 +40,7 @@ public class GamePanelServer extends javax.swing.JPanel {
     public GamePanelServer(String timeOption) {
         this.timeOption = timeOption;
         initComponents();
+        initBoard();
         initTimer();
     }
 
@@ -202,6 +203,15 @@ public class GamePanelServer extends javax.swing.JPanel {
         } catch (IOException ex) {
             System.out.println(ex);
         }
+    }
+
+    private void initBoard(){
+        boardPanel = new BoardPanel(false);
+        leftPanel.setLayout(new java.awt.BorderLayout());
+        leftPanel.removeAll();
+        leftPanel.add(boardPanel);
+        leftPanel.revalidate();
+        boardPanel.setEnable(false);
     }
 
     public void whileGaming() throws IOException {
@@ -417,12 +427,7 @@ public class GamePanelServer extends javax.swing.JPanel {
                                                 javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addContainerGap(47, Short.MAX_VALUE)));
 
-        boardPanel = new BoardPanel(true);
-        leftPanel.setLayout(new java.awt.BorderLayout());
-        leftPanel.removeAll();
-        leftPanel.add(boardPanel);
-        leftPanel.revalidate();
-        boardPanel.setEnable(false);
+        
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_jTextField1ActionPerformed
