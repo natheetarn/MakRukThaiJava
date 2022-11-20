@@ -206,7 +206,7 @@ public class GamePanelServer extends javax.swing.JPanel {
     }
 
     private void initBoard() {
-        boardPanel = new BoardPanel(false);
+        boardPanel = new BoardPanel(true);
         leftPanel.setLayout(new java.awt.BorderLayout());
         leftPanel.removeAll();
         leftPanel.add(boardPanel);
