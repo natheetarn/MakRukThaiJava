@@ -42,6 +42,7 @@ public class GamePanelServer extends javax.swing.JPanel {
         initComponents();
         initBoard();
         initTimer();
+        disableButtons();
     }
 
     public void initTimer() {
@@ -134,6 +135,16 @@ public class GamePanelServer extends javax.swing.JPanel {
 
     }
 
+    public void disableButtons() {
+        resignButton.setEnabled(false);
+        drawButton.setEnabled(false);
+    }
+
+    public void enableButtons() {
+        resignButton.setEnabled(true);
+        drawButton.setEnabled(true);
+    }
+
     public static void closeConnection() {
         try {
             if (socket != null) {
@@ -167,6 +178,7 @@ public class GamePanelServer extends javax.swing.JPanel {
             System.out.println("Client accepted");
             chatPrintln("Client connected!");
             boardPanel.setEnable(true);
+            enableButtons();
 
             chatPrintln("GLHF!!!");
 
