@@ -48,6 +48,7 @@ public class HostPanel extends javax.swing.JPanel {
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         TimeLabel1 = new javax.swing.JLabel();
+        
 
         setBackground(new java.awt.Color(245, 245, 252));
 
