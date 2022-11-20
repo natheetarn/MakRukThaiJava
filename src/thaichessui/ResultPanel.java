@@ -32,6 +32,9 @@ public class ResultPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        GamePanelServer.closeConnection();
+        GamePanelClient.closeConnection();
+
         jPanel1 = new javax.swing.JPanel();
         HostButton = new javax.swing.JButton();
         JoinButton = new javax.swing.JButton();
