@@ -34,10 +34,11 @@ public class AboutPanel extends javax.swing.JPanel {
         JoinButton = new javax.swing.JButton();
         QuitButton = new javax.swing.JButton();
         AboutButton = new javax.swing.JButton();
-        NameField = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        PortText = new javax.swing.JTextField();
+        IpText = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jSeparator3 = new javax.swing.JSeparator();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -88,13 +89,6 @@ public class AboutPanel extends javax.swing.JPanel {
             }
         });
 
-        NameField.setText("Name");
-        NameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NameFieldActionPerformed(evt);
-            }
-        });
-
         jPanel2.setBackground(new java.awt.Color(204, 255, 204));
 
         jLabel2.setFont(new java.awt.Font("PT Sans", 3, 30)); // NOI18N
@@ -123,6 +117,20 @@ public class AboutPanel extends javax.swing.JPanel {
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
+        PortText.setText("PORT");
+        PortText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PortTextActionPerformed(evt);
+            }
+        });
+
+        IpText.setText("IP");
+        IpText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IpTextActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -132,12 +140,15 @@ public class AboutPanel extends javax.swing.JPanel {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(12, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(AboutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(HostButton, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(QuitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(NameField, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(JoinButton, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(JoinButton, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(IpText, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(PortText)))
                         .addGap(0, 8, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -147,7 +158,9 @@ public class AboutPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(NameField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PortText, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(IpText, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(HostButton, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
@@ -234,6 +247,14 @@ public class AboutPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void PortTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PortTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PortTextActionPerformed
+
+    private void IpTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IpTextActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IpTextActionPerformed
+
     private void AboutButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_AboutButtonActionPerformed
         AboutPanel aboutpanel = new AboutPanel();
         this.setLayout(new java.awt.BorderLayout());
@@ -264,7 +285,7 @@ public class AboutPanel extends javax.swing.JPanel {
 
         Thread clientThread = new Thread(new Runnable() {
             public void run() {
-                b.run("127.0.0.1", 3000);
+                b.run(IpText.getText(),Integer.parseInt(PortText.getText()));
             }
         });
 
@@ -280,8 +301,9 @@ public class AboutPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AboutButton;
     private javax.swing.JButton HostButton;
+    private javax.swing.JTextField IpText;
     private javax.swing.JButton JoinButton;
-    private javax.swing.JTextField NameField;
+    private javax.swing.JTextField PortText;
     private javax.swing.JButton QuitButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;

@@ -51,12 +51,16 @@
                       <Component id="jPanel2" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace pref="12" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="AboutButton" min="-2" pref="226" max="-2" attributes="0"/>
                               <Component id="HostButton" min="-2" pref="226" max="-2" attributes="0"/>
                               <Component id="QuitButton" alignment="0" min="-2" pref="226" max="-2" attributes="0"/>
-                              <Component id="NameField" alignment="0" min="-2" pref="226" max="-2" attributes="0"/>
                               <Component id="JoinButton" alignment="0" min="-2" pref="226" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="IpText" min="-2" pref="135" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="PortText" max="32767" attributes="0"/>
+                              </Group>
                           </Group>
                           <EmptySpace min="0" pref="8" max="32767" attributes="0"/>
                       </Group>
@@ -71,7 +75,10 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="NameField" min="-2" pref="34" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="PortText" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                      <Component id="IpText" alignment="3" min="-2" pref="34" max="-2" attributes="0"/>
+                  </Group>
                   <EmptySpace type="unrelated" max="32767" attributes="0"/>
                   <Component id="HostButton" min="-2" pref="59" max="-2" attributes="0"/>
                   <EmptySpace pref="12" max="32767" attributes="0"/>
@@ -142,14 +149,6 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AboutButtonActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="NameField">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Name"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="NameFieldActionPerformed"/>
-          </Events>
-        </Component>
         <Container class="javax.swing.JPanel" name="jPanel2">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -200,6 +199,22 @@
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JTextField" name="PortText">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="PORT"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PortTextActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JTextField" name="IpText">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="IP"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="IpTextActionPerformed"/>
+          </Events>
+        </Component>
       </SubComponents>
     </Container>
     <Container class="javax.swing.JPanel" name="jPanel3">
