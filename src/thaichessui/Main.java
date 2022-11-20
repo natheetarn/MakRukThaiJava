@@ -31,9 +31,9 @@ public class Main extends javax.swing.JFrame {
     public static final String TIME_OPTION_1_HR = "1 hr";
     public static final String TIME_OPTION_UNLIMITED = "Unlimited";
 
-    public static final String RESULT_WIN = "You Win!! 🥳🥳";
-    public static final String RESULT_LOSE = "You Lose!! 😭😭";
-    public static final String RESULT_TIE = "Tie!!";
+    public static final String RESULT_WIN = "You Win ! ";
+    public static final String RESULT_LOSE = "You Lose ! ";
+    public static final String RESULT_TIE = "Draw !! ";
 
     /**
      * Creates new form Main
