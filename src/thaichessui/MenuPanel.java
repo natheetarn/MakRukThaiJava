@@ -282,7 +282,7 @@ public class MenuPanel extends javax.swing.JPanel {
         }// </editor-fold>//GEN-END:initComponents
 
         private void AboutButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_AboutButtonActionPerformed
-                BoardPanel aboutpanel = new BoardPanel(false);
+                AboutPanel aboutpanel = new AboutPanel();
                 this.setLayout(new java.awt.BorderLayout());
                 this.removeAll();
                 this.add(aboutpanel);

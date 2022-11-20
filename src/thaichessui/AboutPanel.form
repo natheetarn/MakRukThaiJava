@@ -232,7 +232,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="28" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -279,7 +279,7 @@
         </Container>
         <Component class="javax.swing.JLabel" name="jLabel14">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Sorracha     Aiemmeesri                  64011628          SE KMITL"/>
+            <Property name="text" type="java.lang.String" value="Mahnun            Saratunti                       64011456        SE KMTIL"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel15">
@@ -292,17 +292,17 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel16">
           <Properties>
-            <Property name="text" type="java.lang.String" value="John"/>
+            <Property name="text" type="java.lang.String" value="Natheetarn       Panyakorn                     64011474        SE KMITL"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel17">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Joe"/>
+            <Property name="text" type="java.lang.String" value="Sorracha           Aiemmeesri                   64011628        SE KMITL"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel18">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Jack"/>
+            <Property name="text" type="java.lang.String" value="Phobphoomin   Siriboon                        64011548        SE KMITL"/>
           </Properties>
         </Component>
       </SubComponents>
