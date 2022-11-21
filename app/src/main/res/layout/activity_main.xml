@@ -8,34 +8,50 @@
     >
 
     <TextView
-        android:id="@+id/textview_1_hello_world"
+        android:id="@+id/textview_1_welcome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-
+        android:text="Welcome To MakRukThai!"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.844" />
+        app:layout_constraintVertical_bias="0.328" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/button_play_as_black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:drawableBottom="@drawable/bia_white"
-        android:text="@string/click_me_button_1"
+        android:backgroundTint="@android:color/black"
+        android:text="play as black"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="0.837"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.45"
-        android:textColor="@color/black"
-        android:backgroundTint="@android:color/white"
+        app:layout_constraintVertical_bias="0.626"
         app:strokeColor="@color/black"
-        app:strokeWidth="2dp"/>
+        app:strokeWidth="2dp"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/button_play_as_white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/white"
+        android:text="play as white"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.111"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.626"
+        app:strokeColor="@color/black"
+        app:strokeWidth="2dp"
+        tools:ignore="HardcodedText" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
