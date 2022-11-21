@@ -110,14 +110,14 @@ public class MenuPanel extends javax.swing.JPanel {
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
-        IpText.setText("0.tcp.ap.ngrok.io");
+        IpText.setText("127.0.0.1");
         IpText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 IpTextActionPerformed(evt);
             }
         });
 
-        PortText.setText("PORT");
+        PortText.setText("3000");
         PortText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PortTextActionPerformed(evt);

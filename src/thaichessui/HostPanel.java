@@ -118,14 +118,14 @@ public class HostPanel extends javax.swing.JPanel {
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
-        PortText.setText("PORT");
+        PortText.setText("3000");
         PortText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PortTextActionPerformed(evt);
             }
         });
 
-        IpText.setText("IP");
+        IpText.setText("127.0.0.1");
         IpText.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 IpTextActionPerformed(evt);
