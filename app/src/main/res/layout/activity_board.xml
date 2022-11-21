@@ -16,6 +16,7 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:backgroundTint="@color/warm_green"
+        android:drawableBottom="@drawable/bia_white"
         android:insetLeft="0dp"
         android:insetTop="0dp"
         android:insetRight="0dp"

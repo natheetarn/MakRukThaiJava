@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import androidx.annotation.ColorInt;
+import androidx.annotation.DrawableRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -28,6 +29,22 @@ public class BoardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board);
 
+        MaterialButton btn_a8 = (MaterialButton) findViewById(R.id.button_a8);
+
+        btn_a8.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                a8_clicked();
+            }
+        });
+
+
+    }
+
+
+    public void a8_clicked(){
+        MaterialButton btn_a7 = (MaterialButton) findViewById(R.id.button_a7);
+        btn_a7.setCompoundDrawablesWithIntrinsicBounds(0,0,0,R.drawable.bia_white);
 
     }
 
