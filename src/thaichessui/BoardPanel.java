@@ -48,9 +48,9 @@ public class BoardPanel extends JPanel {
                 b.setBorder(new LineBorder(Color.GRAY));
 
                 if (boardData.board[ii][jj].getColor() == Color.WHITE) {
-                    b.setBackground(Color.WHITE);
+                    b.setBackground(Main.CREAM);
                 } else {
-                    b.setBackground(Color.GREEN);
+                    b.setBackground(Main.WARM_GREEN);
                 }
                 chessBoardSquares[ii][jj] = b;
 
@@ -120,7 +120,7 @@ public class BoardPanel extends JPanel {
                                     ArrayList<Tile> validMoves = a.getPiece().getLegalMoves(boardData,
                                             a.getRank(),
                                             a.getFile(), isHostView, false);
-                                    returnColor(validMoves);
+                                            resetboardcolor();
                                     if (a.getPiece() instanceof KhunPiece) {
                                         validMoves = getSafeKhunMoves(validMoves, true);
 
@@ -138,7 +138,7 @@ public class BoardPanel extends JPanel {
                                             boardData.board[returnSelectedTile().getRank()][returnSelectedTile()
                                                     .getFile()],
                                             t, boardData)) {
-                                        returnColor(validMoves);
+                                        resetboardcolor();
                                         boardPanel.setEnable(false);
                                         int arr[] = { opOldTile.getRank(), opOldTile.getFile(), opNewTile.getRank(),
                                                 opNewTile.getFile() };
@@ -216,7 +216,7 @@ public class BoardPanel extends JPanel {
 
                                 validMoves = getMovesNoKillKhun(oldTile, validMoves);
 
-                                returnColor(validMoves);
+                                resetboardcolor();
 
                                 if (move(validMoves, oldTile, newTile, boardData)) {
                                     boardPanel.setEnable(false);
@@ -784,38 +784,32 @@ public class BoardPanel extends JPanel {
         }
     }
 
-    private void returnColor(ArrayList<Tile> legalTiles) {
-        for (Tile t : legalTiles) {
-            chessBoardSquares[t.getRank()][t.getFile()].setBackground(t.getColor());
-        }
-    }
-
     void resetboardcolor() {
         for (int ii = 0; ii < 8; ii++) {
             for (int jj = 0; jj < 8; jj++) {
                 if (isHostView) {
                     if (ii % 2 == 0) {
                         if (jj % 2 == 0)
-                            chessBoardSquares[ii][jj].setBackground(Color.WHITE);
+                            chessBoardSquares[ii][jj].setBackground(Main.CREAM);
                         else
-                            chessBoardSquares[ii][jj].setBackground(Color.GREEN);
+                            chessBoardSquares[ii][jj].setBackground(Main.WARM_GREEN);
                     } else {
                         if (jj % 2 == 0)
-                            chessBoardSquares[ii][jj].setBackground(Color.GREEN);
+                            chessBoardSquares[ii][jj].setBackground(Main.WARM_GREEN);
                         else
-                            chessBoardSquares[ii][jj].setBackground(Color.WHITE);
+                            chessBoardSquares[ii][jj].setBackground(Main.CREAM);
                     }
                 } else {
                     if (ii % 2 == 0) {
                         if (jj % 2 == 0)
-                            chessBoardSquares[ii][jj].setBackground(Color.WHITE);
+                            chessBoardSquares[ii][jj].setBackground(Main.CREAM);
                         else
-                            chessBoardSquares[ii][jj].setBackground(Color.green);
+                            chessBoardSquares[ii][jj].setBackground(Main.WARM_GREEN);
                     } else {
                         if (jj % 2 == 0)
-                            chessBoardSquares[ii][jj].setBackground(Color.green);
+                            chessBoardSquares[ii][jj].setBackground(Main.WARM_GREEN);
                         else
-                            chessBoardSquares[ii][jj].setBackground(Color.WHITE);
+                            chessBoardSquares[ii][jj].setBackground(Main.CREAM);
                     }
                 }
                 ;
