@@ -71,6 +71,10 @@ public class GamePanelServer extends javax.swing.JPanel {
                 myCurTime = 60 * 60;
                 opponentCurTime = 60 * 60;
                 break;
+            case Main.TIME_OPTION_2_HR:
+                myCurTime = 60 * 60 * 2;
+                opponentCurTime = 60 * 60 * 2;
+                break;
             case Main.TIME_OPTION_UNLIMITED:
                 myCurTime = Double.POSITIVE_INFINITY;
                 opponentCurTime = Double.POSITIVE_INFINITY;
