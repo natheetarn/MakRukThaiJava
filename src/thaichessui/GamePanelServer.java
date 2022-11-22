@@ -246,6 +246,7 @@ public class GamePanelServer extends javax.swing.JPanel {
                     if ((int) o == Main.FORCE_EXIT_CODE) {
                         return;
                     } else if ((int) o == Main.YOUR_TURN_CODE) {
+                        drawButton.setEnabled(true);
                         boardPanel.setEnable(true);
                         stopOpponentTimer();
                         startMyTimer();
@@ -538,6 +539,7 @@ public class GamePanelServer extends javax.swing.JPanel {
 
     private void drawButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_drawButtonActionPerformed
         // TODO add your handling code here:
+        drawButton.setEnabled(false);
         try {
             out.writeObject(Main.OFFERED_DRAW_CODE);
         } catch (IOException e) {

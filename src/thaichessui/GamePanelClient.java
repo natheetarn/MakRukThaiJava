@@ -231,6 +231,7 @@ public class GamePanelClient extends javax.swing.JPanel {
                     if ((int) o == Main.FORCE_EXIT_CODE) {
                         return;
                     } else if ((int) o == Main.YOUR_TURN_CODE) {
+                        drawButton.setEnabled(true);
                         boardPanel.setEnable(true);
                         stopOpponentTimer();
                         startMyTimer();
@@ -542,6 +543,7 @@ public class GamePanelClient extends javax.swing.JPanel {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        drawButton.setEnabled(false);
     }// GEN-LAST:event_drawButtonActionPerformed
 
     private void resignButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_resignButtonActionPerformed
