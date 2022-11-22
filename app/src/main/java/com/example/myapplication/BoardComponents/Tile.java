@@ -1,6 +1,9 @@
 package com.example.myapplication.BoardComponents;
 
+import android.widget.Button;
+
 import com.example.myapplication.Pieces.Piece;
+
 
 public class Tile {
     private Piece piece;
@@ -29,11 +32,7 @@ public class Tile {
 
     public void setPiece(Piece p) {
         this.piece = p;
-        if (p != null) {
-            this.setOccupied(true);
-        } else {
-            this.setOccupied(false);
-        }
+        this.setOccupied(p != null);
     }
 
 }
