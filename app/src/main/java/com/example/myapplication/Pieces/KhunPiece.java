@@ -7,4 +7,5 @@ public class KhunPiece extends Piece{
         super(isWhite);
         this.name = "KhunPiece";
     }
+
 }
