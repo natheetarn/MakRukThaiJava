@@ -41,9 +41,12 @@ public class BoardActivity extends AppCompatActivity {
 
     }
 
-
     public void a8_clicked(){
         MaterialButton btn_a7 = (MaterialButton) findViewById(R.id.button_a7);
+
+        Log.d("logtag",getResources().getResourceEntryName(R.id.button_a7));
+        ;
+
         btn_a7.setCompoundDrawablesWithIntrinsicBounds(0,0,0,R.drawable.bia_white);
 
     }

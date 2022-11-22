@@ -13,6 +13,7 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/button_a8"
+        android:tag="mytag"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:backgroundTint="@color/warm_green"
