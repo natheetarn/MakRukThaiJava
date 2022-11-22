@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 public abstract class Piece {
     protected String name;
-    public int id;
+
     private boolean white = false;
-    private boolean isCaptured = false;
-    //Id attribute is for view Id
+    public boolean isCaptured = false;
+
     //Icon is to be changed into "drawable instead"
 
     public Piece(boolean isWhite){
@@ -16,9 +16,8 @@ public abstract class Piece {
         this.white = isWhite;
     }
 
-    public boolean isCaptured(){
+    public void isCaptured(){
         this.isCaptured = true;
-        return this.isCaptured;
     }
 
     public String getName(){
