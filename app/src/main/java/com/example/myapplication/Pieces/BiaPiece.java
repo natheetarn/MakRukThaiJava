@@ -10,8 +10,5 @@ public class BiaPiece extends Piece {
         this.name = "BiaPiece";
     }
 
-    @Override
-    public boolean canMove() {
-        return false;
-    }
+
 }

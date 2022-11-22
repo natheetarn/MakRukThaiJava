@@ -13,8 +13,5 @@ public class MetPiece extends Piece{
 
     //Icon changes into drawable
 
-    @Override
-    public boolean canMove() {
-        return false;
-    }
+
 }

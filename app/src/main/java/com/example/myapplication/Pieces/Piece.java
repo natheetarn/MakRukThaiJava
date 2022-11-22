@@ -25,7 +25,7 @@ public abstract class Piece {
     }
 
 
-    public abstract boolean canMove();
+
 
 
 }
