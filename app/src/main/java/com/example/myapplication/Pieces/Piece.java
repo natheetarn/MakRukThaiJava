@@ -3,7 +3,7 @@ package com.example.myapplication.Pieces;
 import java.util.ArrayList;
 
 
-public abstract class Piece {
+public class Piece {
     protected String name;
 
     private boolean white = false;
