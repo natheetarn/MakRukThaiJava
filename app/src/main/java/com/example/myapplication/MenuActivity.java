@@ -16,7 +16,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MenuActivity extends AppCompatActivity {
     private Button button_play;
 
     @Override
