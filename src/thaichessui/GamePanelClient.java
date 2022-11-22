@@ -10,6 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
@@ -189,6 +190,13 @@ public class GamePanelClient extends javax.swing.JPanel {
         }
 
         try {
+
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+
             if (socket != null) {
                 in.close();
                 out.close();
@@ -209,7 +217,6 @@ public class GamePanelClient extends javax.swing.JPanel {
                 this.add(resultPanel);
                 this.revalidate();
             }
-
         } catch (IOException ex) {
             System.out.println(ex);
         }

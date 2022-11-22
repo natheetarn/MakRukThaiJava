@@ -10,6 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
@@ -193,6 +194,15 @@ public class GamePanelServer extends javax.swing.JPanel {
             boardPanel.listenToEvent(boardPanel, out, myTimer, opponentTimer);
             whileGaming();
 
+            stopMyTimer();
+            stopOpponentTimer();
+
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException ex) {
+                System.out.println(ex);
+            }
+
             System.out.println("closing connection");
 
             if (socket != null) {
@@ -202,8 +212,6 @@ public class GamePanelServer extends javax.swing.JPanel {
                 server.close();
             }
 
-            stopMyTimer();
-            stopOpponentTimer();
             if (!timeoutFlag) {
                 // JOptionPane.showMessageDialog(null, "Oops! Your opponent disconnected, guess
                 // its your win!", "🗿",
@@ -215,7 +223,6 @@ public class GamePanelServer extends javax.swing.JPanel {
                 this.add(resultPanel);
                 this.revalidate();
             }
-
         } catch (IOException ex) {
             System.out.println(ex);
         }
