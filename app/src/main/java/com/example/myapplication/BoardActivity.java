@@ -37,36 +37,42 @@ public class BoardActivity extends AppCompatActivity {
         RelativeLayout  layout_board = (RelativeLayout) findViewById(R.id.layout_board);
 
 
-
+        //for base button just create button and specify relative layout width and height then set bottom drawable, background color and set it to randomly generated id
         Button btn1 = new Button(this);
         btn1.setLayoutParams(new RelativeLayout.LayoutParams(btnSize_int,btnSize_int));
         btn1.setCompoundDrawablesWithIntrinsicBounds(0,0,0,R.drawable.bia_white);
         btn1.setBackgroundColor(getResources().getColor(R.color.warm_green));
+        btn1.setId(View.generateViewId());
         btn1.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 btn1.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0);
                 btn1.setText("clicked");
+
+                //design a specific layout for btn2
+                RelativeLayout.LayoutParams params2= new RelativeLayout.LayoutParams(btnSize_int,btnSize_int);
+                params2.addRule(RelativeLayout.BELOW, btn1.getId());
+                //create button 2
+                Button btn2 = new Button(getBaseContext());
+                //btn2.setLayoutParams(new RelativeLayout.LayoutParams(btnSize_int,btnSize_int));
+                btn2.setCompoundDrawablesWithIntrinsicBounds(0,0,0,R.drawable.bia_white);
+                btn2.setBackgroundColor(getResources().getColor(R.color.cream));
+                //set button2 to the deisnged layout above
+                btn2.setLayoutParams(params2);
+                layout_board.addView(btn2);
             }
         });
 
 
-        //design a specific layout for btn2
-        RelativeLayout.LayoutParams params2= new RelativeLayout.LayoutParams(btnSize_int,btnSize_int);
-        params2.addRule(RelativeLayout.BELOW, R.id.button_a8);
-        //create button 2
-        Button btn2 = new Button(this);
-        btn2.setLayoutParams(new RelativeLayout.LayoutParams(btnSize_int,btnSize_int));
-        btn2.setCompoundDrawablesWithIntrinsicBounds(0,0,0,R.drawable.ic_launcher_background);
-        btn2.setBackgroundColor(getResources().getColor(R.color.cream));
-        //set button2 to the deisnged layout above
-        btn2.setLayoutParams(params2);
+
+
+
 
 
 
 
         layout_board.addView(btn1);
-        layout_board.addView(btn2);
+
 
 
     }
