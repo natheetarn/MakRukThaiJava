@@ -11,7 +11,7 @@ Thai Chess Built with Java Swing GUI as a part of AOOP Cousrse at SE KMITL
 - All 8 pieces 
 - Check/Checkmate warning
 - Auto checkmate detection
-- Resign button (for 🤡)
+- Exclusive Resign Button for Katang
 - Draw Offering
 - Piece Promotion
 - Chat functionality
