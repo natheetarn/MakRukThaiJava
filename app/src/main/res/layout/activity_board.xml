@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/layout_board"
@@ -9,89 +9,114 @@
     tools:context=".BoardActivity">
 
 
+<!--    <Button-->
+<!--        android:layout_width="60dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:backgroundTint="@color/warm_green"-->
+<!--        android:drawableBottom="@drawable/bia_white"-->
+<!--        android:insetLeft="0dp"-->
+<!--        android:insetTop="0dp"-->
+<!--        android:insetRight="0dp"-->
+<!--        android:insetBottom="0dp"-->
+<!--        app:cornerRadius="0dp"-->
+<!--        tools:layout_editor_absoluteY="300dp" />-->
 
+<!--    <com.google.android.material.button.MaterialButton-->
+<!--        android:id="@+id/button_a8"-->
+<!--        android:layout_width="60dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:backgroundTint="@color/warm_green"-->
+<!--        android:drawableBottom="@drawable/bia_white"-->
+<!--        android:insetLeft="0dp"-->
+<!--        android:insetTop="0dp"-->
+<!--        android:insetRight="0dp"-->
+<!--        android:insetBottom="0dp"-->
+<!--        app:cornerRadius="0dp"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        tools:layout_editor_absoluteY="0dp" />-->
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_a8"
-        android:tag="mytag"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:backgroundTint="@color/warm_green"
-        android:drawableBottom="@drawable/bia_white"
-        android:insetLeft="0dp"
-        android:insetTop="0dp"
-        android:insetRight="0dp"
-        android:insetBottom="0dp"
-        app:cornerRadius="0dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="0dp" />
+<!--    <com.google.android.material.button.MaterialButton-->
+<!--        android:id="@+id/button_b8"-->
+<!--        android:layout_width="60dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:backgroundTint="@color/cream"-->
+<!--        android:insetLeft="0dp"-->
+<!--        android:insetTop="0dp"-->
+<!--        android:insetRight="0dp"-->
+<!--        android:insetBottom="0dp"-->
+<!--        app:cornerRadius="0dp"-->
+<!--        app:layout_constraintLeft_toRightOf="@id/button_a8"-->
+<!--        app:layout_constraintTop_toTopOf="@id/button_a8"-->
+<!--        app:strokeColor="@color/black"-->
+<!--        app:strokeWidth="0.5dp"-->
+<!--        tools:layout_editor_absoluteY="46dp" />-->
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_b8"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:backgroundTint="@color/cream"
-        android:insetLeft="0dp"
-        android:insetTop="0dp"
-        android:insetRight="0dp"
-        android:insetBottom="0dp"
-        app:cornerRadius="0dp"
-        app:layout_constraintLeft_toRightOf="@id/button_a8"
-        app:layout_constraintTop_toTopOf="@id/button_a8"
-        app:strokeColor="@color/black"
-        app:strokeWidth="0.5dp"
-        tools:layout_editor_absoluteY="46dp" />
+<!--    <com.google.android.material.button.MaterialButton-->
+<!--        android:id="@+id/button_c8"-->
+<!--        android:layout_width="60dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:backgroundTint="@color/warm_green"-->
+<!--        android:insetLeft="0dp"-->
+<!--        android:insetTop="0dp"-->
+<!--        android:insetRight="0dp"-->
+<!--        android:insetBottom="0dp"-->
+<!--        app:cornerRadius="0dp"-->
+<!--        app:layout_constraintLeft_toRightOf="@id/button_b8"-->
+<!--        app:layout_constraintTop_toTopOf="@id/button_b8"-->
+<!--        tools:layout_editor_absoluteY="46dp" />-->
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_c1"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:backgroundTint="@color/warm_green"
-        android:insetLeft="0dp"
-        android:insetTop="0dp"
-        android:insetRight="0dp"
-        android:insetBottom="0dp"
-        app:cornerRadius="0dp"
-        app:layout_constraintLeft_toRightOf="@id/button_b8"
-        app:layout_constraintTop_toTopOf="@id/button_b8"
-        tools:layout_editor_absoluteY="46dp" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_a7"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:backgroundTint="@color/cream"
-        android:insetLeft="0dp"
-        android:insetTop="0dp"
-        android:insetRight="0dp"
-        android:insetBottom="0dp"
-        app:cornerRadius="0dp"
-        app:layout_constraintTop_toBottomOf="@id/button_a8"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:strokeColor="@color/black"
-        app:strokeWidth="0.5dp"
-        tools:layout_editor_absoluteY="0dp" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/button_b7"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:backgroundTint="@color/warm_green"
-        android:insetLeft="0dp"
-        android:insetTop="0dp"
-        android:insetRight="0dp"
-        android:insetBottom="0dp"
-        app:cornerRadius="0dp"
-        app:layout_constraintTop_toBottomOf="@id/button_b8"
-        app:layout_constraintLeft_toRightOf="@id/button_a7"
-        app:strokeColor="@color/black"
-        app:strokeWidth="0.5dp"
-        tools:layout_editor_absoluteY="0dp" />
+<!--    <com.google.android.material.button.MaterialButton-->
+<!--        android:id="@+id/button_d8"-->
+<!--        android:layout_width="60dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:backgroundTint="@color/cream"-->
+<!--        android:insetLeft="0dp"-->
+<!--        android:insetTop="0dp"-->
+<!--        android:insetRight="0dp"-->
+<!--        android:insetBottom="0dp"-->
+<!--        app:cornerRadius="0dp"-->
+<!--        app:layout_constraintLeft_toRightOf="@id/button_c8"-->
+<!--        app:layout_constraintTop_toTopOf="@id/button_b8"-->
+<!--        tools:layout_editor_absoluteY="46dp" />-->
 
 
 
+<!--    <com.google.android.material.button.MaterialButton-->
+<!--        android:id="@+id/button_a7"-->
+<!--        android:layout_width="60dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:backgroundTint="@color/cream"-->
+<!--        android:insetLeft="0dp"-->
+<!--        android:insetTop="0dp"-->
+<!--        android:insetRight="0dp"-->
+<!--        android:insetBottom="0dp"-->
+<!--        app:cornerRadius="0dp"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/button_a8"-->
+<!--        app:layout_constraintLeft_toLeftOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:strokeColor="@color/black"-->
+<!--        app:strokeWidth="0.5dp"-->
+<!--        tools:layout_editor_absoluteY="0dp" />-->
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+<!--    <com.google.android.material.button.MaterialButton-->
+<!--        android:id="@+id/button_b7"-->
+<!--        android:layout_width="60dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:backgroundTint="@color/warm_green"-->
+<!--        android:insetLeft="0dp"-->
+<!--        android:insetTop="0dp"-->
+<!--        android:insetRight="0dp"-->
+<!--        android:insetBottom="0dp"-->
+<!--        app:cornerRadius="0dp"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/button_b8"-->
+<!--        app:layout_constraintLeft_toRightOf="@id/button_a7"-->
+<!--        app:strokeColor="@color/black"-->
+<!--        app:strokeWidth="0.5dp"-->
+<!--        tools:layout_editor_absoluteY="0dp" />-->
+
+
+
+
+</RelativeLayout>
