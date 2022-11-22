@@ -31,11 +31,14 @@ public class BoardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_board);
 
-        RelativeLayout  layout_board = (RelativeLayout) findViewById(R.id.layout_board);
-
-        Button btn1 = new Button(this);
+        //Global Variable Scope
         float btnSize_float = convertDpToPixel(60,this);
         int btnSize_int = (int)Math.round(btnSize_float);
+        RelativeLayout  layout_board = (RelativeLayout) findViewById(R.id.layout_board);
+
+
+
+        Button btn1 = new Button(this);
         btn1.setLayoutParams(new RelativeLayout.LayoutParams(btnSize_int,btnSize_int));
         btn1.setCompoundDrawablesWithIntrinsicBounds(0,0,0,R.drawable.bia_white);
         btn1.setBackgroundColor(getResources().getColor(R.color.warm_green));
@@ -46,8 +49,24 @@ public class BoardActivity extends AppCompatActivity {
                 btn1.setText("clicked");
             }
         });
-        layout_board.addView(btn1);
 
+
+        //design a specific layout for btn2
+        RelativeLayout.LayoutParams params2= new RelativeLayout.LayoutParams(btnSize_int,btnSize_int);
+        params2.addRule(RelativeLayout.BELOW, R.id.button_a8);
+        //create button 2
+        Button btn2 = new Button(this);
+        btn2.setLayoutParams(new RelativeLayout.LayoutParams(btnSize_int,btnSize_int));
+        btn2.setCompoundDrawablesWithIntrinsicBounds(0,0,0,R.drawable.ic_launcher_background);
+        btn2.setBackgroundColor(getResources().getColor(R.color.cream));
+        //set button2 to the deisnged layout above
+        btn2.setLayoutParams(params2);
+
+
+
+
+        layout_board.addView(btn1);
+        layout_board.addView(btn2);
 
 
     }
